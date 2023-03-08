@@ -102,6 +102,15 @@ ALTER TABLE bit_responses
     ADD CONSTRAINT bit_to_bit_response FOREIGN KEY (bit_id) REFERENCES bits (bit_id),
     ADD CONSTRAINT user_to_bit_response FOREIGN KEY (user_id) REFERENCES users (user_id);
 
+ALTER TABLE bit_likes
+    DROP
+        CONSTRAINT IF EXISTS bit_to_bit_like,
+    DROP
+        CONSTRAINT IF EXISTS user_to_bit_like;
+ALTER TABLE bit_likes
+    ADD CONSTRAINT bit_to_bit_like FOREIGN KEY (bit_id) REFERENCES bits (bit_id),
+    ADD CONSTRAINT user_to_bit_like FOREIGN KEY (user_id) REFERENCES users (user_id);
+
 
 
 --INSERT INTO users
