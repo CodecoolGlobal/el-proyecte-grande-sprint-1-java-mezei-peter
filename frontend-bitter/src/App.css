@@ -1,42 +1,127 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.App-logo {
+    height: 10vmin;
+    pointer-events: none;
+    margin: 0;
+    
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.App {
+    background-color: #7D8F69;
+    min-height: 100vh;
+    padding: 57px 27px;
+    display: flex;
+    flex-direction: column;
+    font-size: calc(1px + 2vmin);
+    color: whitesmoke;
+    background-repeat: no-repeat;
+    background-position: right 75%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+h1 {
+    margin: 0px;
+    letter-spacing: -0.05em;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
+    font-weight: 700;
+    font-size: 60px;
+    color: #E6E5A3;
 }
 
-.card {
-  padding: 2em;
+h2 {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
+    font-weight: 200;
 }
 
-.read-the-docs {
-  color: #888;
+.nav {
+    background-color: #557153;
+    display: flex;
+    align-items: center;
+}
+
+.nav-items {
+    list-style: none;
+    display: flex;
+}
+
+.nav-items > li:first-of-type {
+    font-weight: bold;
+    margin-left: -60px;
+}
+
+.login-div {
+    display: flex;
+}
+
+.login {
+    font-size: calc(7px + 2vmin);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
+    font-weight: 300;
+    margin-left: 650px;
+    display: inline-block;
+    background-color: #E6E5A3;
+    color: #000000;
+    border-radius: 4px;
+    padding: 8px 16px;
+    white-space: nowrap;
+    transition: 0.3s;
+}
+
+.login:hover {
+    background-color: whitesmoke;
+    transition: 0.3s;
+}
+
+.link {
+    list-style: none;
+    display: flex;
+    color: whitesmoke;
+    transition: 0.3s;
+}
+
+.link:hover {
+    color: #E6E5A3;
+    transition: 0.3s;
+}
+
+.nav-items > li {
+    padding: 10px;
+    margin-left: 140px;
+    font-size: calc(8px + 2vmin);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
+    font-weight: 300;
+}
+
+.facts > li {
+    line-height: 19px;
+    padding-block: 10px;
+    max-width: 400px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+        sans-serif;
+    font-weight: 400;
+}
+
+::marker {
+    color: #E6E5A3;
+    font-size: 1.5rem;
+}
+
+.App-link {
+    color: #E6E5A3;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }
