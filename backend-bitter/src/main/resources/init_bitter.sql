@@ -78,6 +78,16 @@ ALTER TABLE user_follows
     ADD CONSTRAINT user_to_following FOREIGN KEY (user_following_id) REFERENCES users (user_id),
     ADD CONSTRAINT user_to_followed FOREIGN KEY (user_followed_id) REFERENCES users (user_id);
 
+ALTER TABLE user_blocks
+    DROP
+        CONSTRAINT IF EXISTS user_to_blocking,
+    DROP
+        CONSTRAINT IF EXISTS user_to_blocked;
+ALTER TABLE user_blocks
+    ADD CONSTRAINT user_to_blocking FOREIGN KEY (user_blocking_id) REFERENCES users (user_id),
+    ADD CONSTRAINT user_to_blocked FOREIGN KEY (user_blocked_id) REFERENCES users (user_id);
+
+
 
 --INSERT INTO users
 --VALUES (DEFAULT, 'asd', 'password', 'szia', 'test@test.com', uuid_generate_v4(), DEFAULT, DEFAULT, DEFAULT);
