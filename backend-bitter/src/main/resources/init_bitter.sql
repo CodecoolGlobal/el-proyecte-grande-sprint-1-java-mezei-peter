@@ -93,6 +93,15 @@ ALTER TABLE bits
 ALTER TABLE bits
     ADD CONSTRAINT user_to_bit FOREIGN KEY (user_id) REFERENCES users (user_id);
 
+ALTER TABLE bit_responses
+    DROP
+        CONSTRAINT IF EXISTS bit_to_bit_response,
+    DROP
+        CONSTRAINT IF EXISTS user_to_bit_response;
+ALTER TABLE bit_responses
+    ADD CONSTRAINT bit_to_bit_response FOREIGN KEY (bit_id) REFERENCES bits (bit_id),
+    ADD CONSTRAINT user_to_bit_response FOREIGN KEY (user_id) REFERENCES users (user_id);
+
 
 
 --INSERT INTO users
