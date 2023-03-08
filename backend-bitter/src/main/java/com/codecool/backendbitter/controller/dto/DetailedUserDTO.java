@@ -1,5 +1,7 @@
 package com.codecool.backendbitter.controller.dto;
 
+import com.codecool.backendbitter.model.profilePicture.ProfilePicture;
+
 import java.sql.Timestamp;
 import java.util.UUID;
 
