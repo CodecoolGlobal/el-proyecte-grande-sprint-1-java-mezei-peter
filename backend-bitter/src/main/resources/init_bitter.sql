@@ -87,6 +87,12 @@ ALTER TABLE user_blocks
     ADD CONSTRAINT user_to_blocking FOREIGN KEY (user_blocking_id) REFERENCES users (user_id),
     ADD CONSTRAINT user_to_blocked FOREIGN KEY (user_blocked_id) REFERENCES users (user_id);
 
+ALTER TABLE bits
+    DROP
+        CONSTRAINT IF EXISTS user_to_bit;
+ALTER TABLE bits
+    ADD CONSTRAINT user_to_bit FOREIGN KEY (user_id) REFERENCES users (user_id);
+
 
 
 --INSERT INTO users
