@@ -1,8 +1,15 @@
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE
+EXTENSION IF NOT EXISTS "uuid-ossp";
 
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS user_follows;
+DROP TABLE IF EXISTS user_blocks;
+DROP TABLE IF EXISTS profile_pictures;
+DROP TABLE IF EXISTS bits;
+DROP TABLE IF EXISTS bit_likes;
+DROP TABLE IF EXISTS bit_responses;
 
-CREATE TABLE IF NOT EXISTS users
+CREATE TABLE users
 (
     user_id              UUID                  DEFAULT uuid_generate_v4() PRIMARY KEY,
     username             VARCHAR(25)  NOT NULL UNIQUE,
@@ -15,10 +22,45 @@ CREATE TABLE IF NOT EXISTS users
     date_of_registration TIMESTAMPTZ           DEFAULT (current_timestamp)
 );
 
-CREATE TABLE IF NOT EXISTS profile_pictures
+CREATE TABLE user_follows
+(
+    user_following_id UUID NOT NULL,
+    user_followed_id  UUID NOT NULL
+);
+
+CREATE TABLE user_blocks
+(
+    user_blocking_id UUID NOT NULL,
+    user_blocked_id  UUID NOT NULL
+);
+
+CREATE TABLE profile_pictures
 (
     profile_picture_id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
     binary_data        BYTEA NOT NULL
+);
+
+CREATE TABLE bits
+(
+    bit_id           UUID        DEFAULT uuid_generate_v4() PRIMARY KEY,
+    user_id          UUID NOT NULL,
+    date_of_creation TIMESTAMPTZ DEFAULT (current_timestamp),
+    bit_content      VARCHAR(500)
+);
+
+CREATE TABLE bit_responses
+(
+    bit_id               UUID NOT NULL,
+    bit_response_id      UUID        DEFAULT uuid_generate_v4() PRIMARY KEY,
+    user_id              UUID NOT NULL,
+    date_of_creation     TIMESTAMPTZ DEFAULT (current_timestamp),
+    bit_response_content VARCHAR(500)
+);
+
+CREATE TABLE bit_likes
+(
+    user_id UUID NOT NULL,
+    bit_id  UUID NOT NULL,
 );
 
 INSERT INTO users
