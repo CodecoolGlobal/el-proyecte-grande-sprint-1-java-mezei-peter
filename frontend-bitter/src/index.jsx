@@ -2,12 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
-import Welcome from "./components/Welcome";
 import About from "./components/About";
 import Layout from "./components/Layout";
 import ErrorPage from "./components/ErrorPage";
 import Login from "./components/Login";
 import Contact from "./components/Contact";
+import BitFeed from "./components/BitFeed.jsx";
 
 const router = createBrowserRouter([
     {
@@ -17,7 +17,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <Welcome />,
+                element: <BitFeed />,
             },
             {
                 path: "/about",
@@ -31,6 +31,7 @@ const router = createBrowserRouter([
                 path: "/contact",
                 element: <Contact />,
             },
+
         ],
     },
 ]);
