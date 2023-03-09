@@ -5,7 +5,7 @@ function BitCard({bit}) {
         <>
             <div className="BitCard">
                 <div className="PictureContainer">
-                    <img src={} alt={"profilePicture"}/>
+                    <img src={""} alt="profilePicture"/>
                 </div>
                 <div className="ContentContainer">
                     <div className="CardPostData">
