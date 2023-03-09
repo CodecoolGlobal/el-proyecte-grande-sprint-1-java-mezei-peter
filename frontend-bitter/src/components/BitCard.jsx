@@ -9,7 +9,7 @@ function BitCard({bit}) {
                 </div>
                 <div className="ContentContainer">
                     <div className="CardPostData">
-                        <span className="CardPostUserName">{bit.generalUserDTO.userName}</span>
+                        <span className="CardPostUserName">{bit.userDTO.userName}</span>
                         <span className="CardPostTime">{bit.dateOfCreation}</span>
                     </div>
                     <div className="CardContent">{bit.content}</div>
