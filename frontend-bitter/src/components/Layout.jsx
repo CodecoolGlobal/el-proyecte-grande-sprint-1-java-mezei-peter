@@ -1,6 +1,8 @@
 import React from "react";
 import logo from "../logo.png";
 import { Outlet, Link } from "react-router-dom";
+import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 
 function Layout() {
     return (
@@ -40,8 +42,23 @@ function Layout() {
                             style={{ textDecoration: "none" }}
                             className="login"
                             to="/login"
-                        >
-                            Log in
+                        ><Box>
+                            <Button
+                                sx={{
+                                    backgroundColor: "#FFFBE9",
+                                    color: "black",
+                                    border: "2px solid #262018",
+                                    ":hover": {
+                                        border: "2px solid #262018",
+                                        bgcolor: "whitesmoke",
+                                        color: "black",
+                                    },
+                                }}
+                                variant="outlined"
+                            >
+                                Log in
+                            </Button>
+                        </Box>
                         </Link>
                     </div>
                 </ul>
