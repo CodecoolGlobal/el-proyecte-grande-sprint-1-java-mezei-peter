@@ -60,12 +60,12 @@ function Login() {
                         sx={{
                             "& .MuiOutlinedInput-root.Mui-focused": {
                               "& > fieldset": {
-                        borderColor: "whitesmoke"
+                        borderColor: "#262018"
                               }
                             },
-                          input: { color: "white" } }}
+                          input: { color: "#262018" } }}
                         InputLabelProps={{
-                            style: { color: "whitesmoke" },
+                            style: { color: "#262018" },
                             
                         }}
                     />
@@ -90,12 +90,12 @@ function Login() {
                         sx={{
                             "& .MuiOutlinedInput-root.Mui-focused": {
                               "& > fieldset": {
-                        borderColor: "whitesmoke"
+                        borderColor: "#262018"
                               }
                             },
-                          input: { color: "white" } }}
+                          input: { color: "#262018" } }}
                         InputLabelProps={{
-                            style: { color: "whitesmoke" },
+                            style: { color: "#262018" },
                             
                         }}
                         id="outlined-adornment-password"
@@ -124,9 +124,11 @@ function Login() {
                 </FormControl>
                 <Button
                     sx={{
-                        backgroundColor: "#E6E5A3",
+                        backgroundColor: "#FFFBE9",
                         color: "black",
+                        border: "2px solid #262018",
                         ":hover": {
+                            border: "2px solid #262018",
                             bgcolor: "whitesmoke",
                             color: "black",
                         },

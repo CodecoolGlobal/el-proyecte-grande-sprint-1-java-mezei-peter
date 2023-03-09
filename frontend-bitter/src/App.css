@@ -6,13 +6,13 @@
 }
 
 .App {
-    background-color: #7D8F69;
+    background-color: #FFFBE9;
     min-height: 100vh;
     padding: 57px 27px;
     display: flex;
     flex-direction: column;
     font-size: calc(1px + 2vmin);
-    color: whitesmoke;
+    color: #262018;
     background-repeat: no-repeat;
     background-position: right 75%;
 }
@@ -25,7 +25,7 @@ h1 {
         sans-serif;
     font-weight: 700;
     font-size: 60px;
-    color: #E6E5A3;
+    color: #262018;
 }
 
 h2 {
@@ -36,9 +36,10 @@ h2 {
 }
 
 .nav {
-    background-color: #557153;
+    background-color: #FFFBE9;
     display: flex;
     align-items: center;
+    border-bottom: 3px solid #262018;
 }
 
 .nav-items {
@@ -63,7 +64,6 @@ h2 {
     font-weight: 300;
     margin-left: 650px;
     display: inline-block;
-    background-color: #E6E5A3;
     color: #000000;
     border-radius: 4px;
     padding: 8px 16px;
@@ -71,20 +71,15 @@ h2 {
     transition: 0.3s;
 }
 
-.login:hover {
-    background-color: whitesmoke;
-    transition: 0.3s;
-}
-
 .link {
     list-style: none;
     display: flex;
-    color: whitesmoke;
+    color: #262018;
     transition: 0.3s;
 }
 
 .link:hover {
-    color: #E6E5A3;
+    color: #262018;
     transition: 0.3s;
 }
 
@@ -109,7 +104,7 @@ h2 {
 }
 
 ::marker {
-    color: #E6E5A3;
+    color: #262018;
     font-size: 1.5rem;
 }
 
