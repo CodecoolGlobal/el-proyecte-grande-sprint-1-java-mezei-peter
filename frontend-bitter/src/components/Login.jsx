@@ -72,7 +72,7 @@ function Login() {
                 </FormControl>
                 <FormControl
                     fullWidth
-                    sx={{ input: { color: "white" } }}
+                    sx={{ input: { color: "#262018" } }}
                     variant="outlined"
                 >
                     <InputLabel
