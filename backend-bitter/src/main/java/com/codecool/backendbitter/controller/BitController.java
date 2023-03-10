@@ -14,7 +14,6 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/bit")
-@CrossOrigin(origins = "http://localhost:5173")
 public class BitController {
 
     @GetMapping("/feed/{userId}")
