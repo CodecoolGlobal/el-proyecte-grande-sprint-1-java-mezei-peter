@@ -42,6 +42,7 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+                <!-- TODO:  Look into whether it is worthwhile to use project lombok -->
 	</dependencies>
 
 	<build>
