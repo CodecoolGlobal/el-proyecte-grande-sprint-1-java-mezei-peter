@@ -10,12 +10,13 @@ import java.util.UUID;
 @Data
 @Entity
 @NoArgsConstructor
+@Table
 public class Bit {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID bitId;
 
-    @Column
+    @JoinColumn
     @ManyToOne
     private User poster;
 
