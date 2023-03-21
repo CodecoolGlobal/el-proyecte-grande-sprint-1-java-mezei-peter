@@ -31,7 +31,7 @@ public class Bit {
     @JoinColumn
     @OneToMany
     @JsonIgnore
-    private Collection<BitResponses> bitResponses;
+    private Collection<BitResponse> bitResponses;
 
     @JoinColumn
     @ManyToMany
