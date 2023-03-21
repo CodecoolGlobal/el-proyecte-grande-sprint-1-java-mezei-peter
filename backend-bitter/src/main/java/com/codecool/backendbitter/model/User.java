@@ -53,6 +53,11 @@ public class User {
     @JsonIgnore
     private Collection<User> followers;
 
+    @JoinColumn
+    @ManyToMany
+    @JsonIgnore
+    private Collection<User> blockedUsers;
+
     @Column
     @OneToMany
     @JsonIgnore
