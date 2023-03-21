@@ -71,7 +71,7 @@ public class User {
     @JoinColumn
     @OneToMany
     @JsonIgnore
-    private Collection<BitResponses> bitResponses;
+    private Collection<BitResponse> bitResponses;
 
     public void addFollower(User follower) {
         followers.add(follower);

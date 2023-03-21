@@ -10,7 +10,7 @@ import java.util.UUID;
 @Data
 @Entity
 @NoArgsConstructor
-public class BitResponses {
+public class BitResponse {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID bitResponseId;
