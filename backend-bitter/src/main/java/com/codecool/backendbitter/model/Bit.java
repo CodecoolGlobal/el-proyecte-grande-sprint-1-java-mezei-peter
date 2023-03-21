@@ -1,10 +1,12 @@
 package com.codecool.backendbitter.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.Collection;
 import java.util.UUID;
 
 @Data
@@ -25,4 +27,13 @@ public class Bit {
 
     @Column
     private String bitContent;
+
+    @JoinColumn
+    @OneToMany
+    @JsonIgnore
+    private Collection<BitResponses> bitResponses;
+
+    @JoinColumn
+    @ManyToMany
+    private Collection<User> likedBy;
 }

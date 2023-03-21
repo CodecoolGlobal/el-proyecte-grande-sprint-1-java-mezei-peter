@@ -45,15 +45,28 @@ public class User {
 
     @Column
     @ManyToMany
+    @JsonIgnore
     private Collection<User> followedUsers;
 
     @Column
     @ManyToMany
+    @JsonIgnore
     private Collection<User> followers;
 
     @Column
     @OneToMany
+    @JsonIgnore
     private Collection<Bit> bits;
+
+    @JoinColumn
+    @ManyToMany
+    @JsonIgnore
+    private Collection<Bit> likedBits;
+
+    @JoinColumn
+    @OneToMany
+    @JsonIgnore
+    private Collection<BitResponses> bitResponses;
 
     public void addFollower(User follower) {
         followers.add(follower);
