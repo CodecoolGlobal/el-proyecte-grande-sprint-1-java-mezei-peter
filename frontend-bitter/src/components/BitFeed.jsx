@@ -5,7 +5,7 @@ function BitFeed() {
     const [feedBits, setFeedBits] = useState(null);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        fetch(" http://localhost:8080/bit/feed/abc")
+        fetch("/api/bit/feed/abc")
             .then(response => response.json())
             .then(data => {
                 console.log(data)
