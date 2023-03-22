@@ -1,5 +1,6 @@
 package com.codecool.backendbitter.service;
 
+import com.codecool.backendbitter.controller.dto.BitResponseDTO;
 import com.codecool.backendbitter.controller.dto.NewBitResponseDTO;
 import com.codecool.backendbitter.controller.dto.UpdateBitResponseDTO;
 import com.codecool.backendbitter.model.BitResponse;
@@ -26,20 +27,22 @@ public class BitResponseServiceImpl implements BitResponseService{
     }
 
     @Override
-    public BitResponse addBitResponse(NewBitResponseDTO newBitResponseDTO) {
+    public BitResponseDTO addBitResponse(NewBitResponseDTO newBitResponseDTO) {
         BitResponse bitResponse =
                 bitResponseMapper.newBitResponseDTOToBitResponse(newBitResponseDTO);
         BitResponse savedBitResponse = bitResponseRepository.save(bitResponse);
 
-        return savedBitResponse;
+        return bitResponseMapper.bitResponseToBitResponseDTO(savedBitResponse);
     }
 
     @Override
-    public List<BitResponse> findBitResponsesByBitId(String bitId) {
+    public List<BitResponseDTO> findBitResponsesByBitId(String bitId) {
         UUID convertedBitId = UUID.fromString(bitId);
         List<BitResponse> bitResponseList =
                 bitResponseRepository.findAllByBit_BitId(convertedBitId);
-        return bitResponseList;
+        List<BitResponseDTO> bitResponseDTOS =
+                bitResponseList.stream().map(bitResponseMapper::bitResponseToBitResponseDTO).toList();
+        return bitResponseDTOS;
     }
 
     public void deleteBitResponseByBitResponseId(String bitResponseId) throws ResourceNotFoundException {

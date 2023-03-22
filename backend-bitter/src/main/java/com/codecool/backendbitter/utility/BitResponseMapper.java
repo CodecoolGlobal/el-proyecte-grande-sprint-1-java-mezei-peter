@@ -1,5 +1,6 @@
 package com.codecool.backendbitter.utility;
 
+import com.codecool.backendbitter.controller.dto.BitResponseDTO;
 import com.codecool.backendbitter.controller.dto.NewBitResponseDTO;
 import com.codecool.backendbitter.controller.dto.UpdateBitResponseDTO;
 import com.codecool.backendbitter.model.Bit;
@@ -45,5 +46,16 @@ public class BitResponseMapper {
         bitResponse.setBitResponseContent(updateBitResponseDTO.newBitContent());
 
         return bitResponse;
+    }
+
+    public BitResponseDTO bitResponseToBitResponseDTO(BitResponse bitResponse) {
+        boolean isEdited = bitResponse.getTimeOfEdit().after(bitResponse.getDateOfPosting());
+
+        BitResponseDTO bitResponseDTO = new BitResponseDTO(bitResponse.getBitResponseId(),
+                bitResponse.getBitResponseContent(), bitResponse.getDateOfPosting(),
+                bitResponse.getPoster().getUserId(), bitResponse.getPoster().getUsername(),
+                isEdited);
+
+        return bitResponseDTO;
     }
 }

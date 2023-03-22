@@ -1,5 +1,6 @@
 package com.codecool.backendbitter.controller;
 
+import com.codecool.backendbitter.controller.dto.BitResponseDTO;
 import com.codecool.backendbitter.controller.dto.NewBitResponseDTO;
 import com.codecool.backendbitter.controller.dto.UpdateBitResponseDTO;
 import com.codecool.backendbitter.model.BitResponse;
@@ -28,7 +29,7 @@ public class ResponseController {
     public ResponseEntity<?> addNewBitResponse(
             @RequestBody NewBitResponseDTO newBitResponseDTO
             ) {
-        BitResponse savedBitResponse = bitResponseService.addBitResponse(newBitResponseDTO);
+        BitResponseDTO savedBitResponse = bitResponseService.addBitResponse(newBitResponseDTO);
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(savedBitResponse);
     }
@@ -38,7 +39,7 @@ public class ResponseController {
             @PathVariable String bitId
     ) {
 
-        List<BitResponse> bitResponseList = bitResponseService.findBitResponsesByBitId(bitId);
+        List<BitResponseDTO> bitResponseList = bitResponseService.findBitResponsesByBitId(bitId);
 
         return ResponseEntity.status(HttpStatus.OK).body(bitResponseList);
     }
