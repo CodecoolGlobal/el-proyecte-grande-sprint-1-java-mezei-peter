@@ -7,6 +7,9 @@ import com.codecool.backendbitter.utility.BitResponseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.UUID;
+
 @Service
 public class BitResponseServiceImpl implements BitResponseService{
 
@@ -27,5 +30,13 @@ public class BitResponseServiceImpl implements BitResponseService{
         BitResponse savedBitResponse = bitResponseRepository.save(bitResponse);
 
         return savedBitResponse;
+    }
+
+    @Override
+    public List<BitResponse> findBitResponsesByBitId(String bitId) {
+        UUID convertedBitId = UUID.fromString(bitId);
+        List<BitResponse> bitResponseList =
+                bitResponseRepository.findAllByBit_BitId(convertedBitId);
+        return bitResponseList;
     }
 }

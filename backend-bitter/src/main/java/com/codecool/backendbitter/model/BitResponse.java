@@ -1,5 +1,6 @@
 package com.codecool.backendbitter.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,7 @@ public class BitResponse {
 
     @JoinColumn
     @ManyToOne
+    @JsonIgnore
     private Bit bit;
 
     @JoinColumn
