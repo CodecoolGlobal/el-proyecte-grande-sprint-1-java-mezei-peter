@@ -11,7 +11,7 @@ import java.util.UUID;
 @Service
 public class BitServiceImpl implements BitService {
 
-    private BitRepository bitRepository;
+    private final BitRepository bitRepository;
 
     @Autowired
     public BitServiceImpl(BitRepository bitRepository) {
