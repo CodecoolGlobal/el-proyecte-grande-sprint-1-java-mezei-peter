@@ -1,7 +1,10 @@
 package com.codecool.backendbitter.service;
 
 import com.codecool.backendbitter.model.Bit;
+import com.codecool.backendbitter.model.User;
 import com.codecool.backendbitter.repository.BitRepository;
+import com.codecool.backendbitter.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +16,36 @@ public class BitServiceImpl implements BitService {
 
     private final BitRepository bitRepository;
 
+    private final UserRepository userRepository;
+
+    private final User user;
+
+    private final Bit bit;
+
     @Autowired
-    public BitServiceImpl(BitRepository bitRepository) {
+    public BitServiceImpl(BitRepository bitRepository, UserRepository userRepository, User user, Bit bit) {
         this.bitRepository = bitRepository;
+        this.userRepository = userRepository;
+        this.user = user;
+        this.bit = bit;
     }
 
     @Override
     public Collection<Bit> getBitsForUser(UUID userId) {
         return bitRepository.findBitsByPosterUserId(userId);
+    }
+
+    @Override
+    public void likeBit(UUID userId, UUID bitId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with ID: " + userId));
+        Bit bit = bitRepository.findById(bitId)
+                .orElseThrow(() -> new EntityNotFoundException("Bit not found with ID: " + bitId));
+
+        user.likeBit(bit);
+        bit.addUserToLikes(user);
+
+        userRepository.save(user);
+        bitRepository.save(bit);
     }
 }

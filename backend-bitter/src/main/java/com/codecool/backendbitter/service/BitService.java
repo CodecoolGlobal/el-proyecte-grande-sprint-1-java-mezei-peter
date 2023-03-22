@@ -8,5 +8,7 @@ import java.util.UUID;
 public interface BitService {
     Collection<Bit> getBitsForUser(UUID userId);
 
+    void likeBit(UUID userId, UUID bitId);
+
 
 }

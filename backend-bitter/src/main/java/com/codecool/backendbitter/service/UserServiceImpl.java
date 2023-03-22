@@ -18,10 +18,6 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
-    @Override
-    public User getUserbyId(UUID userId) {
-        return userRepository.findUserByUserId(userId);
-    }
 
     @Override
     public Collection<User> getFollowersForUser(UUID userId) {

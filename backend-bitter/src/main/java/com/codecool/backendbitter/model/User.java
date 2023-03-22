@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.UUID;
 
 @Data
@@ -80,4 +81,12 @@ public class User {
     public void followUser(User user) {
         followedUsers.add(user);
     }
+
+    public void likeBit(Bit bit) {
+        if (likedBits == null) {
+            likedBits = new HashSet<>();
+        }
+        likedBits.add(bit);
+    }
 }
+

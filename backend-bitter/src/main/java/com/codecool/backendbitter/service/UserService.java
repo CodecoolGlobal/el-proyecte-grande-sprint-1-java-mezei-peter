@@ -7,8 +7,6 @@ import java.util.UUID;
 
 public interface UserService {
 
-    User getUserbyId(UUID userId);
-
     Collection<User> getFollowersForUser(UUID userId);
 
 
