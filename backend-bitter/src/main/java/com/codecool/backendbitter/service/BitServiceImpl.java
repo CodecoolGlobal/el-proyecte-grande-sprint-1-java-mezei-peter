@@ -18,16 +18,11 @@ public class BitServiceImpl implements BitService {
 
     private final UserRepository userRepository;
 
-    private final User user;
-
-    private final Bit bit;
 
     @Autowired
-    public BitServiceImpl(BitRepository bitRepository, UserRepository userRepository, User user, Bit bit) {
+    public BitServiceImpl(BitRepository bitRepository, UserRepository userRepository) {
         this.bitRepository = bitRepository;
         this.userRepository = userRepository;
-        this.user = user;
-        this.bit = bit;
     }
 
     @Override
