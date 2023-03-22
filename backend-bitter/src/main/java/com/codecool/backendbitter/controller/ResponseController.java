@@ -1,6 +1,7 @@
 package com.codecool.backendbitter.controller;
 
 import com.codecool.backendbitter.controller.dto.NewBitResponseDTO;
+import com.codecool.backendbitter.controller.dto.UpdateBitResponseDTO;
 import com.codecool.backendbitter.model.BitResponse;
 import com.codecool.backendbitter.service.BitResponseService;
 import com.codecool.backendbitter.service.BitResponseServiceImpl;
@@ -50,6 +51,19 @@ public class ResponseController {
             bitResponseService.deleteBitResponseByBitResponseId(bitId);
 
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    @PutMapping("")
+    public ResponseEntity<?> updateBitResponseByBitResponseId(
+            @RequestBody UpdateBitResponseDTO updateBitResponseDTO
+            ) {
+        try {
+            bitResponseService.updateBitResponseByBitResponseId(updateBitResponseDTO);
+
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body("Response with id: " + updateBitResponseDTO.responseId() + " updated.");
         } catch (ResourceNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }

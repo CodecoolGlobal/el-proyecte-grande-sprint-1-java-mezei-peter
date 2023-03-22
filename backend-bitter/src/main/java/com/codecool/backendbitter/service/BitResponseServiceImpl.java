@@ -1,6 +1,7 @@
 package com.codecool.backendbitter.service;
 
 import com.codecool.backendbitter.controller.dto.NewBitResponseDTO;
+import com.codecool.backendbitter.controller.dto.UpdateBitResponseDTO;
 import com.codecool.backendbitter.model.BitResponse;
 import com.codecool.backendbitter.repository.BitResponseRepository;
 import com.codecool.backendbitter.utility.BitResponseMapper;
@@ -45,5 +46,19 @@ public class BitResponseServiceImpl implements BitResponseService{
         int affectedRows = bitResponseRepository.deleteByBitResponseId(UUID.fromString(bitResponseId));
 
         if (affectedRows == 0) throw new ResourceNotFoundException("Bit Response with id: " + bitResponseId + " not found.");
+    }
+
+    @Override
+    public void updateBitResponseByBitResponseId(UpdateBitResponseDTO updateBitResponseDTO) throws ResourceNotFoundException {
+        try {
+            BitResponse bitResponse =
+                    bitResponseMapper.updateBitResponseDTOToBitResponse(updateBitResponseDTO);
+
+            bitResponseRepository.save(bitResponse);
+        } catch (ResourceNotFoundException e) {
+            throw new ResourceNotFoundException(e.getMessage());
+        } catch (NumberFormatException e) {
+            throw new ResourceNotFoundException("Resource with id: " + updateBitResponseDTO.responseId() + " not found");
+        }
     }
 }

@@ -1,10 +1,12 @@
 package com.codecool.backendbitter.utility;
 
 import com.codecool.backendbitter.controller.dto.NewBitResponseDTO;
+import com.codecool.backendbitter.controller.dto.UpdateBitResponseDTO;
 import com.codecool.backendbitter.model.Bit;
 import com.codecool.backendbitter.model.BitResponse;
 import com.codecool.backendbitter.model.User;
 import com.codecool.backendbitter.repository.BitRepository;
+import com.codecool.backendbitter.repository.BitResponseRepository;
 import com.codecool.backendbitter.repository.UserRepository;
 import jakarta.persistence.Column;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +19,14 @@ public class BitResponseMapper {
 
     private final UserRepository userRepository;
     private final BitRepository bitRepository;
+    private final BitResponseRepository bitResponseRepository;
 
     @Autowired
-    public BitResponseMapper(UserRepository userRepository, BitRepository bitRepository) {
+    public BitResponseMapper(UserRepository userRepository, BitRepository bitRepository,
+                             BitResponseRepository bitResponseRepository) {
         this.userRepository = userRepository;
         this.bitRepository = bitRepository;
+        this.bitResponseRepository = bitResponseRepository;
     }
 
     public BitResponse newBitResponseDTOToBitResponse(NewBitResponseDTO newBitResponseDTO) {
@@ -31,5 +36,14 @@ public class BitResponseMapper {
 
         return new BitResponse(bit, bitPoster,
                 newBitResponseDTO.bitResponseContent());
+    }
+
+    public BitResponse updateBitResponseDTOToBitResponse(UpdateBitResponseDTO updateBitResponseDTO) throws ResourceNotFoundException {
+        UUID id = UUID.fromString(updateBitResponseDTO.responseId());
+        BitResponse bitResponse =
+                bitResponseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Bit response with id: " + updateBitResponseDTO.responseId() + " not found"));
+        bitResponse.setBitResponseContent(updateBitResponseDTO.newBitContent());
+
+        return bitResponse;
     }
 }
