@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
-import java.util.Collection;
-import java.util.UUID;
+import java.util.*;
 
 @Data
 @Entity
@@ -80,10 +79,16 @@ public class User {
     private Collection<BitResponse> bitResponses;
 
     public void addFollower(User follower) {
+        if (followers == null) {
+            followers = new HashSet<>();
+        }
         followers.add(follower);
     }
 
     public void followUser(User user) {
+        if (followedUsers == null) {
+            followedUsers = new HashSet<>();
+        }
         followedUsers.add(user);
     }
 }
