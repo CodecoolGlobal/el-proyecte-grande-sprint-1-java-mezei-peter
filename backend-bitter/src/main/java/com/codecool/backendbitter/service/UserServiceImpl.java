@@ -1,5 +1,6 @@
 package com.codecool.backendbitter.service;
 
+import com.codecool.backendbitter.controller.dto.UserRegistrationDTO;
 import com.codecool.backendbitter.model.User;
 import com.codecool.backendbitter.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,19 @@ public class UserServiceImpl implements UserService {
     @Autowired
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    @Override
+    public boolean exists(UserRegistrationDTO userRegistrationDTO) {
+        return userRepository.existsUserByUsernameAndPasswordAndUserEmail(
+                userRegistrationDTO.username(),
+                userRegistrationDTO.password(),
+                userRegistrationDTO.userEmail()
+        );
+    }
+
+    public void saveUser(User user) {
+        userRepository.save(user);
     }
 
     @Override
