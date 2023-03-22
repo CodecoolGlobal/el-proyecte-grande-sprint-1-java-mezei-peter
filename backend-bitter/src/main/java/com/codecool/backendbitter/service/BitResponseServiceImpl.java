@@ -4,6 +4,7 @@ import com.codecool.backendbitter.controller.dto.NewBitResponseDTO;
 import com.codecool.backendbitter.model.BitResponse;
 import com.codecool.backendbitter.repository.BitResponseRepository;
 import com.codecool.backendbitter.utility.BitResponseMapper;
+import com.codecool.backendbitter.utility.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,5 +39,11 @@ public class BitResponseServiceImpl implements BitResponseService{
         List<BitResponse> bitResponseList =
                 bitResponseRepository.findAllByBit_BitId(convertedBitId);
         return bitResponseList;
+    }
+
+    public void deleteBitResponseByBitResponseId(String bitResponseId) throws ResourceNotFoundException {
+        int affectedRows = bitResponseRepository.deleteByBitResponseId(UUID.fromString(bitResponseId));
+
+        if (affectedRows == 0) throw new ResourceNotFoundException("Bit Response with id: " + bitResponseId + " not found.");
     }
 }

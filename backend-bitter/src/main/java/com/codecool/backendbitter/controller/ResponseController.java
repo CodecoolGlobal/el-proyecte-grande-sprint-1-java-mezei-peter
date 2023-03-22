@@ -4,6 +4,7 @@ import com.codecool.backendbitter.controller.dto.NewBitResponseDTO;
 import com.codecool.backendbitter.model.BitResponse;
 import com.codecool.backendbitter.service.BitResponseService;
 import com.codecool.backendbitter.service.BitResponseServiceImpl;
+import com.codecool.backendbitter.utility.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,8 +36,22 @@ public class ResponseController {
     public ResponseEntity<?> getBitResponsesByBitId(
             @PathVariable String bitId
     ) {
+
         List<BitResponse> bitResponseList = bitResponseService.findBitResponsesByBitId(bitId);
 
         return ResponseEntity.status(HttpStatus.OK).body(bitResponseList);
+    }
+
+    @DeleteMapping("/{bitId}")
+    public ResponseEntity<?> deleteBitResponseByBitId(
+            @PathVariable String bitId
+    ) {
+        try {
+            bitResponseService.deleteBitResponseByBitResponseId(bitId);
+
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 }
