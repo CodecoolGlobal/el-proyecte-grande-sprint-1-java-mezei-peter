@@ -74,14 +74,14 @@ public class User {
 
     public void addFollower(User follower) {
         if (followers == null) {
-            followers = new HashSet<>(Set.of(follower));
+            followers = new HashSet<>();
         }
         followers.add(follower);
     }
 
     public void followUser(User user) {
         if (followedUsers == null) {
-            followedUsers = new HashSet<>(Set.of(user));
+            followedUsers = new HashSet<>();
         }
         followedUsers.add(user);
     }
