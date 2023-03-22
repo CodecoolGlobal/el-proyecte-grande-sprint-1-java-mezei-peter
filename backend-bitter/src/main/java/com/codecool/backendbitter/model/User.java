@@ -6,8 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
-import java.util.Collection;
-import java.util.UUID;
+import java.util.*;
 
 @Data
 @Entity
@@ -74,10 +73,16 @@ public class User {
     private Collection<BitResponse> bitResponses;
 
     public void addFollower(User follower) {
+        if (followers == null) {
+            followers = new HashSet<>(Set.of(follower));
+        }
         followers.add(follower);
     }
 
     public void followUser(User user) {
+        if (followedUsers == null) {
+            followedUsers = new HashSet<>(Set.of(user));
+        }
         followedUsers.add(user);
     }
 }
