@@ -38,9 +38,11 @@ public class UserController {
                         .userEmail(userRegistrationDTO.userEmail())
                         .build();
 
+                userService.saveUser(userToAdd);
+
                 message = "User added.";
                 status = HttpStatus.OK;
-            } catch(Exception e) {
+            } catch(Throwable e) {
                 message = "ERROR.";
                 status = HttpStatus.INTERNAL_SERVER_ERROR;
             }

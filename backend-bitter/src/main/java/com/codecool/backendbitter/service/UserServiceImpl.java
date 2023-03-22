@@ -1,6 +1,7 @@
 package com.codecool.backendbitter.service;
 
 import com.codecool.backendbitter.controller.dto.UserRegistrationDTO;
+import com.codecool.backendbitter.model.User;
 import com.codecool.backendbitter.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,10 @@ public class UserServiceImpl implements UserService {
                 userRegistrationDTO.password(),
                 userRegistrationDTO.userEmail()
         );
+    }
+
+    public void saveUser(User user) {
+        userRepository.save(user);
     }
 
 
