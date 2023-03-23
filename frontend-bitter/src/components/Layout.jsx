@@ -1,69 +1,53 @@
 import React from "react";
 import logo from "../logo.png";
-import { Outlet, Link } from "react-router-dom";
+import {Outlet, Link} from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
 function Layout() {
     return (
         <>
-            <nav className="nav">
-                <img src={logo} className="App-logo" alt="logo" />
-                <ul className="nav-items">
-                    <li>
-                        <Link
-                            style={{ textDecoration: "none" }}
-                            className="link"
-                            to="/"
-                        >
-                            Bitter
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            style={{ textDecoration: "none" }}
-                            className="link"
-                            to="/about"
-                        >
-                            About
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            style={{ textDecoration: "none" }}
-                            className="link"
-                            to="/contact"
-                        >
-                            Contact
-                        </Link>
-                    </li>
-                    <div className="login-div">
-                        <Link
-                            style={{ textDecoration: "none" }}
-                            className="login"
-                            to="/login"
-                        ><Box>
-                            <Button
-                                sx={{
-                                    backgroundColor: "#FFFBE9",
-                                    color: "black",
-                                    border: "2px solid #262018",
-                                    ":hover": {
-                                        border: "2px solid #262018",
-                                        bgcolor: "whitesmoke",
-                                        color: "black",
-                                    },
-                                }}
-                                variant="outlined"
-                            >
-                                Log in
-                            </Button>
-                        </Box>
-                        </Link>
-                    </div>
-                </ul>
-            </nav>
-            <Outlet />
+            <header
+                className="w-full flex justify-between items-center h-20 bg-white sm:px-8 px-4 py-4 border-b border-b-[#e6ebf4] bg-[#FFFBE9]">
+
+                <Link
+                    style={{textDecoration: "none"}}
+                    className="flex text-gray-900"
+                    to="/"
+                >
+                    <img src={logo} className="w-20 object-contain" alt="logo"/>
+                    <h1 className="mt-5 font-extrabold text-[#222328] text-[32px]">
+                        Bitter
+                    </h1>
+                </Link>
+
+                <Link
+                    style={{textDecoration: "none"}}
+                    className="button ml-auto flex text-gray-900"
+                    to="/login"
+                ><Box>
+                    <Button
+                        sx={{
+                            backgroundColor: "#FFFBE9",
+                            color: "black",
+                            border: "2px solid #262018",
+                            ":hover": {
+                                border: "2px solid #262018",
+                                bgcolor: "whitesmoke",
+                                color: "black",
+                            },
+                        }}
+
+                        variant="outlined"
+                    >
+                        Log in
+                    </Button>
+                </Box>
+                </Link>
+
+
+            </header>
+            <Outlet/>
         </>
     );
 }
