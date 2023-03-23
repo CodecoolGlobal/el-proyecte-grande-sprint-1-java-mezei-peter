@@ -1,3 +1,5 @@
 package com.codecool.backendbitter.controller.dto;
 
-public record BitCreationDTO() {}
+import java.util.UUID;
+
+public record BitCreationDTO(UUID userId, String bitContent) {}
