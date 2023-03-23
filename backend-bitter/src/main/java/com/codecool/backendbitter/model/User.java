@@ -2,15 +2,20 @@ package com.codecool.backendbitter.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 import java.util.*;
 
 @Data
 @Entity
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "users")
 public class User {
     @Id
@@ -40,6 +45,7 @@ public class User {
     private boolean isBanned;
 
     @Column
+    @CreationTimestamp
     private Timestamp dateOfRegistration;
 
     @Column
