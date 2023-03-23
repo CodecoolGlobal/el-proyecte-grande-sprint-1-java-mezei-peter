@@ -21,7 +21,7 @@ function Login() {
     });
 
     const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
+        setValues({...values, [prop]: event.target.value});
     };
 
     const handleClickShowPassword = () => {
@@ -36,9 +36,8 @@ function Login() {
     };
 
     return (
-        <div className="App">
+        <div className="className=sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]">
             <Box
-                className="box"
                 sx={{
                     margin: "4rem",
                     display: "flex",
@@ -47,32 +46,31 @@ function Login() {
                     width: "35rem",
                 }}
                 component="form"
-
                 // onSubmit={}
             >
                 <FormControl fullWidth>
                     <TextField
-                        className="form"
+
                         name="email"
                         id="email"
                         label="Email"
                         variant="outlined"
                         sx={{
                             "& .MuiOutlinedInput-root.Mui-focused": {
-                              "& > fieldset": {
-                        borderColor: "#262018"
-                              }
+                                "& > fieldset": {
+                                    borderColor: "#262018"
+                                }
                             },
-                          input: { color: "#262018" } }}
+                            input: {color: "#262018"}
+                        }}
                         InputLabelProps={{
-                            style: { color: "#262018" },
-                            
+                            style: {color: "#262018"},
                         }}
                     />
                 </FormControl>
                 <FormControl
                     fullWidth
-                    sx={{ input: { color: "#262018" } }}
+                    sx={{input: {color: "#262018"}}}
                     variant="outlined"
                 >
                     <InputLabel
@@ -84,19 +82,19 @@ function Login() {
                         }}
                         htmlFor="outlined-adornment-password"
                     >
-                        
                     </InputLabel>
                     <TextField
                         sx={{
                             "& .MuiOutlinedInput-root.Mui-focused": {
-                              "& > fieldset": {
-                        borderColor: "#262018"
-                              }
+                                "& > fieldset": {
+                                    borderColor: "#262018"
+                                }
                             },
-                          input: { color: "#262018" } }}
+                            input: {color: "#262018"}
+                        }}
                         InputLabelProps={{
-                            style: { color: "#262018" },
-                            
+                            style: {color: "#262018"},
+
                         }}
                         id="outlined-adornment-password"
                         type={values.showPassword ? "text" : "password"}
@@ -105,16 +103,16 @@ function Login() {
                         endAdornment={
                             <InputAdornment position="end">
                                 <IconButton
-                                    sx={{ color: "whitesmoke" }}
+                                    sx={{color: "whitesmoke"}}
                                     aria-label="toggle password visibility"
                                     onClick={handleClickShowPassword}
                                     onMouseDown={handleMouseDownPassword}
                                     edge="end"
                                 >
                                     {values.showPassword ? (
-                                        <VisibilityOff />
+                                        <VisibilityOff/>
                                     ) : (
-                                        <Visibility />
+                                        <Visibility/>
                                     )}
                                 </IconButton>
                             </InputAdornment>

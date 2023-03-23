@@ -17,11 +17,11 @@ function BitFeed() {
     }, []);
 
     if (loading) {
-        return <div className="App">LOADING</div>
+        return <div className="className=sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]">LOADING</div>
     }
     return (
         <>
-            <div className="BitFeed App">
+            <div className="className=sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]">
                 {feedBits.map(bit => <BitCard bit={bit} key={bit.bitId}/>)}
 
             </div>
