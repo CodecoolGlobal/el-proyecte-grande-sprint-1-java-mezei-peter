@@ -2,6 +2,7 @@ package com.codecool.backendbitter.service;
 
 import com.codecool.backendbitter.model.Bit;
 import com.codecool.backendbitter.repository.BitRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +23,16 @@ public class BitServiceImpl implements BitService {
             bitRepository.save(bit);
             return true;
         } catch(Throwable e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean delete(Bit bit) {
+        try {
+            bitRepository.delete(bit);
+            return true;
+        } catch (EntityNotFoundException e) {
             return false;
         }
     }

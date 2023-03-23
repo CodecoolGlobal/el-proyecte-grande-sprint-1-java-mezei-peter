@@ -84,4 +84,23 @@ public class BitController {
 
         return new ResponseEntity<>(message, status);
     }
+
+    @DeleteMapping("/delete/{userId}/{bitId}")
+    public ResponseEntity<String> deleteBit(@PathVariable UUID userId, @PathVariable UUID bitId) {
+        String message = "Bit deleted!";
+        HttpStatus status = HttpStatus.OK;
+
+        if(!userService.userIsAuthorizedForBitWithId( userId, bitId )) {
+            message = "User is not authorized to delete this bit.";
+            status = HttpStatus.FORBIDDEN;
+        } else if (!bitService.bitExists(bitId)) {
+            message = "The requested bit does not exist!";
+            status = HttpStatus.NOT_FOUND;
+        } else {
+            Bit bitToUpdate = bitService.getById(bitId);
+            bitService.delete(bitToUpdate);
+        }
+
+        return new ResponseEntity<>(message, status);
+    }
 }

@@ -7,6 +7,8 @@ import java.util.UUID;
 public interface BitService {
     boolean save(Bit bit);
 
+    boolean delete(Bit bit);
+
     boolean bitExists(UUID id);
 
     Bit getById(UUID id);
