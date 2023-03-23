@@ -6,10 +6,12 @@ import com.codecool.backendbitter.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
+
     private final UserRepository userRepository;
 
     @Autowired
@@ -26,6 +28,7 @@ public class UserServiceImpl implements UserService {
         );
     }
 
+    @Override
     public void saveUser(User user) {
         userRepository.save(user);
     }
@@ -33,6 +36,24 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean exists(UUID userId) {
         return userRepository.existsById(userId);
+    }
+
+    public User findById(UUID id) {
+        return userRepository.findUserByUserId(id);
+    }
+
+    public boolean userIsAuthorizedForBitWithId(UUID userId, UUID bitId) {
+        User user = userRepository.findUserByUserId(userId);
+        if(user == null) return false;
+        if(user.isAdmin()) return true;
+
+        boolean userOwnsBit = false;
+
+        if(user.getBits().size() > 0) {
+            userOwnsBit = user.getBits().stream().anyMatch(bit -> bit.getBitId().equals(bitId));
+        }
+
+        return userOwnsBit;
     }
 
     @Override
@@ -45,6 +66,17 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(user);
         userRepository.save(follower);
+
+    }
+
+    @Override
+    public Collection<User> getFollowersForUser(UUID userId) {
+        return userRepository.findFollowersByUserId(userId);
+    }
+
+    @Override
+    public Collection<User> getFollowedForUser(UUID userId) {
+        return userRepository.findFollowedByUserId(userId);
     }
 
     @Override
