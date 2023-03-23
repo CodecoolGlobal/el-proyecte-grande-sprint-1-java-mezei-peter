@@ -1,4 +1,6 @@
-package com.codecool.backendbitter.controller.dto;
+package com.codecool.backendbitter.controller.dto.bit;
+
+import com.codecool.backendbitter.controller.dto.GeneralUserDTO;
 
 import java.sql.Timestamp;
 import java.util.UUID;

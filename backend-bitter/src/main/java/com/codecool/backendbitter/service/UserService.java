@@ -15,10 +15,13 @@ public interface UserService {
 
     void addFollowerToUser(UUID userUUID, UUID followedUserUUID);
 
+    User findById(UUID id);
+
+    boolean userIsAuthorizedForBitWithId(UUID userId, UUID bitId);
+
     Collection<User> getFollowersForUser(UUID userId);
 
 
     Collection<User> getFollowedForUser(UUID userId);
-
 
 }

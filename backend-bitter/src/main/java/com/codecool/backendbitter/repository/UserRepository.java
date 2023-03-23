@@ -13,10 +13,10 @@ import java.util.UUID;
 public interface UserRepository extends JpaRepository<User, UUID> {
     boolean existsUserByUsernameAndPasswordAndUserEmail(String username, String password, String userEmail);
 
+    User findUserByUserId(UUID userId);
+    
     Collection<User> findFollowersByUserId(@Param("userId") UUID userId);
 
     Collection<User> findFollowedByUserId(@Param("userId") UUID userId);
-
-
 
 }

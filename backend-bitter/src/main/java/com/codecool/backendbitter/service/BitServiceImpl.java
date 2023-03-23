@@ -1,6 +1,7 @@
 package com.codecool.backendbitter.service;
 
 import com.codecool.backendbitter.model.Bit;
+
 import com.codecool.backendbitter.model.User;
 import com.codecool.backendbitter.repository.BitRepository;
 import com.codecool.backendbitter.repository.UserRepository;
@@ -13,16 +14,43 @@ import java.util.UUID;
 
 @Service
 public class BitServiceImpl implements BitService {
-
     private final BitRepository bitRepository;
-
     private final UserRepository userRepository;
-
 
     @Autowired
     public BitServiceImpl(BitRepository bitRepository, UserRepository userRepository) {
         this.bitRepository = bitRepository;
         this.userRepository = userRepository;
+    }
+
+    @Override
+    public boolean save(Bit bit) {
+        try {
+            bitRepository.save(bit);
+            return true;
+        } catch(Throwable e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean delete(Bit bit) {
+        try {
+            bitRepository.delete(bit);
+            return true;
+        } catch (EntityNotFoundException e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean bitExists(UUID id) {
+        return bitRepository.existsById(id);
+    }
+
+    @Override
+    public Bit getById(UUID id) {
+        return bitRepository.findById(id).get();
     }
 
     @Override
@@ -58,6 +86,4 @@ public class BitServiceImpl implements BitService {
         bitRepository.save(bit);
 
     }
-
-
 }

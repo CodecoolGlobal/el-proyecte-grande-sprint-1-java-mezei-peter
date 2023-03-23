@@ -28,6 +28,7 @@ public class UserServiceImpl implements UserService {
         );
     }
 
+    @Override
     public void saveUser(User user) {
         userRepository.save(user);
     }
@@ -35,6 +36,24 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean exists(UUID userId) {
         return userRepository.existsById(userId);
+    }
+
+    public User findById(UUID id) {
+        return userRepository.findUserByUserId(id);
+    }
+
+    public boolean userIsAuthorizedForBitWithId(UUID userId, UUID bitId) {
+        User user = userRepository.findUserByUserId(userId);
+        if(user == null) return false;
+        if(user.isAdmin()) return true;
+
+        boolean userOwnsBit = false;
+
+        if(user.getBits().size() > 0) {
+            userOwnsBit = user.getBits().stream().anyMatch(bit -> bit.getBitId().equals(bitId));
+        }
+
+        return userOwnsBit;
     }
 
     @Override
