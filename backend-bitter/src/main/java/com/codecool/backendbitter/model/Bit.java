@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.UUID;
 
 @Data
@@ -36,4 +37,16 @@ public class Bit {
     @JoinColumn
     @ManyToMany
     private Collection<User> likedBy;
+
+
+    public void addUserToLikes(User user) {
+        if (likedBy == null) {
+            likedBy = new HashSet<>();
+        }
+        likedBy.add(user);
+    }
+
+    public void deleteUserFromLikes(User user) {
+        likedBy.remove(user);
+    }
 }
