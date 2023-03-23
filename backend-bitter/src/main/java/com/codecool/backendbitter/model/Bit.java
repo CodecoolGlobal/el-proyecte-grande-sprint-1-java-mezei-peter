@@ -45,4 +45,8 @@ public class Bit {
         }
         likedBy.add(user);
     }
+
+    public void deleteUserFromLikes(User user) {
+        likedBy.removeIf(currentUser -> currentUser.equals(user));
+    }
 }

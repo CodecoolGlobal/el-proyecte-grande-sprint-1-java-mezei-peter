@@ -51,4 +51,19 @@ public class BitController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @DeleteMapping("/{bitId}/like/{userId}")
+    public ResponseEntity<Void> removeLikeBits(@PathVariable String bitId, @PathVariable String userId) {
+
+        try {
+            UUID finalUserId = UUID.fromString(userId);
+            UUID finalBitId = UUID.fromString(bitId);
+
+            bitService.removeBitLike(finalUserId, finalBitId);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Throwable e) {
+            e.printStackTrace(System.err);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

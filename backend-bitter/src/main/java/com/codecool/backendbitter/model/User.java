@@ -88,5 +88,9 @@ public class User {
         }
         likedBits.add(bit);
     }
+
+    public void deleteBitFromLikes(Bit bit) {
+        likedBits.removeIf(currentBit -> currentBit.equals(bit));
+    }
 }
 

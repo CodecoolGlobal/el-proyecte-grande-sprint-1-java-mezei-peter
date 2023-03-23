@@ -10,5 +10,7 @@ public interface BitService {
 
     void likeBit(UUID userId, UUID bitId);
 
+    void removeBitLike(UUID userId, UUID bitId);
+
 
 }

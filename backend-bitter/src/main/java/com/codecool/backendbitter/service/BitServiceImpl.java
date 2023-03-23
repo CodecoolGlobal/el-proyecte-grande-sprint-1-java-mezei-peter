@@ -43,4 +43,21 @@ public class BitServiceImpl implements BitService {
         userRepository.save(user);
         bitRepository.save(bit);
     }
+
+    @Override
+    public void removeBitLike(UUID userId, UUID bitId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new EntityNotFoundException("User not found with ID: " + userId));
+        Bit bit = bitRepository.findById(bitId)
+                .orElseThrow(() -> new EntityNotFoundException("Bit not found with ID: " + bitId));
+
+        user.deleteBitFromLikes(bit);
+        bit.deleteUserFromLikes(user);
+
+        userRepository.save(user);
+        bitRepository.save(bit);
+
+    }
+
+
 }
