@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 import java.util.Collection;
@@ -23,6 +24,7 @@ public class Bit {
     private User poster;
 
     @Column
+    @CreationTimestamp
     private Timestamp dateOfPosting;
 
     @Column

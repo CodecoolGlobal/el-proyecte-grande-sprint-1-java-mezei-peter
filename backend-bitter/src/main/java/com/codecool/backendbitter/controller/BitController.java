@@ -27,4 +27,9 @@ public class BitController {
         ));
         return new ResponseEntity<>(dummyData, HttpStatus.OK);
     }
+
+    @PostMapping("/add")
+    public ResponseEntity<String> addBit() {
+        return new ResponseEntity<>("", HttpStatus.NOT_IMPLEMENTED);
+    }
 }
