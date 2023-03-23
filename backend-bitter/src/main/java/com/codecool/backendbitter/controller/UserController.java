@@ -78,6 +78,22 @@ public class UserController {
 
     @PutMapping("/{userId}/block/{blockedUserId}")
     private ResponseEntity<String> blockUserByIds(@PathVariable String userId, @PathVariable String blockedUserId) {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        try {
+            if (userId.equals(blockedUserId)) {
+                return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            }
+            UUID userUUID = UUID.fromString(userId);
+            UUID blockedUserUUID = UUID.fromString(blockedUserId);
+
+            if (!userService.exists(userUUID) || !userService.exists(blockedUserUUID)) {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+
+            userService.addBlockedUserToUser(userUUID, blockedUserUUID);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Throwable e) {
+            e.printStackTrace(System.err);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

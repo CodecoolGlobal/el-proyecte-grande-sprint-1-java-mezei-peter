@@ -13,4 +13,6 @@ public interface UserService {
     void saveUser(User user);
     
     void addFollowerToUser(UUID userUUID, UUID followedUserUUID);
+
+    void addBlockedUserToUser(UUID userUUID, UUID blockedUserUUID);
 }

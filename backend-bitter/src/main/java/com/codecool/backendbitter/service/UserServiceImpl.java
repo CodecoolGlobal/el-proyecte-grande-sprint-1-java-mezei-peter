@@ -46,4 +46,14 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
         userRepository.save(follower);
     }
+
+    @Override
+    public void addBlockedUserToUser(UUID userId, UUID blockedUserId) {
+        User user = userRepository.findById(userId).get();
+        User blocked = userRepository.findById(blockedUserId).get();
+
+        user.blockUser(blocked);
+
+        userRepository.save(user);
+    }
 }
