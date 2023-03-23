@@ -6,10 +6,12 @@ import com.codecool.backendbitter.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
+
     private final UserRepository userRepository;
 
     @Autowired
@@ -64,5 +66,16 @@ public class UserServiceImpl implements UserService {
 
         userRepository.save(user);
         userRepository.save(follower);
+
+    }
+
+    @Override
+    public Collection<User> getFollowersForUser(UUID userId) {
+        return userRepository.findFollowersByUserId(userId);
+    }
+
+    @Override
+    public Collection<User> getFollowedForUser(UUID userId) {
+        return userRepository.findFollowedByUserId(userId);
     }
 }

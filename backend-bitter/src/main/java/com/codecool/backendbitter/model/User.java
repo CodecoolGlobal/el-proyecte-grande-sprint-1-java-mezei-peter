@@ -10,6 +10,9 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
 import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.UUID;
 
 @Data
 @Entity
@@ -91,4 +94,16 @@ public class User {
         }
         followedUsers.add(user);
     }
+
+    public void likeBit(Bit bit) {
+        if (likedBits == null) {
+            likedBits = new HashSet<>();
+        }
+        likedBits.add(bit);
+    }
+
+    public void deleteBitFromLikes(Bit bit) {
+        likedBits.remove(bit);
+    }
 }
+
