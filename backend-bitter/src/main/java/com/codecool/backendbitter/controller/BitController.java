@@ -1,12 +1,11 @@
 package com.codecool.backendbitter.controller;
 
-import com.codecool.backendbitter.controller.dto.BitCreationDTO;
-import com.codecool.backendbitter.controller.dto.BitDTO;
+import com.codecool.backendbitter.controller.dto.bit.BitCreationDTO;
+import com.codecool.backendbitter.controller.dto.bit.BitDTO;
 import com.codecool.backendbitter.controller.dto.GeneralUserDTO;
+import com.codecool.backendbitter.controller.dto.bit.BitUpdateDTO;
 import com.codecool.backendbitter.model.Bit;
 import com.codecool.backendbitter.model.User;
-import com.codecool.backendbitter.repository.BitRepository;
-import com.codecool.backendbitter.repository.UserRepository;
 import com.codecool.backendbitter.service.BitService;
 import com.codecool.backendbitter.service.BitServiceImpl;
 import com.codecool.backendbitter.service.UserService;
@@ -57,10 +56,32 @@ public class BitController {
                 .bitContent(bitCreationDTO.bitContent())
                 .build();
 
-        if(bitService.insertBit(bitToSave)) {
+        if(bitService.save(bitToSave)) {
             return new ResponseEntity<>("Bit saved!", HttpStatus.OK);
         } else {
             return new ResponseEntity<>("Error saving bit!", HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @PatchMapping("/update")
+    public ResponseEntity<String> updateBit(@RequestBody BitUpdateDTO bitUpdateDTO) {
+        String message = "Bit updated!";
+        HttpStatus status = HttpStatus.OK;
+
+        if(!userService.userIsAuthorizedForBitWithId(
+                bitUpdateDTO.userId(), bitUpdateDTO.bitId()
+        )) {
+            message = "User is not authorized to modify this bit.";
+            status = HttpStatus.FORBIDDEN;
+        } else if (!bitService.bitExists(bitUpdateDTO.bitId())) {
+            message = "The requested bit does not exist!";
+            status = HttpStatus.NOT_FOUND;
+        } else {
+            Bit bitToUpdate = bitService.getById(bitUpdateDTO.bitId());
+            bitToUpdate.setBitContent(bitUpdateDTO.updatedBitContent());
+            bitService.save(bitToUpdate);
+        }
+
+        return new ResponseEntity<>(message, status);
     }
 }

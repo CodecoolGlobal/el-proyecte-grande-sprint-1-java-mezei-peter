@@ -15,4 +15,6 @@ public interface UserService {
     void addFollowerToUser(UUID userUUID, UUID followedUserUUID);
 
     User findById(UUID id);
+
+    boolean userIsAuthorizedForBitWithId(UUID userId, UUID bitId);
 }

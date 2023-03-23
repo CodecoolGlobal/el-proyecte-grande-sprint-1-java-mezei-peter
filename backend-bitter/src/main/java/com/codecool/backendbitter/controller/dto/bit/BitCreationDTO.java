@@ -1,4 +1,4 @@
-package com.codecool.backendbitter.controller.dto;
+package com.codecool.backendbitter.controller.dto.bit;
 
 import java.util.UUID;
 
