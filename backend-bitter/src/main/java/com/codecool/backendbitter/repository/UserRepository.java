@@ -11,6 +11,7 @@ import java.util.UUID;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID> {
+    boolean existsUserByUsernameAndPasswordAndUserEmail(String username, String password, String userEmail);
 
     Collection<User> findFollowersByUserId(@Param("userId") UUID userId);
 
