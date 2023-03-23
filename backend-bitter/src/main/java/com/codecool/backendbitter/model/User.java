@@ -95,6 +95,13 @@ public class User {
         followedUsers.add(user);
     }
 
+    public void blockUser(User user) {
+        if (blockedUsers == null) {
+            blockedUsers = new HashSet<>();
+        }
+        blockedUsers.add(user);
+    }
+
     public void likeBit(Bit bit) {
         if (likedBits == null) {
             likedBits = new HashSet<>();

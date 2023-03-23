@@ -78,4 +78,14 @@ public class UserServiceImpl implements UserService {
     public Collection<User> getFollowedForUser(UUID userId) {
         return userRepository.findFollowedByUserId(userId);
     }
+
+    @Override
+    public void addBlockedUserToUser(UUID userId, UUID blockedUserId) {
+        User user = userRepository.findById(userId).get();
+        User blocked = userRepository.findById(blockedUserId).get();
+
+        user.blockUser(blocked);
+
+        userRepository.save(user);
+    }
 }

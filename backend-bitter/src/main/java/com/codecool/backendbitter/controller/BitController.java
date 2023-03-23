@@ -28,15 +28,9 @@ public class BitController {
     private final UserService userService;
 
     @Autowired
-    public BitController(BitServiceImpl bitService, UserServiceImpl userService) {
+    public BitController(BitService bitService, UserService userService) {
         this.bitService = bitService;
         this.userService = userService;
-    }
-
-    private final BitService bitService;
-
-    public BitController(BitService bitService) {
-        this.bitService = bitService;
     }
 
     @GetMapping("/feed/{userId}")
