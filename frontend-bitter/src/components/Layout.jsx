@@ -8,7 +8,7 @@ function Layout() {
     return (
         <>
             <header
-                className="w-full flex justify-between items-center h-20 bg-white sm:px-8 px-4 py-4 border-b border-b-[#e6ebf4] bg-[#FFFBE9]">
+                className="w-full flex justify-between items-center h-20 sm:px-8 px-4 py-4 border-b border-b-[#e6ebf4] bg-[#FFFBE9]">
 
                 <Link
                     style={{textDecoration: "none"}}
