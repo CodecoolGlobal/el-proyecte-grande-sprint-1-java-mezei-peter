@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
@@ -18,7 +19,9 @@ public class CustomUsernamePasswordAuthenticationFilter extends UsernamePassword
     private final JwtGenerator jwtGenerator;
 
     @Autowired
-    public CustomUsernamePasswordAuthenticationFilter(JwtGenerator jwtGenerator) {
+    public CustomUsernamePasswordAuthenticationFilter(JwtGenerator jwtGenerator,
+                                                      AuthenticationManager authenticationManager) {
+        super(authenticationManager);
         this.jwtGenerator = jwtGenerator;
     }
 
