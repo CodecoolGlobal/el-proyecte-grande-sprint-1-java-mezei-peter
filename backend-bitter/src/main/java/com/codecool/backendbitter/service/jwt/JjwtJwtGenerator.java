@@ -14,7 +14,7 @@ import java.util.Date;
 public class JjwtJwtGenerator implements JwtGenerator {
     @Override
     public String generateToken(String subject) {
-        Key key = Keys.hmacShaKeyFor("test_secret_key".getBytes());
+        Key key = Keys.hmacShaKeyFor("test_secret_keytest_secret_keytest_secret_keytest_secret_keytest_secret_key".getBytes());
         return Jwts.builder()
                 .setSubject(subject)
                 .signWith(key)
