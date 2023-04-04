@@ -2,6 +2,7 @@ package com.codecool.backendbitter.security;
 
 import com.codecool.backendbitter.service.jwt.JwtGenerator;
 import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
+
+import java.io.IOException;
 
 @Component
 public class CustomUsernamePasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
@@ -21,11 +24,12 @@ public class CustomUsernamePasswordAuthenticationFilter extends UsernamePassword
 
     @Override
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
-                                            FilterChain chain, Authentication authResult) {
-
+                                            FilterChain chain, Authentication authResult)
+            throws ServletException, IOException {
         String jwt = jwtGenerator.generateToken(authResult.getPrincipal().toString());
         System.out.println("username??? " + authResult.getPrincipal().toString());
         System.out.println("token - " + jwt);
         response.setHeader(HttpHeaders.AUTHORIZATION, jwt);
+        chain.doFilter(request, response);
     }
 }
