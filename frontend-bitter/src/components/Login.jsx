@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
@@ -10,15 +10,40 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 import "../App.css";
+import { UserContext } from "../contexts/UserContext";
+
+const postLogin = async (username, password) => {
+    return await fetch(`/api/user/login?username=${username}&password=${password}`, {
+        method : "POST",
+        headers : {
+            "Content-Type" : "application/json",
+            "Accept" : "*/*"
+        }
+    })
+}
 
 function Login() {
     const [values, setValues] = React.useState({
         amount: "",
         password: "",
+        username: "",
         weight: "",
         weightRange: "",
         showPassword: false,
     });
+
+    const {userId, setUserId} = useContext(UserContext);
+
+    const handleLogin = async () => {
+        try {
+            const data = await postLogin(values.username, values.password);
+            //console.log(data)
+            console.log(data.headers.get("authorization"))
+
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
     const handleChange = (prop) => (event) => {
         setValues({...values, [prop]: event.target.value});
@@ -55,6 +80,7 @@ function Login() {
                         id="email"
                         label="Email"
                         variant="outlined"
+                        onChange={handleChange("username")}
                         sx={{
                             "& .MuiOutlinedInput-root.Mui-focused": {
                                 "& > fieldset": {
@@ -132,6 +158,8 @@ function Login() {
                         },
                     }}
                     variant="outlined"
+                    onClick={() => handleLogin()}
+
                 >
                     Log in
                 </Button>
