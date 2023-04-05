@@ -13,13 +13,15 @@ import "../App.css";
 import { UserContext } from "../contexts/UserContext";
 
 const postLogin = async (username, password) => {
-    return await fetch(`/api/user/login?username=${username}&password=${password}`, {
+    const res =  await fetch(`/api/user/login?username=${username}&password=${password}`, {
         method : "POST",
         headers : {
             "Content-Type" : "application/json",
             "Accept" : "*/*"
         }
     })
+
+    return {"authorization" : res.headers.get("authorization"), "userId" : await res.text()}
 }
 
 function Login() {
@@ -37,9 +39,10 @@ function Login() {
     const handleLogin = async () => {
         try {
             const data = await postLogin(values.username, values.password);
-            //console.log(data)
-            console.log(data.headers.get("authorization"))
-
+            
+            const token = data.authorization
+            window.localStorage.setItem("token", token);
+            setUserId(data.userId);
         } catch (e) {
             console.log(e);
         }
