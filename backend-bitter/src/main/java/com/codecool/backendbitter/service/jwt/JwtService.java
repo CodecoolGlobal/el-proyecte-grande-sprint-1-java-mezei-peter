@@ -1,5 +1,6 @@
 package com.codecool.backendbitter.service.jwt;
 
-public interface JwtGenerator {
+public interface JwtService {
     String generateToken(String subject);
+    String readToken(String token);
 }

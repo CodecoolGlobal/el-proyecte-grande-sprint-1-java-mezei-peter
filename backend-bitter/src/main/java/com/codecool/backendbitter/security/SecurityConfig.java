@@ -1,7 +1,7 @@
 package com.codecool.backendbitter.security;
 
 import com.codecool.backendbitter.service.CustomUserDetailsService;
-import com.codecool.backendbitter.service.jwt.JwtGenerator;
+import com.codecool.backendbitter.service.jwt.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +29,7 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtGenerator jwtGenerator,
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtService jwtService,
                                                    AuthenticationManager authenticationManager) throws Exception {
         http.csrf().disable();
         http.authorizeHttpRequests()
@@ -37,7 +37,7 @@ public class SecurityConfig {
                 .anyRequest().authenticated()
                 .and()
                 .cors();
-        http.addFilter(new CustomUsernamePasswordAuthenticationFilter(jwtGenerator, authenticationManager));
+        http.addFilter(new CustomUsernamePasswordAuthenticationFilter(jwtService, authenticationManager));
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         return http.build();
     }
