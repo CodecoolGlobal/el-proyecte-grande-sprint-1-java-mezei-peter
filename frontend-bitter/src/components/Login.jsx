@@ -38,8 +38,6 @@ function Login() {
         showPassword: false,
     });
 
-    const {userId, setUserId} = useContext(UserContext);
-
     const handleLogin = async () => {
         try {
             const data = await postLogin(values.username, values.password);
@@ -47,9 +45,7 @@ function Login() {
             const token = data.authorization
             window.localStorage.setItem("token", token);
             window.localStorage.setItem("userId", data.userId)
-            console.log(data.userId)
-            setUserId(data.userId);
-            console.log(window.localStorage.getItem("token"));
+            window.location.reload();
         } catch (e) {
             console.log(e);
         }
