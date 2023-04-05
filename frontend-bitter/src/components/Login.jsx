@@ -46,8 +46,9 @@ function Login() {
             
             const token = data.authorization
             window.localStorage.setItem("token", token);
+            window.localStorage.setItem("userId", data.userId)
+            console.log(data.userId)
             setUserId(data.userId);
-            console.log(userId);
             console.log(window.localStorage.getItem("token"));
         } catch (e) {
             console.log(e);

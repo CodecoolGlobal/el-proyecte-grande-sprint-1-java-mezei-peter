@@ -6,7 +6,8 @@ function BitFeed() {
     const [feedBits, setFeedBits] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    const {userId, setUserID} = useContext(UserContext);
+//    const {userId, setUserID} = useContext(UserContext);
+    const userId = window.localStorage.getItem("userId")
     const token = window.localStorage.getItem("token");
 
     useEffect(() => {
