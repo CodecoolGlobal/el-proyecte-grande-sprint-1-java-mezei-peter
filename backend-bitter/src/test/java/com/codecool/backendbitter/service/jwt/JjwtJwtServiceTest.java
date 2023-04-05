@@ -21,9 +21,12 @@ class JjwtJwtServiceTest {
                 "testkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytestkey"));
 
         String token =
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEifQ.0xX_ccX9BzXIYcBZR71MSGSoqffWheSChwLtt33pudE";
+                "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJ0ZXN0IiwiaWF0IjoxNjgwNjg0Nzk0LCJleHAiOjE2ODA2OTU1OTR9." +
+                "pUh-fNYW463jkoKgJpp2fodFT7bMa024e2Q7r46WP8eRsHAasA_VJ9-7WUDr775c";
 
-        jjwtJwtService.readToken(token);
+        String expectedSubject = "test";
+        String resultSubject = jjwtJwtService.readToken(token);
+        assertEquals(expectedSubject, resultSubject);
     }
 
     @Test

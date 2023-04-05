@@ -41,7 +41,7 @@ public class JjwtJwtService implements JwtService {
                     .setSigningKey(secretKey)
                     .build()
                     .parseClaimsJws(token);
-            return jws.getBody().getId();
+            return jws.getBody().getSubject();
         } catch (JwtException e) {
             throw new AuthenticationException("JWT '" + token + "' cannot be trusted.");
         }
