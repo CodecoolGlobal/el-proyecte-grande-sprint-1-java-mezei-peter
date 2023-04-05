@@ -16,11 +16,11 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <UserContextProvider><BitFeed /></UserContextProvider>,
+                element: <BitFeed />,
             },
             {
                 path: "/login",
-                element: <UserContextProvider><Login /></UserContextProvider>,
+                element: <Login />,
             },
 
         ],

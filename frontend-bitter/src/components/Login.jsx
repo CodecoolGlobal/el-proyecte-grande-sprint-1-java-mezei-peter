@@ -21,7 +21,11 @@ const postLogin = async (username, password) => {
         }
     })
 
-    return {"authorization" : res.headers.get("authorization"), "userId" : await res.text()}
+    const id = await res.text();
+
+    console.log(await id);
+
+    return {"authorization" : res.headers.get("authorization"), "userId" : id};
 }
 
 function Login() {
@@ -43,6 +47,8 @@ function Login() {
             const token = data.authorization
             window.localStorage.setItem("token", token);
             setUserId(data.userId);
+            console.log(userId);
+            console.log(window.localStorage.getItem("token"));
         } catch (e) {
             console.log(e);
         }

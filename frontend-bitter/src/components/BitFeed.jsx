@@ -1,7 +1,6 @@
 import {useState, useEffect, useContext} from "react";
 import BitCard from "./BitCard.jsx";
 import { UserContext } from "../contexts/UserContext";
-import React, { useContext } from "react";
 
 function BitFeed() {
     const [feedBits, setFeedBits] = useState(null);
@@ -11,7 +10,9 @@ function BitFeed() {
     const token = window.localStorage.getItem("token");
 
     useEffect(() => {
-        fetch("/api/bit/feed/userId", {
+        console.log(userId);
+        console.log(token);
+        fetch(`/api/bit/feed/${userId}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
