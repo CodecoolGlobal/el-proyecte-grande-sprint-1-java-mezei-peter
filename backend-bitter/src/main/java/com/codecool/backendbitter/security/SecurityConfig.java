@@ -39,6 +39,7 @@ public class SecurityConfig {
                 .and()
                 .cors();
         http.addFilter(new CustomUsernamePasswordAuthenticationFilter(jwtService, authenticationManager));
+        http.addFilterBefore(new JwtAuthenticationFilter(jwtService), CustomUsernamePasswordAuthenticationFilter.class);
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         return http.build();
     }
