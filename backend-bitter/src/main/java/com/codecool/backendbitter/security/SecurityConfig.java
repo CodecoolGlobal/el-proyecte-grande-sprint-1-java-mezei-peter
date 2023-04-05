@@ -2,6 +2,7 @@ package com.codecool.backendbitter.security;
 
 import com.codecool.backendbitter.service.CustomUserDetailsService;
 import com.codecool.backendbitter.service.jwt.JwtService;
+import io.jsonwebtoken.io.Decoders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -59,5 +60,10 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public byte[] secretKey() {
+        return Decoders.BASE64.decode("testkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytestkey");
     }
 }
