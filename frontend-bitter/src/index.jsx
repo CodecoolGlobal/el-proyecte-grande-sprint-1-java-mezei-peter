@@ -7,21 +7,22 @@ import ErrorPage from "./components/ErrorPage";
 import Login from "./components/Login";
 import BitFeed from "./components/BitFeed.jsx";
 
+import RequireAuth from './components/RequireAuth';
+
 const router = createBrowserRouter([
     {
-        path: "/",
-        element: <Layout />,
+        path: '/',
+        element: <Layout/>,
         errorElement: <ErrorPage />,
         children: [
             {
-                path: "/",
-                element: <BitFeed />,
+                path: '/',
+                element: <RequireAuth Component={BitFeed} />,
             },
             {
-                path: "/login",
+                path: '/login',
                 element: <Login />,
             },
-
         ],
     },
 ]);
