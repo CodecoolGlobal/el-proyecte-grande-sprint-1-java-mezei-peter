@@ -25,7 +25,7 @@ class JjwtJwtServiceTest {
                 "pUh-fNYW463jkoKgJpp2fodFT7bMa024e2Q7r46WP8eRsHAasA_VJ9-7WUDr775c";
 
         String expectedSubject = "test";
-        String resultSubject = jjwtJwtService.readToken(token);
+        String resultSubject = jjwtJwtService.readTokenBodySubject(token);
         assertEquals(expectedSubject, resultSubject);
     }
 
@@ -37,6 +37,6 @@ class JjwtJwtServiceTest {
         String token =
                 "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEifQ.invalid9BzXIYcBZR71MSGSoqffWheSChwLtinvalid";
 
-        assertThrows(AuthenticationException.class, () -> jjwtJwtService.readToken(token));
+        assertThrows(AuthenticationException.class, () -> jjwtJwtService.readTokenBodySubject(token));
     }
 }

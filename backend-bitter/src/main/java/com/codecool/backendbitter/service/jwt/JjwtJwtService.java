@@ -35,7 +35,7 @@ public class JjwtJwtService implements JwtService {
     }
 
     @Override
-    public String readToken(String token) throws AuthenticationException{
+    public String readTokenBodySubject(String token) throws AuthenticationException{
         try {
             Jws<Claims> jws = Jwts.parserBuilder()
                     .setSigningKey(secretKey)
