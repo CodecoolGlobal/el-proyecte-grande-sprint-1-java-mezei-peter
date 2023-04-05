@@ -51,9 +51,9 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login() {
-        System.out.println("Login attempt.");
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<String> login(@RequestParam String username) {
+        String userId =  userService.findUserIdByUsername(username);
+        return new ResponseEntity<>(userId ,HttpStatus.OK);
     }
 
     @PutMapping("/{userId}/follow/{followedUserId}")

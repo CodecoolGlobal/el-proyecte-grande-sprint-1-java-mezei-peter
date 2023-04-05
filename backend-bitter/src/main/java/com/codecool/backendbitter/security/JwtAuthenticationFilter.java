@@ -40,15 +40,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String token = authorization.substring(BEARER_PREFIX_LENGTH);
         try {
             String userSubject = jwtService.readTokenBodySubject(token);
+            System.out.println(userSubject);
             UserDetails user = userDetailsService.loadUserByUsername(userSubject);
             Authentication authentication = new UsernamePasswordAuthenticationToken(
-                    user.getUsername(), user.getPassword()
+                    user.getUsername(), user.getPassword(), user.getAuthorities()
             );
             SecurityContext context = SecurityContextHolder.createEmptyContext();
             context.setAuthentication(authentication);
             SecurityContextHolder.setContext(context);
         } catch (AuthenticationException | UsernameNotFoundException e) {
-            System.err.println(e.getMessage());
+            System.err.println(e);
         }
 
         filterChain.doFilter(request, response);

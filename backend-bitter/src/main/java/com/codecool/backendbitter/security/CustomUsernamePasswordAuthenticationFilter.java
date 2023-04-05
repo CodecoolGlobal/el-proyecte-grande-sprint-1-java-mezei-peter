@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
@@ -35,7 +36,11 @@ public class CustomUsernamePasswordAuthenticationFilter extends UsernamePassword
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
                                             FilterChain chain, Authentication authResult)
             throws ServletException, IOException {
-        String jwt = jwtService.generateToken(authResult.getPrincipal().toString());
+
+        User user = (User) authResult.getPrincipal();
+
+
+        String jwt = jwtService.generateToken(user.getUsername());
         response.setHeader(HttpHeaders.AUTHORIZATION, jwt);
         chain.doFilter(request, response);
     }
