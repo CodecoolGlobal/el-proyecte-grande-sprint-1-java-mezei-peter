@@ -1,7 +1,8 @@
 package com.codecool.backendbitter.security;
 
 import com.codecool.backendbitter.service.CustomUserDetailsService;
-import com.codecool.backendbitter.service.jwt.JwtGenerator;
+import com.codecool.backendbitter.service.jwt.JwtService;
+import io.jsonwebtoken.io.Decoders;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +14,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -29,15 +31,17 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtGenerator jwtGenerator,
-                                                   AuthenticationManager authenticationManager) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http, JwtService jwtService,
+                                                   AuthenticationManager authenticationManager,
+                                                   UserDetailsService userDetailsService) throws Exception {
         http.csrf().disable();
         http.authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/user/login", "/user/registration").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .cors();
-        http.addFilter(new CustomUsernamePasswordAuthenticationFilter(jwtGenerator, authenticationManager));
+        http.addFilter(new CustomUsernamePasswordAuthenticationFilter(jwtService, authenticationManager));
+        http.addFilterBefore(new JwtAuthenticationFilter(jwtService, userDetailsService), CustomUsernamePasswordAuthenticationFilter.class);
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         return http.build();
     }
@@ -59,5 +63,10 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public byte[] secretKey() {
+        return Decoders.BASE64.decode("testkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytestkeytestkey");
     }
 }
