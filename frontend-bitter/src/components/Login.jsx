@@ -9,8 +9,6 @@ import InputLabel from "@mui/material/InputLabel";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
-import "../App.css";
-
 function Login() {
     const [values, setValues] = React.useState({
         amount: "",
@@ -39,15 +37,26 @@ function Login() {
         <div className="className=sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]">
             <Box
                 sx={{
-                    margin: "4rem",
-                    display: "flex",
-                    gap: "1rem",
-                    flexWrap: "wrap",
-                    width: "35rem",
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginBottom: '1rem',
+                    '& > *': {
+                        flex: '1 1 auto'
+                    }
                 }}
-                component="form"
-                // onSubmit={}
             >
+                <Box
+                    sx={{
+                        margin: '4rem 1rem 4rem 4rem',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '1rem',
+                        width: {xs: "100%", md: "80%"},
+
+                    }}
+                    component="form"
+                >
                 <FormControl fullWidth>
                     <TextField
 
@@ -135,6 +144,19 @@ function Login() {
                 >
                     Log in
                 </Button>
+                </Box>
+                <Box sx={{ margin: '4rem', flex: '0 1 auto' }}>
+                    <h1 className="text-[#222328] font-bold text-[28px] mb-4">Welcome to Bitter!</h1>
+                    <p className="text-[#222328] text-[18px] mb-4">
+                        Bitter is a social media platform that allows you to share your thoughts, connect with friends and colleagues, and
+                        stay up-to-date with the latest trends and news. With a simple and intuitive interface, Bitter makes it easy for
+                        you to express yourself, engage with others, and join the conversation.
+                    </p>
+                    <p className="text-[#222328] text-[18px] mb-4">
+                        Whether you're here to share your opinions, promote your business, or just have some fun, Bitter is the perfect
+                        platform for you. So log in now and start exploring all that Bitter has to offer!
+                    </p>
+                </Box>
             </Box>
         </div>
     );
