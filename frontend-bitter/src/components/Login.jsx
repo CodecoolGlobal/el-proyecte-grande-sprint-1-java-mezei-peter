@@ -40,6 +40,7 @@ function Login() {
                     display: 'flex',
                     justifyContent: 'space-between',
                     alignItems: 'center',
+                    height: "50vh",
                     marginBottom: '1rem',
                     '& > *': {
                         flex: '1 1 auto'
@@ -52,6 +53,7 @@ function Login() {
                         display: 'flex',
                         flexDirection: 'column',
                         gap: '1rem',
+                        mx: {xs: "auto", md: 0},
                         width: {xs: "100%", md: "80%"},
 
                     }}
@@ -145,7 +147,7 @@ function Login() {
                     Log in
                 </Button>
                 </Box>
-                <Box sx={{ margin: '4rem', flex: '0 1 auto' }}>
+                <Box sx={{ margin: '4rem', flex: '0 1 auto' }} className="hidden md:block">
                     <h1 className="text-[#222328] font-bold text-[28px] mb-4">Welcome to Bitter!</h1>
                     <p className="text-[#222328] text-[18px] mb-4">
                         Bitter is a social media platform that allows you to share your thoughts, connect with friends and colleagues, and
