@@ -26,4 +26,5 @@ public interface UserService {
 
     Collection<User> getFollowedForUser(UUID userId);
 
+    String findUserIdByUsername(String username);
 }

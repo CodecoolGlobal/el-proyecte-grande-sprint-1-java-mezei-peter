@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "../logo.png";
 import {Outlet, Link} from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
 function Layout() {
+
+    const logout = () => {
+        window.localStorage.removeItem("token");
+        window.localStorage.removeItem("userId");
+        window.location.reload();
+    }
+
     return (
         <>
             <header
@@ -21,11 +28,11 @@ function Layout() {
                     </h1>
                 </Link>
 
-                <Link
+               <Link
                     style={{textDecoration: "none"}}
                     className="button ml-auto flex text-gray-900"
                     to="/login"
-                ><Box>
+                ><Box>  { !window.localStorage.getItem("userId") ?  
                     <Button
                         sx={{
                             backgroundColor: "#FFFBE9",
@@ -41,13 +48,29 @@ function Layout() {
                         variant="outlined"
                     >
                         Log in
-                    </Button>
+                    </Button> : <Button
+                        sx={{
+                            backgroundColor: "#FFFBE9",
+                            color: "black",
+                            border: "2px solid #262018",
+                            ":hover": {
+                                border: "2px solid #262018",
+                                bgcolor: "whitesmoke",
+                                color: "black",
+                            },
+                        }}
+
+                        variant="outlined"
+                        onClick={() => logout()}
+                    >
+                        Logout
+                    </Button>}
                 </Box>
-                </Link>
+                </Link> 
 
 
             </header>
-            <Outlet/>
+            <Outlet />
         </>
     );
 }
