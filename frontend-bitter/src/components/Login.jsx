@@ -9,7 +9,6 @@ import InputLabel from "@mui/material/InputLabel";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
-import "../App.css";
 import { UserContext } from "../contexts/UserContext";
 
 const postLogin = async (username, password) => {
