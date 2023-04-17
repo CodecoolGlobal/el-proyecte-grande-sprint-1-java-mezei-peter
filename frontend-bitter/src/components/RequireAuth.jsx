@@ -1,8 +1,8 @@
 import React from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 
-const RequireAuth = (Component) => {
-    const isAuthenticated = false; // replace with your actual authentication logic
+const RequireAuth = ({Component}) => {
+    const isAuthenticated = true; // replace with your actual authentication logic
 
     const routes = useRoutes([
         {
