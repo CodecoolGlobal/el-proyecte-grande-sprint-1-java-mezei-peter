@@ -1,11 +1,23 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useContext} from "react";
 import BitCard from "./BitCard.jsx";
+import { UserContext } from "../contexts/UserContext";
 
 function BitFeed() {
     const [feedBits, setFeedBits] = useState(null);
     const [loading, setLoading] = useState(true);
+
+//    const {userId, setUserID} = useContext(UserContext);
+    const userId = window.localStorage.getItem("userId")
+    const token = window.localStorage.getItem("token");
+
     useEffect(() => {
-        fetch("/api/bit/feed/abc")
+        console.log(userId);
+        console.log(token);
+        fetch(`/api/bit/feed/${userId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        })
             .then(response => response.json())
             .then(data => {
                 console.log(data)

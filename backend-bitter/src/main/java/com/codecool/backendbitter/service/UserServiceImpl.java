@@ -4,6 +4,7 @@ import com.codecool.backendbitter.controller.dto.UserRegistrationDTO;
 import com.codecool.backendbitter.model.User;
 import com.codecool.backendbitter.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -91,5 +92,13 @@ public class UserServiceImpl implements UserService {
         user.blockUser(blocked);
 
         userRepository.save(user);
+    }
+
+    @Override
+    public String findUserIdByUsername(String username) {
+        User user =
+                userRepository.findUserByUsername(username).orElseThrow(() -> new UsernameNotFoundException(username));
+
+        return user.getUserId().toString();
     }
 }

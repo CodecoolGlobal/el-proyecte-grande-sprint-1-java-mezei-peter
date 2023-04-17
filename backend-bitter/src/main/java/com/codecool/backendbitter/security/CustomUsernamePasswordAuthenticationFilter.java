@@ -1,6 +1,6 @@
 package com.codecool.backendbitter.security;
 
-import com.codecool.backendbitter.service.jwt.JwtGenerator;
+import com.codecool.backendbitter.service.jwt.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
@@ -19,15 +20,15 @@ import java.io.IOException;
 
 @Component
 public class CustomUsernamePasswordAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-    private final JwtGenerator jwtGenerator;
+    private final JwtService jwtService;
     private final RequestMatcher DEFAULT_ANT_PATH_REQUEST_MATCHER = new AntPathRequestMatcher("/user/login", "POST");
 
     @Autowired
-    public CustomUsernamePasswordAuthenticationFilter(JwtGenerator jwtGenerator,
+    public CustomUsernamePasswordAuthenticationFilter(JwtService jwtService,
                                                       AuthenticationManager authenticationManager) {
         super(authenticationManager);
         super.setRequiresAuthenticationRequestMatcher(DEFAULT_ANT_PATH_REQUEST_MATCHER);
-        this.jwtGenerator = jwtGenerator;
+        this.jwtService = jwtService;
     }
 
 
@@ -35,7 +36,11 @@ public class CustomUsernamePasswordAuthenticationFilter extends UsernamePassword
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
                                             FilterChain chain, Authentication authResult)
             throws ServletException, IOException {
-        String jwt = jwtGenerator.generateToken(authResult.getPrincipal().toString());
+
+        User user = (User) authResult.getPrincipal();
+
+
+        String jwt = jwtService.generateToken(user.getUsername());
         response.setHeader(HttpHeaders.AUTHORIZATION, jwt);
         chain.doFilter(request, response);
     }
