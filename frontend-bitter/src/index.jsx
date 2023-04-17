@@ -9,25 +9,26 @@ import BitFeed from "./components/BitFeed.jsx";
 import Register from "./components/Register.jsx";
 import { UserContextProvider } from "./contexts/UserContext";
 
+import RequireAuth from './components/RequireAuth';
+
 const router = createBrowserRouter([
     {
-        path: "/",
-        element: <Layout />,
+        path: '/',
+        element: <Layout/>,
         errorElement: <ErrorPage />,
         children: [
             {
-                path: "/",
-                element: <BitFeed />,
+                path: '/',
+                element: <RequireAuth Component={BitFeed} />,
             },
             {
-                path: "/login",
+                path: '/login',
                 element: <Login />,
             },
             {
                 path: "/register",
                 element: <Register />
             }
-
         ],
     },
 ]);
