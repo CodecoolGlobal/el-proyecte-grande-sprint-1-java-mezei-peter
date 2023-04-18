@@ -1,4 +1,4 @@
-const BitResponse = ({responses, fetchNext}) => {
+const BitResponse = ({responses}) => {
     return ( 
         <div>
             {responses.map(response => <div key={response.bitResponseId}>
@@ -18,10 +18,8 @@ const BitResponse = ({responses, fetchNext}) => {
                     {response.isEdited}
                 </div>
             </div>)}
-            <button onClick={() => fetchNext()}>More</button>
         </div>
      );
 }
  
-export default BitResponse;{respons
-    es}
+export default BitResponse;

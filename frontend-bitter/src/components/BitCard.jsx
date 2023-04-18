@@ -1,6 +1,13 @@
 import React from "react";
+import useFetch from "../hooks/useFetch";
+import BitResponse from "./BitResponses";
 
-function BitCard({bit}) {
+
+
+async function BitCard({bit}) {
+
+    const {data, loading, error} = useFetch(`/api/response/${bit.bitId}}`)
+
     return (
         <>
             <div className="BitCard">
@@ -18,6 +25,7 @@ function BitCard({bit}) {
                     <div className="CardStats">
                         <button className="CardLikes">LIKE</button>
                         <button className="CardComments">COMMENTS</button>
+                        {loading ? <div>Loading... </div> : <BitResponse responses={data}/>}
                     </div>
                 </div>
             </div>
