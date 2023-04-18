@@ -45,7 +45,7 @@ function Login() {
             const token = data.authorization
             window.localStorage.setItem("token", token);
             window.localStorage.setItem("userId", data.userId)
-            window.location.reload();
+            window.location.pathname = '/';
         } catch (e) {
             console.log(e);
         }
