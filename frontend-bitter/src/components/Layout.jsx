@@ -33,27 +33,26 @@ function Layout() {
                     style={{
                         textDecoration: "none"
                     }}
-                    className="button ml-auto flex text-gray-900"
+                    className="button ml-10 flex text-gray-900"
                     to="/my-profile"
-                ><Box>  { useUserIdCookie(localStorage) ? null :
-                    <Button
-                        sx={{
-                            backgroundColor: "#FFFBE9",
-                            color: "black",
-                            border: "2px solid #262018",
-                            ":hover": {
-                                border: "2px solid #262018",
-                                bgcolor: "whitesmoke",
+                >
+                    <Box>  { useUserIdCookie(localStorage) ? null :
+                        <Button
+                            sx={{
+                                backgroundColor: "#FFFBE9",
                                 color: "black",
-                            },
-                        }}
-
-                        variant="outlined"
-                    >
-                        My Profile
-                    </Button>
-                }
-                </Box>
+                                border: "2px solid #262018",
+                                ":hover": {
+                                    border: "2px solid #262018",
+                                    bgcolor: "whitesmoke",
+                                    color: "black",
+                                },
+                            }}
+                            variant="outlined"
+                        >
+                            My Profile
+                        </Button>
+                    } </Box>
                 </Link>
                 <Link
                     style={{textDecoration: "none"}}
