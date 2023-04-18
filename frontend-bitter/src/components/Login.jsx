@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
@@ -9,14 +9,47 @@ import InputLabel from "@mui/material/InputLabel";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
+import { UserContext } from "../contexts/UserContext";
+import {Link} from "react-router-dom";
+
+const postLogin = async (username, password) => {
+    const res =  await fetch(`/api/user/login?username=${username}&password=${password}`, {
+        method : "POST",
+        headers : {
+            "Content-Type" : "application/json",
+            "Accept" : "*/*"
+        }
+    })
+
+    const id = await res.text();
+
+    console.log(await id);
+
+    return {"authorization" : res.headers.get("authorization"), "userId" : id};
+}
+
 function Login() {
     const [values, setValues] = React.useState({
         amount: "",
         password: "",
+        username: "",
         weight: "",
         weightRange: "",
         showPassword: false,
     });
+
+    const handleLogin = async () => {
+        try {
+            const data = await postLogin(values.username, values.password);
+            
+            const token = data.authorization
+            window.localStorage.setItem("token", token);
+            window.localStorage.setItem("userId", data.userId)
+            window.location.reload();
+        } catch (e) {
+            console.log(e);
+        }
+    }
 
     const handleChange = (prop) => (event) => {
         setValues({...values, [prop]: event.target.value});
@@ -64,8 +97,9 @@ function Login() {
 
                         name="email"
                         id="email"
-                        label="Email"
+                        label="Username"
                         variant="outlined"
+                        onChange={handleChange("username")}
                         sx={{
                             "& .MuiOutlinedInput-root.Mui-focused": {
                                 "& > fieldset": {
@@ -111,7 +145,7 @@ function Login() {
                         type={values.showPassword ? "text" : "password"}
                         value={values.password}
                         onChange={handleChange("password")}
-                        endAdornment={
+                        endadornment={
                             <InputAdornment position="end">
                                 <IconButton
                                     sx={{color: "whitesmoke"}}
@@ -131,21 +165,60 @@ function Login() {
                         label="Password"
                     />
                 </FormControl>
-                <Button
+                <Box
                     sx={{
-                        backgroundColor: "#FFFBE9",
-                        color: "black",
-                        border: "2px solid #262018",
-                        ":hover": {
-                            border: "2px solid #262018",
-                            bgcolor: "whitesmoke",
-                            color: "black",
-                        },
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        '& > *': {
+                            flex: '1 1 auto'
+                        }
                     }}
-                    variant="outlined"
                 >
-                    Log in
-                </Button>
+                    <Button
+                        sx={{
+                            backgroundColor: "#FFFBE9",
+                            color: "black",
+                            border: "2px solid #262018",
+                            width: "100%",
+                            marginBottom: "3%",
+                            ":hover": {
+                                border: "2px solid #262018",
+                                bgcolor: "whitesmoke",
+                                color: "black",
+                            },
+                        }}
+                        variant="outlined"
+                        onClick={() => handleLogin()}
+                    >
+                        Log in
+                    </Button>
+                    <Link
+                        style={{
+                            textDecoration: "none",
+                            width: "100%"
+                        }}
+                        className="flex text-gray-900"
+                        to="/register"
+                    >
+                        <Button
+                            sx={{
+                                backgroundColor: "#FFFBE9",
+                                color: "black",
+                                border: "2px solid #262018",
+                                width: "100%",
+                                ":hover": {
+                                    border: "2px solid #262018",
+                                    bgcolor: "whitesmoke",
+                                    color: "black",
+                                },
+                            }}
+                            variant="outlined"
+                        >
+                            Register
+                        </Button>
+                    </Link>
+                </Box>
                 </Box>
                 <Box sx={{ margin: '4rem', flex: '0 1 auto' }} className="hidden md:block">
                     <h1 className="text-[#222328] font-bold text-[28px] mb-4">Welcome to Bitter!</h1>
