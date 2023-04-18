@@ -10,6 +10,7 @@ import Register from "./components/Register.jsx";
 import { UserContextProvider } from "./contexts/UserContext";
 
 import RequireAuth from './components/RequireAuth';
+import UserProfile from "./components/user/UserProfile.jsx";
 
 const router = createBrowserRouter([
     {
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
             {
                 path: "/register",
                 element: <Register />
+            },
+            {
+                path: "/my-profile",
+                element: <UserProfile />
             }
         ],
     },
