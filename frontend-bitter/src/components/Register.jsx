@@ -10,14 +10,13 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const postRegistration = async(registrationData) => {
-    console.log(registrationData)
     return await (await fetch('/api/user/registration', {
         method: "POST",
         headers : {
             "Content-Type" : "application/json"
         },
         body: JSON.stringify(registrationData)
-    })).json()
+    })).text();
 }
 
 const Login = () => {
@@ -37,6 +36,7 @@ const Login = () => {
 
     const handleRegistration = async () => {
         try {
+            await postRegistration(values);
             window.location.pathname = '/';
         } catch(e) {
             console.error(e);
