@@ -37,6 +37,10 @@ const Login = () => {
 
     const handleRegistration = async () => {
         try {
+            const response = await postRegistration(values);
+
+            console.log(response);
+            
             window.location.pathname = '/';
         } catch(e) {
             console.error(e);
