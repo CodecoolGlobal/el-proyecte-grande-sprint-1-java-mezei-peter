@@ -9,7 +9,6 @@ function Layout() {
         <>
             <header
                 className="w-full flex justify-between items-center h-20 sm:px-8 px-4 py-4 border-b border-b-[#e6ebf4] bg-[#FFFBE9]">
-
                 <Link
                     style={{textDecoration: "none"}}
                     className="flex text-gray-900"
@@ -20,7 +19,6 @@ function Layout() {
                         Bitter
                     </h1>
                 </Link>
-
                 <Link
                     style={{textDecoration: "none"}}
                     className="button ml-auto flex text-gray-900"
@@ -44,8 +42,6 @@ function Layout() {
                     </Button>
                 </Box>
                 </Link>
-
-
             </header>
             <Outlet/>
         </>
