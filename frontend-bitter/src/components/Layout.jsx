@@ -36,7 +36,7 @@ function Layout() {
                     className="button ml-10 flex text-gray-900"
                     to="/my-profile"
                 >
-                    <Box>  { useUserIdCookie(localStorage) ? null :
+                    <Box>  { !useUserIdCookie(localStorage) ? null :
                         <Button
                             sx={{
                                 backgroundColor: "#FFFBE9",
