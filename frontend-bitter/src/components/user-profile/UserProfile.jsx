@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Modal from "../Modal/Modal.jsx";
-import useFetch from "../../hooks/useFetch.js";
+import useFetch from "../../hooks/UseFetch.js";
 
 function UserProfile(props) {
     const [followersIsOpen, setFollowersIsOpen] = useState(false);
