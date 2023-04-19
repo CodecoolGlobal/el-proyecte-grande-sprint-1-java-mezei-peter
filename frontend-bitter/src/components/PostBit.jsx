@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 import {useState} from "react";
 import useUserIdCookie from "../hooks/cookies.js";
 
-function PostBit() {
+function PostBit({fetchBitFeed}) {
     const CHARACTER_LIMIT = 280;
     const [currentLength, setCurrentLength] = useState(0);
     const [newBit, setNewBit] = useState("");
@@ -21,11 +21,13 @@ function PostBit() {
         console.log(data);
     };
 
-    const handlePostBit = () => {
+    const handlePostBit = async () => {
         const bitContent = newBit.toString();
         setNewBit("");
         setCurrentLength(0);
-        postBit(bitContent);
+        await postBit(bitContent);
+        console.log("calling fetch bit feed...");
+        await fetchBitFeed();
     };
 
     const handleBitTextChange = event => {

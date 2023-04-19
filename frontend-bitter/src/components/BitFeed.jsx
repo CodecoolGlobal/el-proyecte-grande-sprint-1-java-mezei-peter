@@ -11,7 +11,8 @@ function BitFeed() {
     const userId = window.localStorage.getItem("userId")
     const token = window.localStorage.getItem("token");
 
-    const fetchBitFeed = () => {
+    const fetchBitFeed = async () => {
+        console.log("FETCH BIT FEED CALLED");
         fetch(`/api/bit/feed/${userId}`, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -19,7 +20,6 @@ function BitFeed() {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 setFeedBits(data)
                 setLoading(false)
             });
@@ -36,10 +36,9 @@ function BitFeed() {
     }
     return (
         <>
-            <PostBit />
+            <PostBit fetchBitFeed={fetchBitFeed} />
             <div className="className=sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]">
                 {feedBits.map(bit => <BitCard bit={bit} key={bit.bitId}/>)}
-
             </div>
         </>
     );
