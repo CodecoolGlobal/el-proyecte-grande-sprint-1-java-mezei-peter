@@ -1,32 +1,22 @@
+import { ClassNames } from "@emotion/react";
 import React, { useState, useEffect } from "react";
 
-const BitResponse = ({response, loading, hideComments}) => {
+const BitResponse = ({ response, loading, hideComments }) => {
+  if (loading) {
+    return <div>Loading</div>;
+  }
 
-    if(loading) {
-        return <div>Loading</div>
-    }
+  return (
+    <>
+      <div className="border-2 border-red-500 flex">
+        <div>
+          <div>{response.posterUserName}</div>
+          <div>{response.dateOfPosting}</div>
+        </div>
+        <div>{response.bitResponseContent}</div>
+      </div>
+    </>
+  );
+};
 
-    return ( 
-        <>
-                <div>
-                    {response.bitResponseContent}
-                </div>        
-        </>
-     );
-}
- 
 export default BitResponse;
-
-/*<div>
-{response.posterUserName}
-</div>
-<div>
-{response.posterUserName}
-</div>
-<div>
-{response.posterUserId}
-</div>
-
-<div>
-{response.isEdited}
-</div>*/
