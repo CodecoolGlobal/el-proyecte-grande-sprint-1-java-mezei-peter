@@ -2,6 +2,7 @@ package com.codecool.backendbitter.service;
 
 import com.codecool.backendbitter.controller.dto.UserRegistrationDTO;
 import com.codecool.backendbitter.model.User;
+import org.springframework.data.repository.query.Param;
 
 import java.util.Collection;
 import java.util.UUID;
@@ -27,4 +28,6 @@ public interface UserService {
     Collection<User> getFollowedForUser(UUID userId);
 
     String findUserIdByUsername(String username);
+
+    Collection<User> findUsersByUsernameContainingIgnoreCase(String username);
 }

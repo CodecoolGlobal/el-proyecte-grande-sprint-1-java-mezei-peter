@@ -3,6 +3,7 @@ import logo from "../logo.png";
 import {Outlet, Link} from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import SearchBar from "./SearchBar.jsx";
 
 import useUserIdCookie from '../hooks/cookies.js';
 
@@ -29,7 +30,8 @@ function Layout() {
                         Bitter
                     </h1>
                 </Link>
-                <Link
+                <SearchBar/>
+               <Link
                     style={{
                         textDecoration: "none"
                     }}
