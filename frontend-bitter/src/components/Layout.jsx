@@ -4,6 +4,8 @@ import {Outlet, Link} from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
+import useUserIdCookie from '../hooks/cookies.js';
+
 function Layout() {
 
     const logout = () => {
@@ -27,12 +29,36 @@ function Layout() {
                         Bitter
                     </h1>
                 </Link>
-
-               <Link
+                <Link
+                    style={{
+                        textDecoration: "none"
+                    }}
+                    className="button ml-10 flex text-gray-900"
+                    to="/my-profile"
+                >
+                    <Box>  { useUserIdCookie(localStorage) ? null :
+                        <Button
+                            sx={{
+                                backgroundColor: "#FFFBE9",
+                                color: "black",
+                                border: "2px solid #262018",
+                                ":hover": {
+                                    border: "2px solid #262018",
+                                    bgcolor: "whitesmoke",
+                                    color: "black",
+                                },
+                            }}
+                            variant="outlined"
+                        >
+                            My Profile
+                        </Button>
+                    } </Box>
+                </Link>
+                <Link
                     style={{textDecoration: "none"}}
                     className="button ml-auto flex text-gray-900"
                     to="/login"
-                ><Box>  { !window.localStorage.getItem("userId") ?  
+                ><Box>  { !useUserIdCookie(localStorage) ?
                     <Button
                         sx={{
                             backgroundColor: "#FFFBE9",
@@ -66,7 +92,7 @@ function Layout() {
                         Logout
                     </Button>}
                 </Box>
-                </Link> 
+                </Link>
 
 
             </header>
