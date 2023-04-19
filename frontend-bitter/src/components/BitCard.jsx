@@ -1,6 +1,46 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import BitResponse from "./BitResponses";
+
+const fetchResponses = async (id, token) => {
+    return await (await fetch(`/api/response/${id}`, {headers: {
+        Authorization: `Bearer ${token}`
+    }})).json();
+  };
 
 function BitCard({bit}) {
+
+    const [data, setData] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+    const userId = window.localStorage.getItem("userId")
+    const token = window.localStorage.getItem("token");
+
+    useEffect(() => {
+        const controller = new AbortController()
+        const getResponses = async() => {
+            try {
+              const responses = await fetchResponses(bit.bitId, token)
+
+              console.log(responses)
+
+              setData(responses)
+              setLoading(false)
+
+            } catch (err) {
+                if(err.name !== "AbortError") {
+                    throw err
+                }
+            }
+        }
+    
+        getResponses();
+    
+      }, []);
+
+    if (loading) {
+        return <div>loading</div>
+    }
+
     return (
         <>
             <div className="BitCard">
@@ -18,6 +58,7 @@ function BitCard({bit}) {
                     <div className="CardStats">
                         <button className="CardLikes">LIKE</button>
                         <button className="CardComments">COMMENTS</button>
+                        <div>{data.map(response => <div key={response.bitResponseId}><BitResponse responses={data} /></div>)}</div>
                     </div>
                 </div>
             </div>
