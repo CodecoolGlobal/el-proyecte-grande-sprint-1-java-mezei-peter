@@ -12,7 +12,6 @@ function BitFeed() {
     const token = window.localStorage.getItem("token");
 
     const fetchBitFeed = async () => {
-        console.log("FETCH BIT FEED CALLED");
         fetch(`/api/bit/feed/${userId}`, {
             headers: {
                 Authorization: `Bearer ${token}`

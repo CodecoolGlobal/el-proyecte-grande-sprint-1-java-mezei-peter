@@ -26,7 +26,6 @@ function PostBit({fetchBitFeed}) {
         setNewBit("");
         setCurrentLength(0);
         await postBit(bitContent);
-        console.log("calling fetch bit feed...");
         await fetchBitFeed();
     };
 
