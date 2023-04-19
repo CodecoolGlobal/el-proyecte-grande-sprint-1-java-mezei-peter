@@ -12,7 +12,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/response")
@@ -41,7 +44,11 @@ public class ResponseController {
 
         List<BitResponseDTO> bitResponseList = bitResponseService.findBitResponsesByBitId(bitId);
 
-        return ResponseEntity.status(HttpStatus.OK).body(bitResponseList);
+        List<BitResponseDTO> dummyResponse = List.of(new BitResponseDTO(UUID.randomUUID(), "Dummy" +
+                " Response", Timestamp.valueOf(LocalDateTime.now()), UUID.randomUUID(), "User",
+                false));
+
+        return ResponseEntity.status(HttpStatus.OK).body(dummyResponse);
     }
 
     @DeleteMapping("/{bitId}")
