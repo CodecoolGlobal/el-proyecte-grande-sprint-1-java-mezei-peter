@@ -10,7 +10,7 @@ import Register from "./components/Register.jsx";
 import { UserContextProvider } from "./contexts/UserContext";
 
 import RequireAuth from './components/RequireAuth';
-import UserProfile from "./components/user/UserProfile.jsx";
+import UserProfile from "./components/user-profile/UserProfile.jsx";
 
 const router = createBrowserRouter([
     {

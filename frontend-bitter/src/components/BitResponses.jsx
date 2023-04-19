@@ -1,6 +1,13 @@
-const BitResponse = ({responses, fetchNext}) => {
+import React, { useState, useEffect } from "react";
+
+const BitResponse = ({responses, loading, hideComments}) => {
+
+    if(loading) {
+        return <div>Loading</div>
+    }
+
     return ( 
-        <div>
+        <>
             {responses.map(response => <div key={response.bitResponseId}>
                 <div>
                     {response.posterUserName}
@@ -18,10 +25,9 @@ const BitResponse = ({responses, fetchNext}) => {
                     {response.isEdited}
                 </div>
             </div>)}
-            <button onClick={() => fetchNext()}>More</button>
-        </div>
+            <button onClick={hideComments}>Hide COMMENTS</button>
+        </>
      );
 }
  
-export default BitResponse;{respons
-    es}
+export default BitResponse;

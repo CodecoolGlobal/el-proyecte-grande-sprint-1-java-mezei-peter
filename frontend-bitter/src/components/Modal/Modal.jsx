@@ -25,13 +25,13 @@ const OVERLAY_STYLES = {
     zIndex: 1000
 };
 
-export default function Modal({ open, children, onClose }) {
+export default function Modal({ open, children, onClose, overlay_style, modal_style }) {
     if (!open) return null;
 
     return (
         <>
-            <div id="overlay" style={OVERLAY_STYLES} onClick={onClose}/>
-            <div id="modal" style={MODAL_STYLES}>
+            <div id="overlay" style={overlay_style ?? OVERLAY_STYLES} onClick={onClose}/>
+            <div id="modal" style={modal_style ?? MODAL_STYLES}>
                 <Button onClick={onClose}>Close</Button>
                 {children}
             </div>
