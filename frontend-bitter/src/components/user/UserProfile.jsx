@@ -11,45 +11,7 @@ function UserProfile(props) {
           <h1>user profile here</h1>
           <Button onClick={() => setIsOpen(true)}>open modal</Button>
           <Modal open={isOpen} onClose={() => setIsOpen(false)}>
-              <div>
-                  <table>
-                      <tbody>
-                          <th>Company</th>
-                          <th>Contact</th>
-                          <th>Country</th>
-                      </tbody>
-                      <tbody>
-                          <td>Alfreds Futterkiste</td>
-                          <td>Maria Anders</td>
-                          <td>Germany</td>
-                      </tbody>
-                      <tbody>
-                          <td>Centro comercial Moctezuma</td>
-                          <td>Francisco Chang</td>
-                          <td>Mexico</td>
-                      </tbody>
-                      <tbody>
-                          <td>Ernst Handel</td>
-                          <td>Roland Mendel</td>
-                          <td>Austria</td>
-                      </tbody>
-                      <tbody>
-                          <td>Island Trading</td>
-                          <td>Helen Bennett</td>
-                          <td>UK</td>
-                      </tbody>
-                      <tbody>
-                          <td>Laughing Bacchus Winecellars</td>
-                          <td>Yoshi Tannamuri</td>
-                          <td>Canada</td>
-                      </tbody>
-                      <tbody>
-                          <td>Magazzini Alimentari Riuniti</td>
-                          <td>Giovanni Rovelli</td>
-                          <td>Italy</td>
-                      </tbody>
-                  </table>
-              </div>
+
           </Modal>
       </div>
     );
