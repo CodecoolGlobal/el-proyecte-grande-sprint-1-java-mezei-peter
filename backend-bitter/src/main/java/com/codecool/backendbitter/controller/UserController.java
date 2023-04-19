@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collection;
 import java.util.UUID;
 
 @RestController
@@ -95,5 +96,10 @@ public class UserController {
             e.printStackTrace(System.err);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+    @GetMapping("/search/{username}")
+    private ResponseEntity<Collection<User>> getUsersByGivenString(@RequestParam String username){
+        Collection<User> usersByGivenString = userService.findUsersByUsernameContainingIgnoreCase(username);
+        return  new ResponseEntity<>(usersByGivenString, HttpStatus.OK);
     }
 }
