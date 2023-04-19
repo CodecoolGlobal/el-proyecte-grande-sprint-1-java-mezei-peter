@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {Link} from "react-router-dom";
 
 const SearchBar = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -15,7 +16,7 @@ const SearchBar = () => {
                 });
 
                 const data = await response.json();
-
+                console.log(data)
                 setSearchResult(data);
             } catch (error) {
                 console.error(error);
@@ -24,7 +25,6 @@ const SearchBar = () => {
 
         if (searchTerm) {
             const timeoutId = setTimeout(fetchSearchResult, 500);
-
             return () => clearTimeout(timeoutId);
         }
 
@@ -40,7 +40,12 @@ const SearchBar = () => {
         <form>
             <input type="text" value={searchTerm} onChange={handleInputChange}/>
             {Array.isArray(searchResult) && searchResult.map((result) => (
-                <div key={result.userId}>{result.username}</div>
+                <Link
+                    to="/my-profile"
+                    key={result.userId}
+                >
+                    <div>{result.username}</div>
+                </Link>
             ))}
         </form>
     );
