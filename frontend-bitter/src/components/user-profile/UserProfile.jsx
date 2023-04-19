@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Modal from "../Modal/Modal.jsx";
 import useFetch from "../../hooks/UseFetch.js";
+import FollowUser from "../FollowUser.jsx";
 
 function UserProfile(props) {
     const [followersIsOpen, setFollowersIsOpen] = useState(false);
