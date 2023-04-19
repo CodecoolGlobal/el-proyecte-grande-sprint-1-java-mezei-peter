@@ -33,23 +33,25 @@ function BitCard({ bit }) {
   const token = window.localStorage.getItem("token");
 
   const hideComments = () => {
-    console.log("asd");
     setVisiable(false);
   };
 
-  const submitResponse = (content) => {
+  const submitResponse = async (content) => {
     const bitResponse = {
-        "bitId" : "026fa192-4de8-4b9e-902a-f9d029961302",
+        "bitId" : bit.bitId,
         "userId" : userId,
         "bitResponseContent" : content
     }
 
-    const res = postResponse(bitResponse, token);
+    const res = await postResponse(bitResponse, token);
 
     console.log(res)
+
+    setData([...data, res])
   } 
 
   useEffect(() => {
+    console.log("useeffect ran")
     const controller = new AbortController();
     const getResponses = async () => {
       try {
@@ -91,13 +93,13 @@ function BitCard({ bit }) {
             {visiable ? (
               <div>
                 {data.map((response) => (
-                  <div key={response.bitResponseId}>
+                    <div key={response.bitResponseId}>
                     <BitResponse
-                      responses={data}
+                      response={response}
                       loading={loading}
                       hideComments={() => hideComments()}
                     />
-                  </div>
+                    </div>
                 ))}
               </div>
             ) : (
