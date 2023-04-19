@@ -9,7 +9,10 @@ function PostBit() {
         const requestBody = {userId: useUserIdCookie(window.localStorage), bitContent: content};
         const response = await fetch("/api/bit/add", {
             method: "POST",
-            headers: {'Content-type': "application/json"},
+            headers: {
+                'Content-type': 'application/json',
+                'Authorization': `Bearer ${window.localStorage.getItem("token")}`,
+            },
             body: JSON.stringify(requestBody)
         });
         const data = await response.text();
