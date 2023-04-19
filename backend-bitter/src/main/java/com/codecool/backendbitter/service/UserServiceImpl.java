@@ -1,7 +1,6 @@
 package com.codecool.backendbitter.service;
 
 import com.codecool.backendbitter.controller.dto.UserRegistrationDTO;
-import com.codecool.backendbitter.controller.dto.bit.BitDTO;
 import com.codecool.backendbitter.model.Bit;
 import com.codecool.backendbitter.model.User;
 import com.codecool.backendbitter.repository.BitRepository;
@@ -12,10 +11,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -118,9 +115,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<Bit> arrangeFeed(UUID userId) {
-        List<Bit> ownBits = new ArrayList<>(bitRepository.findBitsByPosterUserId(userId,
+        User user = userRepository.findById(userId).orElseThrow();
+        List<Bit> bits = new ArrayList<>(bitRepository.findBitsByPosterUserId(userId,
                 Sort.by(Sort.Direction.DESC, "dateOfPosting")));
+        for (User followedUser : user.getFollowedUsers()) {
+            bits.addAll(bitRepository.findBitsByPosterUserId(followedUser.getUserId(),
+                    Sort.by(Sort.Direction.DESC, "dateOfPosting")));
+        }
 
-        return ownBits;
+        return bits.stream()
+                .sorted(Comparator.comparing(Bit::getDateOfPosting, Comparator.reverseOrder()))
+                .collect(Collectors.toList());
     }
 }
