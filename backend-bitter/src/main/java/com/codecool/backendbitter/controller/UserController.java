@@ -1,6 +1,7 @@
 package com.codecool.backendbitter.controller;
 
 import com.codecool.backendbitter.controller.dto.UserRegistrationDTO;
+import com.codecool.backendbitter.controller.dto.user.PublicUserProfileDTO;
 import com.codecool.backendbitter.model.User;
 import com.codecool.backendbitter.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -73,6 +75,42 @@ public class UserController {
         } catch (Exception e) {
             System.err.println(e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping ("/followed/{userId}")
+    private ResponseEntity<List<PublicUserProfileDTO>> getFollowed(@PathVariable String userId) {
+        List<PublicUserProfileDTO> profileDTOList =
+                userService
+                        .getFollowedForUser(UUID.fromString(userId))
+                        .stream()
+                        .map(user -> PublicUserProfileDTO.of(user)).toList();
+
+        try {
+            return new ResponseEntity<>(
+                    profileDTOList,
+                    HttpStatus.OK
+            );
+        } catch(Throwable e) {
+            return new ResponseEntity<>(List.of(null), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping ("/followers/{userId}")
+    private ResponseEntity<List<PublicUserProfileDTO>> getFollowers(@PathVariable String userId) {
+        List<PublicUserProfileDTO> profileDTOList =
+                userService
+                        .getFollowersForUser(UUID.fromString(userId))
+                        .stream()
+                        .map(user -> PublicUserProfileDTO.of(user)).toList();
+
+        try {
+            return new ResponseEntity<>(
+                    profileDTOList,
+                    HttpStatus.OK
+            );
+        } catch(Throwable e) {
+            return new ResponseEntity<>(List.of(null), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
