@@ -1,6 +1,8 @@
 package com.codecool.backendbitter.service;
 
+import com.codecool.backendbitter.controller.dto.GeneralUserDTO;
 import com.codecool.backendbitter.controller.dto.UserRegistrationDTO;
+import com.codecool.backendbitter.controller.dto.bit.BitDTO;
 import com.codecool.backendbitter.model.User;
 import com.codecool.backendbitter.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +10,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -105,5 +110,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public Collection<User> findUsersByUsernameContainingIgnoreCase(String username) {
         return userRepository.findUsersByUsernameContainingIgnoreCase(username);
+    }
+
+    @Override
+    public List<BitDTO> arrangeFeed(UUID userId) {
+        return List.of(new BitDTO(UUID.randomUUID(),
+                new GeneralUserDTO(UUID.randomUUID(), "Dummy User 1", true, false,
+                        "Profile Picture"), Timestamp.valueOf(LocalDateTime.now()), "Dummy Content"
+        ), new BitDTO(UUID.randomUUID(),
+                new GeneralUserDTO(UUID.randomUUID(), "Dummy User 2", true, false,
+                        "Profile Picture"), Timestamp.valueOf(LocalDateTime.now()), "Dummy Content"
+        ));
     }
 }

@@ -1,10 +1,12 @@
 package com.codecool.backendbitter.service;
 
 import com.codecool.backendbitter.controller.dto.UserRegistrationDTO;
+import com.codecool.backendbitter.controller.dto.bit.BitDTO;
 import com.codecool.backendbitter.model.User;
 import org.springframework.data.repository.query.Param;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 public interface UserService {
@@ -30,4 +32,6 @@ public interface UserService {
     String findUserIdByUsername(String username);
 
     Collection<User> findUsersByUsernameContainingIgnoreCase(String username);
+
+    List<BitDTO> arrangeFeed(UUID userId);
 }
