@@ -11,9 +11,7 @@ function BitFeed() {
     const userId = window.localStorage.getItem("userId")
     const token = window.localStorage.getItem("token");
 
-    useEffect(() => {
-        console.log(userId);
-        console.log(token);
+    const fetchBitFeed = () => {
         fetch(`/api/bit/feed/${userId}`, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -25,8 +23,12 @@ function BitFeed() {
                 setFeedBits(data)
                 setLoading(false)
             });
+    }
 
-
+    useEffect(() => {
+        console.log(userId);
+        console.log(token);
+        fetchBitFeed()
     }, []);
 
     if (loading) {
