@@ -33,7 +33,6 @@ const SearchBar = () => {
 
     const handleInputChange = (event) => {
         const {value} = event.target;
-
         setSearchTerm(value);
     };
 
