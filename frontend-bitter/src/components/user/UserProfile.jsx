@@ -12,8 +12,8 @@ function UserProfile(props) {
           <Button onClick={() => setFollowersIsOpen(true)}>Followers</Button>
           <Modal id="followersModal" open={followersIsOpen} onClose={() => setFollowersIsOpen(false)}>
           </Modal>
-          <Button onClick={() => setFollowedIsOpen(true)}>Followers</Button>
-          <Modal id="followersModal" open={followedIsOpen} onClose={() => setFollowedIsOpen(false)}>
+          <Button onClick={() => setFollowedIsOpen(true)}>Followed</Button>
+          <Modal id="followedModal" open={followedIsOpen} onClose={() => setFollowedIsOpen(false)}>
           </Modal>
       </div>
     );
