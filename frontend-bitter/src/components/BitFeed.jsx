@@ -1,6 +1,7 @@
 import {useState, useEffect, useContext} from "react";
 import BitCard from "./BitCard.jsx";
 import { UserContext } from "../contexts/UserContext";
+import Loader from "./Loader.jsx";
 
 function BitFeed() {
     const [feedBits, setFeedBits] = useState(null);
@@ -28,15 +29,17 @@ function BitFeed() {
 
     }, []);
 
-    if (loading) {
-        return <div className="className=sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]">LOADING</div>
-    }
     return (
         <>
+            {loading ? (
+                <div className="className=sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)] flex justify-center items-center">
+                    <Loader />
+                </div>
+            ) : (
             <div className="className=sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]">
                 {feedBits.map(bit => <BitCard bit={bit} key={bit.bitId}/>)}
 
-            </div>
+            </div>)}
         </>
     );
 }

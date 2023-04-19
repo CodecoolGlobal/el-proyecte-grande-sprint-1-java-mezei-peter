@@ -86,7 +86,7 @@ const Login = () => {
 
                         name="username"
                         id="username"
-                        label="username"
+                        label="Username"
                         variant="outlined"
                         onChange={handleChange("username")}
                         sx={{
