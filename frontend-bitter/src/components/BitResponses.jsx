@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-const BitResponse = ({responses}) => {
+const BitResponse = ({responses, loading, hideComments}) => {
+
+    if(loading) {
+        return <div>Loading</div>
+    }
+
     return ( 
         <>
             {responses.map(response => <div key={response.bitResponseId}>
@@ -20,7 +25,7 @@ const BitResponse = ({responses}) => {
                     {response.isEdited}
                 </div>
             </div>)}
-            <button>More</button>
+            <button onClick={hideComments}>Hide COMMENTS</button>
         </>
      );
 }
