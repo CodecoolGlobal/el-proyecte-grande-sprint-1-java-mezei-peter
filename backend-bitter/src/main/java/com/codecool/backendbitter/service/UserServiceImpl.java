@@ -1,17 +1,18 @@
 package com.codecool.backendbitter.service;
 
-import com.codecool.backendbitter.controller.dto.GeneralUserDTO;
 import com.codecool.backendbitter.controller.dto.UserRegistrationDTO;
 import com.codecool.backendbitter.controller.dto.bit.BitDTO;
+import com.codecool.backendbitter.model.Bit;
 import com.codecool.backendbitter.model.User;
+import com.codecool.backendbitter.repository.BitRepository;
 import com.codecool.backendbitter.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -20,11 +21,14 @@ import java.util.UUID;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final BitRepository bitRepository;
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, BitRepository bitRepository,
+                           PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.bitRepository = bitRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
@@ -54,12 +58,12 @@ public class UserServiceImpl implements UserService {
 
     public boolean userIsAuthorizedForBitWithId(UUID userId, UUID bitId) {
         User user = userRepository.findUserByUserId(userId);
-        if(user == null) return false;
-        if(user.isAdmin()) return true;
+        if (user == null) return false;
+        if (user.isAdmin()) return true;
 
         boolean userOwnsBit = false;
 
-        if(user.getBits().size() > 0) {
+        if (user.getBits().size() > 0) {
             userOwnsBit = user.getBits().stream().anyMatch(bit -> bit.getBitId().equals(bitId));
         }
 
@@ -113,13 +117,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<BitDTO> arrangeFeed(UUID userId) {
-        return List.of(new BitDTO(UUID.randomUUID(),
-                new GeneralUserDTO(UUID.randomUUID(), "Dummy User 1", true, false,
-                        "Profile Picture"), Timestamp.valueOf(LocalDateTime.now()), "Dummy Content"
-        ), new BitDTO(UUID.randomUUID(),
-                new GeneralUserDTO(UUID.randomUUID(), "Dummy User 2", true, false,
-                        "Profile Picture"), Timestamp.valueOf(LocalDateTime.now()), "Dummy Content"
-        ));
+    public List<Bit> arrangeFeed(UUID userId) {
+        List<Bit> ownBits = new ArrayList<>(bitRepository.findBitsByPosterUserId(userId,
+                Sort.by(Sort.Direction.DESC, "dateOfPosting")));
+
+        return ownBits;
     }
 }

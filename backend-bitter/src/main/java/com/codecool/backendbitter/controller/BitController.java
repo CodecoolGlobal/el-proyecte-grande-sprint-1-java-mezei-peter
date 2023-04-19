@@ -37,7 +37,8 @@ public class BitController {
     public ResponseEntity<List<BitDTO>> getBits(@PathVariable String userId) {
         try {
             UUID userUUID = UUID.fromString(userId);
-            List<BitDTO> feedForUser = userService.arrangeFeed(userUUID);
+            List<Bit> bitsForUser = userService.arrangeFeed(userUUID);
+            List<BitDTO> feedForUser = bitService.convertToBitDTO(bitsForUser);
             return new ResponseEntity<>(feedForUser, HttpStatus.OK);
         } catch(Exception e) {
             System.err.println(e);
