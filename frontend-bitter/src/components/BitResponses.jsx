@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const BitResponse = ({responses, loading, hideComments}) => {
+const BitResponse = ({response, loading, hideComments}) => {
 
     if(loading) {
         return <div>Loading</div>
@@ -8,26 +8,25 @@ const BitResponse = ({responses, loading, hideComments}) => {
 
     return ( 
         <>
-            {responses.map(response => <div key={response.bitResponseId}>
-                <div>
-                    {response.posterUserName}
-                </div>
-                <div>
-                    {response.posterUserName}
-                </div>
-                <div>
-                    {response.posterUserId}
-                </div>
                 <div>
                     {response.bitResponseContent}
-                </div>
-                <div>
-                    {response.isEdited}
-                </div>
-            </div>)}
-            <button onClick={hideComments}>Hide COMMENTS</button>
+                </div>        
         </>
      );
 }
  
 export default BitResponse;
+
+/*<div>
+{response.posterUserName}
+</div>
+<div>
+{response.posterUserName}
+</div>
+<div>
+{response.posterUserId}
+</div>
+
+<div>
+{response.isEdited}
+</div>*/
