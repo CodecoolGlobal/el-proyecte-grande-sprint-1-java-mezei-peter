@@ -37,6 +37,7 @@ public class SecurityConfig {
         http.csrf().disable();
         http.authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/user/login", "/user/registration").permitAll()
+                .requestMatchers(HttpMethod.GET, "/api/user/search/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .cors();
