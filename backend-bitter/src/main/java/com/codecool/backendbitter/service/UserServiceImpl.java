@@ -101,4 +101,9 @@ public class UserServiceImpl implements UserService {
 
         return user.getUserId().toString();
     }
+
+    @Override
+    public Collection<User> findUsersByUsernameContainingIgnoreCase(String username) {
+        return userRepository.findUsersByUsernameContainingIgnoreCase(username);
+    }
 }

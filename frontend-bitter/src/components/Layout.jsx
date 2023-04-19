@@ -3,6 +3,7 @@ import logo from "../logo.png";
 import {Outlet, Link} from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import SearchBar from "./SearchBar.jsx";
 
 import useUserIdCookie from '../hooks/cookies.js';
 
@@ -29,14 +30,15 @@ function Layout() {
                         Bitter
                     </h1>
                 </Link>
-                <Link
+                <SearchBar/>
+               <Link
                     style={{
                         textDecoration: "none"
                     }}
                     className="button ml-10 flex text-gray-900"
                     to="/my-profile"
                 >
-                    <Box>  { useUserIdCookie(localStorage) ? null :
+                    <Box>  { !useUserIdCookie(localStorage) ? null :
                         <Button
                             sx={{
                                 backgroundColor: "#FFFBE9",
