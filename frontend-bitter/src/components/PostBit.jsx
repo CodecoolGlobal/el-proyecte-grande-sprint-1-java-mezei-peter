@@ -24,6 +24,7 @@ function PostBit() {
     const handlePostBit = () => {
         const bitContent = newBit.toString();
         setNewBit("");
+        setCurrentLength(0);
         postBit(bitContent);
     };
 
