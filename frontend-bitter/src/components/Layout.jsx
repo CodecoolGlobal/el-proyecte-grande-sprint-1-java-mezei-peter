@@ -57,7 +57,6 @@ function Layout() {
                     } </Box>
                 </Link>
                 <Link
->>>>>>> development
                     style={{textDecoration: "none"}}
                     className="button ml-auto flex text-gray-900"
                     to="/login"

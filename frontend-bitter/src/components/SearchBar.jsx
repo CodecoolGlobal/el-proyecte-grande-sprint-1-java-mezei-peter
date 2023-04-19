@@ -1,34 +1,50 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 const SearchBar = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResult, setSearchResult] = useState([]);
 
-    const handleSearch = async (event) => {
-        event.preventDefault();
-        const response = await fetch(`/api/user/search/${searchTerm}`);
-        const data = await response.json();
-        const lowerSearchTerm = searchTerm.toLowerCase();
-        const filteredResult = data.filter(
-            (result) => result.username.toLowerCase().includes(lowerSearchTerm)
-        );
-        setSearchResult(filteredResult);
-        console.log(searchResult);
-    }
+    useEffect(() => {
+        const fetchSearchResult = async () => {
+            try {
+                const response = await fetch(`/api/user/search?username=${searchTerm}`, {
+                    method: 'GET',
+                    headers: {
+                        Authorization: `Bearer ${window.localStorage.getItem('token')}`,
+                    },
+                });
+
+                const data = await response.json();
+
+                setSearchResult(data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        if (searchTerm) {
+            const timeoutId = setTimeout(fetchSearchResult, 500);
+
+            return () => clearTimeout(timeoutId);
+        }
+
+        setSearchResult([]);
+    }, [searchTerm]);
 
     const handleInputChange = (event) => {
-        setSearchTerm(event.target.value);
-    }
+        const {value} = event.target;
+
+        setSearchTerm(value);
+    };
 
     return (
-        <form onSubmit={handleSearch}>
-            <input type="text" value={searchTerm} onChange={handleInputChange} />
-            <button type="submit">Search</button>
-            {searchResult.map((result) => (
-                <div key={result.id}>{result.username}</div>
+        <form>
+            <input type="text" value={searchTerm} onChange={handleInputChange}/>
+            {Array.isArray(searchResult) && searchResult.map((result) => (
+                <div key={result.userId}>{result.username}</div>
             ))}
         </form>
     );
 };
-export default SearchBar;
 
+export default SearchBar;
