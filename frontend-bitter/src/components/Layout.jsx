@@ -16,7 +16,7 @@ function Layout() {
     }
 
     const globalContext = useContext(GlobalContext);
-    const loggedInUserId = globalContext.value.user.userId;
+    const loggedInUserId = globalContext.user.userId;
 
     return (
         <>
@@ -38,7 +38,7 @@ function Layout() {
                         textDecoration: "none"
                     }}
                     className="button ml-10 flex text-gray-900"
-                    to={`/user/${loggedInUserId}`}
+                    to={`/user/${loggedInUserId ?? "error"}`}
                 >
                     <Box>  { useUserIdCookie(localStorage) ? null :
                         <Button

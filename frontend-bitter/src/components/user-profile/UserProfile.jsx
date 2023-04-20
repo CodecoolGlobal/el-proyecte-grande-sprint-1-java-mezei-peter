@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useContext} from "react";
 import Button from "@mui/material/Button";
+import {ButtonGroup} from "@mui/material";
 import Box from "@mui/material/Box";
 import Modal from "../Modal/Modal.jsx";
 import useFetch from "../../hooks/UseFetch.js";
@@ -15,19 +16,14 @@ function UserProfile(props) {
 
     return (
       <div className="className=sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]">
-          <Button onClick={() => {
-              setFollowersIsOpen(true);
-              dummy.data("hello world");
-              dummy.user.setUserId("this is the test ID");
-              setTimeout(() => {
-                  console.log(dummy.user.userId);
-              }, 1000);
-          }}>Followers</Button>
-          <Modal id="followersModal" open={followersIsOpen} onClose={() => setFollowersIsOpen(false)}>
-          </Modal>
-          <Button onClick={() => setFollowedIsOpen(true)}>Followed</Button>
-          <Modal id="followedModal" open={followedIsOpen} onClose={() => setFollowedIsOpen(false)}>
-          </Modal>
+          <div id="follower-data">
+              <ButtonGroup variant="contained" aria-label="outlined primary button group">
+                  <Button onClick={() => {setFollowersIsOpen(true);}}>Followers</Button>
+                  <Button onClick={() => setFollowedIsOpen(true)}>Followed</Button>
+              </ButtonGroup>
+          </div>
+          <Modal id="followersModal" open={followersIsOpen} onClose={() => setFollowersIsOpen(false)}></Modal>
+          <Modal id="followedModal" open={followedIsOpen} onClose={() => setFollowedIsOpen(false)}></Modal>
       </div>
     );
 }

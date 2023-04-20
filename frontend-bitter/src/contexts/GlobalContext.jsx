@@ -4,7 +4,7 @@ import useUserIdCookie from "../hooks/cookies.js";
 export const GlobalContext = createContext(null);
 
 export const GlobalContextProvider = ({children}) => {
-    const [userId, setUserId] = useState(useUserIdCookie());
+    const [userId, setUserId] = useState(useUserIdCookie(localStorage));
 
     return (
         <GlobalContext.Provider
