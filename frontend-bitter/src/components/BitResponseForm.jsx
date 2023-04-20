@@ -6,24 +6,29 @@ const BitResponseForm = ({ handleSubmit }) => {
 
   return (
     <>
-      <div className="bg-[#FFFBE9] w-2/5 pt-6">
-        <div className="w-4/5 m-auto flex flex-col justify-between p-10">
-          <textarea
-            onChange={(event) => {
-              setContent(event.target.value);
-            }}
-            value={content}
-          ></textarea>
-          <Button
-            onClick={() => {
-              handleSubmit(content);
-              setContent("");
-            }}
-          >
-            Post Response
-          </Button>
+        <div className="bg-white w-full py-2">
+            <div className="max-w-4xl mx-auto flex flex-col justify-between px-8">
+    <textarea
+        className="resize-none border-2 border-gray-300 p-2 rounded-lg"
+        onChange={(event) => {
+            setContent(event.target.value);
+        }}
+        value={content}
+        placeholder="Write your response..."
+    ></textarea>
+                <Button
+                    className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                    onClick={() => {
+                        handleSubmit(content);
+                        setContent("");
+                    }}
+                >
+                    Post Response
+                </Button>
+            </div>
         </div>
-      </div>
+
+
     </>
   );
 };
