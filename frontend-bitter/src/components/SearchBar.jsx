@@ -62,17 +62,17 @@ const SearchBar = () => {
                    focus:border-[#222328] outline-none block w-full p-3"
                        type="text" value={searchTerm} onChange={handleInputChange}/>
                 <div className={"overflow-y-visible bg-white border-x-2"}>
-                    {Array.isArray(searchResult) && searchResult.map((result, index) => {
+                    {Array.isArray(searchResult) && searchResult.map((user, index) => {
                             const isEven = index % 2 === 0;
                             const backgroundColor = isEven ? "bg-[#f9f9f9]" : "bg-white";
                             const isHidden = hiddenResults ? "hidden" : "";
                             return (
                                 <Link
-                                    to="/my-profile"
-                                    key={result.userId}
+                                    to={`/user/${user.userId}`}
+                                    key={user.userId}
                                 >
                                     <div
-                                        className={`border-b-2 ${backgroundColor} hover:bg-[#FFFBE9] ${isHidden}`}>{result.username}</div>
+                                        className={`border-b-2 ${backgroundColor} hover:bg-[#FFFBE9] ${isHidden}`}>{user.username}</div>
                                 </Link>
                             );
                         }
