@@ -1,6 +1,6 @@
 import {useState, useEffect, useContext} from "react";
 import BitCard from "./BitCard.jsx";
-import { UserContext } from "../contexts/UserContext";
+import { GlobalContext } from "../contexts/GlobalContext.jsx";
 import PostBit from "./PostBit.jsx";
 import MyProfileButton from "./MyProfileButton.jsx";
 
@@ -8,7 +8,7 @@ function BitFeed() {
     const [feedBits, setFeedBits] = useState(null);
     const [loading, setLoading] = useState(true);
 
-//    const {userId, setUserID} = useContext(UserContext);
+//    const {userId, setUserID} = useContext(GlobalContext);
     const userId = window.localStorage.getItem("userId")
     const token = window.localStorage.getItem("token");
 

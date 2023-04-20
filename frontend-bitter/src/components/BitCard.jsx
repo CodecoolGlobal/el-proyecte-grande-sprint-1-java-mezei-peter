@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import BitResponse from "./BitResponses";
 import BitResponseForm from "./BitResponseForm";
 import { json } from "react-router-dom";
+import { Button } from "@mui/material";
 
 const fetchResponses = async (id, token) => {
   return await (
@@ -13,16 +14,18 @@ const fetchResponses = async (id, token) => {
   ).json();
 };
 
-const postResponse = async (response, token) =>  {
-    return await (await fetch(`/api/response`, {
-        "method" : "POST",
-        headers : {
-            Authorization: `Bearer ${token}`,
-            "Content-Type" : "application/json"
-        },
-        "body" : JSON.stringify(response)
-    })).json();
-}
+const postResponse = async (response, token) => {
+  return await (
+    await fetch(`/api/response`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(response),
+    })
+  ).json();
+};
 
 function BitCard({ bit }) {
   const [data, setData] = useState(null);
@@ -38,20 +41,20 @@ function BitCard({ bit }) {
 
   const submitResponse = async (content) => {
     const bitResponse = {
-        "bitId" : bit.bitId,
-        "userId" : userId,
-        "bitResponseContent" : content
-    }
+      bitId: bit.bitId,
+      userId: userId,
+      bitResponseContent: content,
+    };
 
     const res = await postResponse(bitResponse, token);
 
-    console.log(res)
+    console.log(res);
 
-    setData([...data, res])
-  } 
+    setData([...data, res]);
+  };
 
   useEffect(() => {
-    console.log("useeffect ran")
+    console.log("useeffect ran");
     const controller = new AbortController();
     const getResponses = async () => {
       try {
@@ -111,7 +114,6 @@ function BitCard({ bit }) {
               </div>
           </div>
       </>
-
   );
 }
 

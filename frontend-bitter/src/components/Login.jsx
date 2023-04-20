@@ -9,8 +9,9 @@ import InputLabel from "@mui/material/InputLabel";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
-import { UserContext } from "../contexts/UserContext";
+import { GlobalContext } from "../contexts/GlobalContext.jsx";
 import {Link} from "react-router-dom";
+import {useUserIdCookie} from "../hooks/cookies.js";
 
 const postLogin = async (username, password) => {
     const res =  await fetch(`/api/user/login?username=${username}&password=${password}`, {
@@ -29,6 +30,8 @@ const postLogin = async (username, password) => {
 }
 
 function Login() {
+    const globalContext = useContext(GlobalContext);
+
     const [values, setValues] = React.useState({
         amount: "",
         password: "",
@@ -44,7 +47,10 @@ function Login() {
             
             const token = data.authorization
             window.localStorage.setItem("token", token);
-            window.localStorage.setItem("userId", data.userId)
+            window.localStorage.setItem("userId", data.userId);
+
+            globalContext.user.setUserId(useUserIdCookie(localStorage));
+
             window.location.pathname = '/';
         } catch (e) {
             console.log(e);

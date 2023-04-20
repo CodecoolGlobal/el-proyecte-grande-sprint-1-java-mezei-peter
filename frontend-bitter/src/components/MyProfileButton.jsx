@@ -1,6 +1,5 @@
 import {Link} from "react-router-dom";
 import Box from "@mui/material/Box";
-import useUserIdCookie from "../hooks/cookies.js";
 import Button from "@mui/material/Button";
 import React from "react";
 
@@ -14,7 +13,7 @@ const MyProfileButton = () => {
                 className="button ml-10 flex text-gray-900"
                 to="/my-profile"
             >
-                <Box>  { !useUserIdCookie(localStorage) ? null :
+                <Box>  { !window.localStorage.getItem("userId") ? null :
                     <Button
                         sx={{
                             backgroundColor: "#FFFBE9",
