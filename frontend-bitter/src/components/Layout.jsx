@@ -35,7 +35,10 @@ function Layout() {
                         Bitter
                     </h1>
                 </Link>
-                <SearchBar/>
+                <div className="justify-between items-center flex text-gray-900 pt-5">
+                    <SearchBar />
+                </div>
+
 
                 <Box>  { !useUserIdCookie(localStorage) ? <Link
                     style={{textDecoration: "none"}}
