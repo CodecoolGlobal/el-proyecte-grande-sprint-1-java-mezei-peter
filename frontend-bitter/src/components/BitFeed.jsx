@@ -14,7 +14,8 @@ const deleteBit = async (bitId, token, userId) => {
     return await (await fetch(`/api/bit/delete/${userId}/${bitId}`, {
         headers: {
             Authorization: `Bearer ${token}`
-        }
+        },
+        method: "DELETE"
     })).json();
 }
 
@@ -27,12 +28,13 @@ function BitFeed() {
     const token = window.localStorage.getItem("token");
 
     const handleDelete = async (bitId) => {
-        const res = deleteBit(bitId, userId, token);
+        const res = deleteBit(bitId, token, userId);
 
         console.log(res)
     }
 
     useEffect(() => {
+        setLoading(setLoading)
         console.log(userId);
         console.log(token);
         fetch(`/api/bit/feed/${userId}`, {
@@ -51,18 +53,18 @@ function BitFeed() {
     }, []);
 
     useEffect(() => {
-        const getUser = async (userId, token) => {
+        setLoading(true)
+        const getUser = async () => {
+            console.log(userId)
             try {
-                setLoading(true)
                 const user = await fetchCurrentUser(userId, token);
                 
                 console.log(user);
 
                 setUser(user);
+                setLoading(false)
             } catch(e) {
                 console.log(e);
-            } finally {
-                setLoading(false);
             }
         }
 
@@ -70,7 +72,7 @@ function BitFeed() {
 
     }, []);
 
-    if (loading) {
+    if (loading || user === null || feedBits === null) {
         return <div className="className=sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]">LOADING</div>
     }
     return (
