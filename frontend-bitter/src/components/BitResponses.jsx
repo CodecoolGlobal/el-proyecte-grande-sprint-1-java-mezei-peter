@@ -13,7 +13,7 @@ const BitResponse = ({ response, loading, hideComments }) => {
           <div>{response.posterUserName}</div>
           <div>{response.dateOfPosting}</div>
         </div>
-        <div>{response.bitResponseContent}</div>
+        <div className="break-all">{response.bitResponseContent}</div>
       </div>
     </>
   );

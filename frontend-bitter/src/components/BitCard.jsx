@@ -52,7 +52,7 @@ function BitCard({ bit, isAdmin, handleDelete, index }) {
     console.log(res)
 
     setData([...data, res])
-  } 
+  }
 
   useEffect(() => {
     console.log("useeffect ran")
@@ -89,7 +89,7 @@ function BitCard({ bit, isAdmin, handleDelete, index }) {
                           <p className="text-gray-700 font-bold text-xm mr-2">{bit.userDTO.userName}</p>
                           <span className="text-gray-500 text-xs">{bit.dateOfCreation}</span>
                       </div>
-                      <div className="text-gray-800 font-normal text-xl mb-4">{bit.content}</div>
+                      <div className="text-gray-800 font-normal text-xl break-all mb-4">{bit.content}</div>
                       <div className="inline-block justify-between">
                           <button className="text-gray-500 font-medium text-xs border border-gray-300 rounded-lg px-4 py-2 hover:bg-gray-500 hover:text-white transition-all duration-300">
                               LIKE
