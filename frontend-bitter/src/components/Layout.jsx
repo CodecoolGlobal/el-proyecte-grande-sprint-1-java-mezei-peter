@@ -1,11 +1,12 @@
-import React, { useEffect } from "react";
+import React, {useContext, useEffect} from "react";
 import logo from "../logo.png";
-import {Outlet, Link} from "react-router-dom";
+import {Outlet, Link, useNavigate} from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import SearchBar from "./SearchBar.jsx";
 
-import useUserIdCookie from '../hooks/cookies.js';
+import {useUserIdCookie} from '../hooks/cookies.js';
+import {GlobalContext} from "../contexts/GlobalContext.jsx";
 
 function Layout() {
 
@@ -14,6 +15,10 @@ function Layout() {
         window.localStorage.removeItem("userId");
         window.location.reload();
     }
+
+    const globalContext = useContext(GlobalContext);
+    //const loggedInUserId = globalContext.user.userId;
+    const loggedInUserId = useUserIdCookie(localStorage);
 
     return (
         <>
@@ -26,7 +31,7 @@ function Layout() {
                     to="/"
                 >
                     <img src={logo} className="w-20 object-contain" alt="logo"/>
-                    <h1 className="mt-5 font-extrabold text-[#222328] text-[32px]">
+                    <h1 className="mt-5 font-extrabold text-[#222328] text-[32px] pr-5">
                         Bitter
                     </h1>
                 </Link>
@@ -36,7 +41,7 @@ function Layout() {
                         textDecoration: "none"
                     }}
                     className="button ml-10 flex text-gray-900"
-                    to="/my-profile"
+                    to={`/user/${loggedInUserId ?? "error"}`}
                 >
                     <Box>  { !useUserIdCookie(localStorage) ? null :
                         <Button
@@ -56,12 +61,12 @@ function Layout() {
                         </Button>
                     } </Box>
                 </Link>
-                <Link
-                    style={{textDecoration: "none"}}
-                    className="button ml-auto flex text-gray-900"
-                    to="/login"
-                ><Box>  { !useUserIdCookie(localStorage) ?
-                    <Button
+                <Box>  { !useUserIdCookie(localStorage) ?
+                    <Link
+                        style={{textDecoration: "none"}}
+                        className="button ml-auto flex text-gray-900"
+                        to="/login"
+                    ><Button
                         sx={{
                             backgroundColor: "#FFFBE9",
                             color: "black",
@@ -76,7 +81,11 @@ function Layout() {
                         variant="outlined"
                     >
                         Log in
-                    </Button> : <Button
+                    </Button></Link> : <Link
+                        style={{textDecoration: "none"}}
+                        className="button ml-auto flex text-gray-900"
+                        to="/login"
+                    ><Button
                         sx={{
                             backgroundColor: "#FFFBE9",
                             color: "black",
@@ -89,12 +98,14 @@ function Layout() {
                         }}
 
                         variant="outlined"
-                        onClick={() => logout()}
+                        onClick={() => {
+                            logout();
+
+                        }}
                     >
                         Logout
-                    </Button>}
+                    </Button></Link>}
                 </Box>
-                </Link>
 
 
             </header>

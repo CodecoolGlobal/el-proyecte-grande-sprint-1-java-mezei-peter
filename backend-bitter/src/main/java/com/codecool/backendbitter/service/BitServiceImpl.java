@@ -1,5 +1,7 @@
 package com.codecool.backendbitter.service;
 
+import com.codecool.backendbitter.controller.dto.GeneralUserDTO;
+import com.codecool.backendbitter.controller.dto.bit.BitDTO;
 import com.codecool.backendbitter.model.Bit;
 
 import com.codecool.backendbitter.model.User;
@@ -9,8 +11,11 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class BitServiceImpl implements BitService {
@@ -85,5 +90,17 @@ public class BitServiceImpl implements BitService {
         userRepository.save(user);
         bitRepository.save(bit);
 
+    }
+
+    @Override
+    public List<BitDTO> convertToBitDTO(List<Bit> bits) {
+        return bits.stream()
+                .map(bit -> {
+                    User user = bit.getPoster();
+                    GeneralUserDTO userDTO = new GeneralUserDTO(user.getUserId(), user.getUsername(), user.isAdmin(),
+                            user.isBanned(), user.getProfilePicture());
+                    return new BitDTO(bit.getBitId(), userDTO, bit.getDateOfPosting(), bit.getBitContent());
+                })
+                .collect(Collectors.toList());
     }
 }

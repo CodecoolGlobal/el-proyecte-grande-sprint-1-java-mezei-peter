@@ -32,14 +32,15 @@ public class BitController {
 
     @GetMapping("/feed/{userId}")
     public ResponseEntity<List<BitDTO>> getBits(@PathVariable String userId) {
-        List<BitDTO> dummyData = List.of(new BitDTO(UUID.randomUUID(),
-                new GeneralUserDTO(UUID.randomUUID(), "Dummy User 1", true, false,
-                        "Profile Picture"), Timestamp.valueOf(LocalDateTime.now()), "Dummy Content"
-        ), new BitDTO(UUID.randomUUID(),
-                new GeneralUserDTO(UUID.randomUUID(), "Dummy User 2", true, false,
-                        "Profile Picture"), Timestamp.valueOf(LocalDateTime.now()), "Dummy Content"
-        ));
-        return new ResponseEntity<>(dummyData, HttpStatus.OK);
+        try {
+            UUID userUUID = UUID.fromString(userId);
+            List<Bit> bitsForUser = userService.arrangeFeed(userUUID);
+            List<BitDTO> feedForUser = bitService.convertToBitDTO(bitsForUser);
+            return new ResponseEntity<>(feedForUser, HttpStatus.OK);
+        } catch(Exception e) {
+            System.err.println(e);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PostMapping("/add")

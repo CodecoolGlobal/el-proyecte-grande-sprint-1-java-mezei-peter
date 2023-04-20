@@ -24,7 +24,8 @@ const postResponse = async (response, token) =>  {
     })).json();
 }
 
-function BitCard({ bit, isAdmin, handleDelete }) {
+
+function BitCard({ bit }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [visiable, setVisiable] = useState(false);
@@ -35,6 +36,7 @@ function BitCard({ bit, isAdmin, handleDelete }) {
   const hideComments = () => {
     setVisiable(false);
   };
+
 
   const submitResponse = async (content) => {
     const bitResponse = {
@@ -89,7 +91,6 @@ function BitCard({ bit, isAdmin, handleDelete }) {
           <div className="CardContent">{bit.content}</div>
           <div className="CardStats">
             <button className="CardLikes">LIKE</button>
-            {isAdmin ? <button onClick={() => handleDelete(bit.bitId)}>Delete</button> : null}
 
             {visiable ? (
               <div>
@@ -100,6 +101,7 @@ function BitCard({ bit, isAdmin, handleDelete }) {
                       loading={loading}
                       hideComments={() => hideComments()}
                     />
+                    <Button onClick={() => setVisiable()}>Hide COMMENTS</Button>
                     </div>
                 ))}
               </div>
