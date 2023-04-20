@@ -36,7 +36,7 @@ public class Bit {
     private String bitContent;
 
     @JoinColumn
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
     private Collection<BitResponse> bitResponses;
 

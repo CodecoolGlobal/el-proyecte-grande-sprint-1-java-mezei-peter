@@ -2,6 +2,7 @@ import {useState, useEffect, useContext} from "react";
 import BitCard from "./BitCard.jsx";
 import { GlobalContext } from "../contexts/GlobalContext.jsx";
 import PostBit from "./PostBit.jsx";
+import MyProfileButton from "./MyProfileButton.jsx";
 
 const fetchCurrentUser = async (userId, token) => {
     return await (await fetch(`/api/user/${userId}`, {
@@ -29,9 +30,14 @@ function BitFeed() {
     const userId = window.localStorage.getItem("userId")
     const token = window.localStorage.getItem("token");
 
-    const handleDelete = async (bitId) => {
+    const handleDelete = async (bitId, index) => {
         const res = deleteBit(bitId, token, userId);
 
+        const newBits = [...feedBits]
+
+        newBits.splice(index, 1);
+        
+        setFeedBits(newBits);
         console.log(res)
     }
 
@@ -81,9 +87,12 @@ function BitFeed() {
     }
     return (
         <>
-            <PostBit fetchBitFeed={fetchBitFeed} />
             <div className="className=sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]">
-                {feedBits.map(bit => <BitCard bit={bit} key={bit.bitId} handleDelete={handleDelete}/>)}
+            <MyProfileButton className=""/>
+            <PostBit fetchBitFeed={fetchBitFeed} />
+
+
+                {feedBits.map((bit, index) => <BitCard bit={bit} key={bit.bitId} isAdmin={user.isAdmin} handleDelete={handleDelete} index={index}/>)}
             </div>
         </>
     );
