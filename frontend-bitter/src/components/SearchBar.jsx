@@ -41,7 +41,7 @@ const SearchBar = () => {
             <input type="text" value={searchTerm} onChange={handleInputChange}/>
             {Array.isArray(searchResult) && searchResult.map((result) => (
                 <Link
-                    to="/my-profile"
+                    to={`/user/${result.userId ?? "error"}`}
                     key={result.userId}
                 >
                     <div>{result.username}</div>
