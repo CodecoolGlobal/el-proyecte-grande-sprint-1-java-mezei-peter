@@ -37,19 +37,26 @@ const SearchBar = () => {
     };
 
     return (
-        <form onSubmit={ev => ev.preventDefault()}>
+        <form className={"flex flex-col h-16"} onSubmit={ev => ev.preventDefault()}>
             <input placeholder="Search for a user"
                    className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#222328]
                    focus:border-[#222328] outline-none block w-full p-3"
                    type="text" value={searchTerm} onChange={handleInputChange}/>
-            {Array.isArray(searchResult) && searchResult.map((result) => (
-                <Link
-                    to="/my-profile"
-                    key={result.userId}
-                >
-                    <div>{result.username}</div>
-                </Link>
-            ))}
+            <div className={"overflow-y-visible z-10 bg-white border-x-2"}>
+                {Array.isArray(searchResult) && searchResult.map((result, index) => {
+                        const isEven = index % 2 == 0;
+                        const backgroundColor = isEven ? "bg-[#f1f5f9]" : "bg-white";
+                        return (
+                            <Link
+                                to="/my-profile"
+                                key={result.userId}
+                            >
+                                <div className={`border-b-2 ${backgroundColor} hover:bg-[#FFFBE9]`}>{result.username}</div>
+                            </Link>
+                        );
+                    }
+                )}
+            </div>
         </form>
     );
 };
