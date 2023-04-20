@@ -14,9 +14,9 @@ function UserProfile(props) {
     const fetch = useFetch(`/api/user/${userId}`);
     const user = fetch.data;
 
-    if(userId === "error" || fetch.error) return (<h1>Something went wrong!</h1>);
+    if(userId === "error" || fetch.error) return (<div className="className=sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]">Something went wrong!</div>);
 
-    return ( fetch.loading ? <h1>Loading...</h1> :
+    return ( fetch.loading ? <div className="className=sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]">Loading...</div> :
       <div className="className=sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]">
           <div id="follower-data">
               <ButtonGroup variant="contained" aria-label="outlined primary button group">

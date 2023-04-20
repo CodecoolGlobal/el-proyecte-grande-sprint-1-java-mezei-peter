@@ -30,6 +30,8 @@ const postLogin = async (username, password) => {
 }
 
 function Login() {
+    const globalContext = useContext(GlobalContext);
+
     const [values, setValues] = React.useState({
         amount: "",
         password: "",
@@ -47,8 +49,7 @@ function Login() {
             window.localStorage.setItem("token", token);
             window.localStorage.setItem("userId", data.userId);
 
-            const globalContext = useContext(GlobalContext);
-            globalContext.value.user.setUserId(useUserIdCookie());
+            globalContext.user.setUserId(useUserIdCookie(localStorage));
 
             window.location.pathname = '/';
         } catch (e) {
