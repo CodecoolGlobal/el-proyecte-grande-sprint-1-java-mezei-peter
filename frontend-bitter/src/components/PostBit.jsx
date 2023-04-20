@@ -3,7 +3,7 @@ import {useState} from "react";
 import {useUserIdCookie} from "../hooks/cookies.js";
 
 function PostBit({fetchBitFeed}) {
-    const CHARACTER_LIMIT = 280;
+    const CHARACTER_LIMIT = 255;
     const [currentLength, setCurrentLength] = useState(0);
     const [newBit, setNewBit] = useState("");
 
@@ -64,7 +64,7 @@ function PostBit({fetchBitFeed}) {
 
                 >Post
                 </Button>
-                <div className="text-end">{currentLength}/280</div>
+                <div className="text-end">{currentLength}/{CHARACTER_LIMIT}</div>
             </div>
         </div>
     );

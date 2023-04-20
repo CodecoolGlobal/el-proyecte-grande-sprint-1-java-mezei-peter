@@ -43,12 +43,7 @@ public class ResponseController {
     ) {
 
         List<BitResponseDTO> bitResponseList = bitResponseService.findBitResponsesByBitId(bitId);
-
-        List<BitResponseDTO> dummyResponse = List.of(new BitResponseDTO(UUID.randomUUID(), "Dummy" +
-                " Response", Timestamp.valueOf(LocalDateTime.now()), UUID.randomUUID(), "User",
-                false));
-
-        return ResponseEntity.status(HttpStatus.OK).body(dummyResponse);
+        return ResponseEntity.status(HttpStatus.OK).body(bitResponseList);
     }
 
     @DeleteMapping("/{bitId}")
