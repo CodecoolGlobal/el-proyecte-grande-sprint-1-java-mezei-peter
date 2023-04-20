@@ -11,6 +11,7 @@ import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 import { GlobalContext } from "../contexts/GlobalContext.jsx";
 import {Link} from "react-router-dom";
+import useUserIdCookie from "../hooks/cookies.js";
 
 const postLogin = async (username, password) => {
     const res =  await fetch(`/api/user/login?username=${username}&password=${password}`, {
@@ -44,7 +45,11 @@ function Login() {
             
             const token = data.authorization
             window.localStorage.setItem("token", token);
-            window.localStorage.setItem("userId", data.userId)
+            window.localStorage.setItem("userId", data.userId);
+
+            const globalContext = useContext(GlobalContext);
+            globalContext.value.user.setUserId(useUserIdCookie());
+
             window.location.pathname = '/';
         } catch (e) {
             console.log(e);
