@@ -17,7 +17,6 @@ function Layout() {
     }
 
     const globalContext = useContext(GlobalContext);
-    //const loggedInUserId = globalContext.user.userId;
     const loggedInUserId = useUserIdCookie(localStorage);
 
     return (
