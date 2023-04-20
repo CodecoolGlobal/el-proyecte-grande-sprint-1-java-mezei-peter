@@ -68,7 +68,7 @@ const SearchBar = () => {
                             const isHidden = hiddenResults ? "hidden" : "";
                             return (
                                 <Link
-                                    to={`/user/${user.userId}`}
+                                    to={`/user/${user?.userId ?? "error"}`}
                                     key={user.userId}
                                 >
                                     <div
@@ -80,7 +80,6 @@ const SearchBar = () => {
                 </div>
             </form>
         </>
-
     );
 };
 

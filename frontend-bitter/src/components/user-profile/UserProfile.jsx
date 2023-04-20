@@ -15,18 +15,14 @@ function UserProfile(props) {
     const fetch = useFetch(`/api/user/${userId}`);
     const user = fetch.data;
 
-    //setInterval(() => {
-    //    console.log(fetch);
-    //}, 2000);
-
     if(userId === "error" || fetch.error || !user) return (<div className="className=sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]">Something went wrong!</div>);
 
     return ( fetch.loading ? <div className="className=sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]">Loading...</div> :
       <div className="className=sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]">
           <div id="follower-data">
               <ButtonGroup variant="contained" aria-label="outlined primary button group">
-                  <Button onClick={() => {setFollowersIsOpen(true);}}>Followers</Button>
-                  <Button onClick={() => setFollowedIsOpen(true)}>Followed</Button>
+                  <Button onClick={() => {setFollowersIsOpen(true);}}>{`Followers [${user.followerCount ?? 0}]`}</Button>
+                  <Button onClick={() => setFollowedIsOpen(true)}>{`Followed [${user.followedUserCount ?? 0}]`}</Button>
               </ButtonGroup>
           </div>
           <div>
