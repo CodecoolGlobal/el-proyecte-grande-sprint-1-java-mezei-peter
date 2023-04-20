@@ -1,6 +1,6 @@
 import Button from "@mui/material/Button";
 import {useState} from "react";
-import useUserIdCookie from "../hooks/cookies.js";
+import {useUserIdCookie} from "../hooks/cookies.js";
 
 function PostBit({fetchBitFeed}) {
     const CHARACTER_LIMIT = 280;

@@ -1,7 +1,6 @@
 import {useState, useEffect, useContext} from "react";
 import BitCard from "./BitCard.jsx";
 import { GlobalContext } from "../contexts/GlobalContext.jsx";
-import { UserContext } from "../contexts/UserContext";
 import PostBit from "./PostBit.jsx";
 
 function BitFeed() {
