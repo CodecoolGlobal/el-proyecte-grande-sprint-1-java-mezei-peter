@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from "react";
 import logo from "../logo.png";
-import {Outlet, Link} from "react-router-dom";
+import {Outlet, Link, useNavigate} from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
@@ -59,12 +59,12 @@ function Layout() {
                         </Button>
                     } </Box>
                 </Link>
-                <Link
-                    style={{textDecoration: "none"}}
-                    className="button ml-auto flex text-gray-900"
-                    to="/login"
-                ><Box>  { !useUserIdCookie(localStorage) ?
-                    <Button
+                <Box>  { !useUserIdCookie(localStorage) ?
+                    <Link
+                        style={{textDecoration: "none"}}
+                        className="button ml-auto flex text-gray-900"
+                        to="/login"
+                    ><Button
                         sx={{
                             backgroundColor: "#FFFBE9",
                             color: "black",
@@ -79,7 +79,11 @@ function Layout() {
                         variant="outlined"
                     >
                         Log in
-                    </Button> : <Button
+                    </Button></Link> : <Link
+                        style={{textDecoration: "none"}}
+                        className="button ml-auto flex text-gray-900"
+                        to="/login"
+                    ><Button
                         sx={{
                             backgroundColor: "#FFFBE9",
                             color: "black",
@@ -92,12 +96,14 @@ function Layout() {
                         }}
 
                         variant="outlined"
-                        onClick={() => logout()}
+                        onClick={() => {
+                            logout();
+
+                        }}
                     >
                         Logout
-                    </Button>}
+                    </Button></Link>}
                 </Box>
-                </Link>
 
 
             </header>

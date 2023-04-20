@@ -13,11 +13,11 @@ function useFetch(url, method, dataToSend){
         else console.log("invalid request method");
     }
 
-    const getConfig = () => {
+    const getConfig = () => ({
         headers: {
             Authorization: `Bearer ${useJwtToken(localStorage)}`
         }
-    };
+    });
 
     const [data,setData] = useState(null)
     const [error,setError] = useState(null)
