@@ -1,5 +1,6 @@
 package com.codecool.backendbitter.service;
 
+import com.codecool.backendbitter.controller.dto.GeneralUserDTO;
 import com.codecool.backendbitter.controller.dto.UserRegistrationDTO;
 import com.codecool.backendbitter.model.Bit;
 import com.codecool.backendbitter.model.User;
@@ -18,6 +19,8 @@ public interface UserService {
     void addFollowerToUser(UUID userUUID, UUID followedUserUUID);
 
     void addBlockedUserToUser(UUID userUUID, UUID blockedUserUUID);
+
+    GeneralUserDTO findByIdAndConvertTOGeneralUserDTO(UUID id);
 
     User findById(UUID id);
 
