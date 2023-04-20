@@ -1,5 +1,6 @@
 package com.codecool.backendbitter.controller;
 
+import com.codecool.backendbitter.controller.dto.UserIdDTO;
 import com.codecool.backendbitter.controller.dto.UserRegistrationDTO;
 import com.codecool.backendbitter.model.User;
 import com.codecool.backendbitter.service.UserService;
@@ -19,6 +20,11 @@ public class UserController {
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
+    }
+
+    @GetMapping("")
+    public ResponseEntity<?> getUserByUserId(@RequestBody UserIdDTO userIdDTO) {
+        User = userService.findById(UUID.fromString(userIdDTO.userId()));
     }
 
     @PostMapping("/registration")

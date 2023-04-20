@@ -1,5 +1,6 @@
 package com.codecool.backendbitter.service;
 
+import com.codecool.backendbitter.controller.dto.GeneralUserDTO;
 import com.codecool.backendbitter.controller.dto.UserRegistrationDTO;
 import com.codecool.backendbitter.model.User;
 import com.codecool.backendbitter.repository.UserRepository;
@@ -43,8 +44,9 @@ public class UserServiceImpl implements UserService {
         return userRepository.existsById(userId);
     }
 
-    public User findById(UUID id) {
-        return userRepository.findUserByUserId(id);
+    public GeneralUserDTO findById(UUID id) {
+        GeneralUserDTO generalUserDTO = new GeneralUserDTO()
+        User user =  userRepository.findUserByUserId(id);
     }
 
     public boolean userIsAuthorizedForBitWithId(UUID userId, UUID bitId) {
