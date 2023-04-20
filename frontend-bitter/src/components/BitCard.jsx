@@ -14,17 +14,18 @@ const fetchResponses = async (id, token) => {
   ).json();
 };
 
-const postResponse = async (response, token) =>  {
-    return await (await fetch(`/api/response`, {
-        "method" : "POST",
-        headers : {
-            Authorization: `Bearer ${token}`,
-            "Content-Type" : "application/json"
-        },
-        "body" : JSON.stringify(response)
-    })).json();
-}
-
+const postResponse = async (response, token) => {
+  return await (
+    await fetch(`/api/response`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(response),
+    })
+  ).json();
+};
 
 function BitCard({ bit }) {
   const [data, setData] = useState(null);
@@ -38,23 +39,22 @@ function BitCard({ bit }) {
     setVisiable(false);
   };
 
-
   const submitResponse = async (content) => {
     const bitResponse = {
-        "bitId" : bit.bitId,
-        "userId" : userId,
-        "bitResponseContent" : content
-    }
+      bitId: bit.bitId,
+      userId: userId,
+      bitResponseContent: content,
+    };
 
     const res = await postResponse(bitResponse, token);
 
-    console.log(res)
+    console.log(res);
 
-    setData([...data, res])
-  } 
+    setData([...data, res]);
+  };
 
   useEffect(() => {
-    console.log("useeffect ran")
+    console.log("useeffect ran");
     const controller = new AbortController();
     const getResponses = async () => {
       try {
@@ -95,15 +95,14 @@ function BitCard({ bit }) {
 
             {visiable ? (
               <div>
-                {data.map((response) => (
+                <div>
+                  {data.map((response) => (
                     <div key={response.bitResponseId}>
-                    <BitResponse
-                      response={response}
-                      loading={loading}
-                    />
-                    <Button onClick={() => setVisiable()}>Hide COMMENTS</Button>
+                      <BitResponse response={response} loading={loading} />
                     </div>
-                ))}
+                  ))}
+                </div>
+                <Button onClick={() => setVisiable()}>Hide COMMENTS</Button>
               </div>
             ) : (
               <button
@@ -113,7 +112,7 @@ function BitCard({ bit }) {
                 Show COMMENTS
               </button>
             )}
-            <BitResponseForm handleSubmit={submitResponse}/>
+            <BitResponseForm handleSubmit={submitResponse} />
           </div>
         </div>
       </div>
