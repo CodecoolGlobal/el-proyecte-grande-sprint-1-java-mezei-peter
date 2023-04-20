@@ -38,6 +38,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests()
                 .requestMatchers(HttpMethod.POST, "/user/login", "/user/registration").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/user/search/**").permitAll()
+                .requestMatchers(HttpMethod.DELETE, "/api/bit/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .cors();

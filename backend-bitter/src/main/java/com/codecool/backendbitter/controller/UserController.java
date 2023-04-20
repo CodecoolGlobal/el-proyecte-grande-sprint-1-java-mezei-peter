@@ -1,5 +1,7 @@
 package com.codecool.backendbitter.controller;
 
+import com.codecool.backendbitter.controller.dto.GeneralUserDTO;
+import com.codecool.backendbitter.controller.dto.UserIdDTO;
 import com.codecool.backendbitter.controller.dto.UserRegistrationDTO;
 import com.codecool.backendbitter.controller.dto.user.PublicUserProfileDTO;
 import com.codecool.backendbitter.model.User;
