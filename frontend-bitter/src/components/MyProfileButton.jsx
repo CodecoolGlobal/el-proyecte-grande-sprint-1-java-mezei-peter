@@ -11,7 +11,7 @@ const MyProfileButton = () => {
                     textDecoration: "none"
                 }}
                 className="button ml-10 flex text-gray-900"
-                to="/my-profile"
+                to={`/user/${window.localStorage.getItem("userId")}`}
             >
                 <Box>  { !window.localStorage.getItem("userId") ? null :
                     <Button
