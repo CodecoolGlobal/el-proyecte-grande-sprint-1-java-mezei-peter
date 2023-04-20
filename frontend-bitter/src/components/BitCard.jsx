@@ -101,11 +101,15 @@ function BitCard({ bit, isAdmin, handleDelete, index }) {
                                       <div key={response.bitResponseId}>
                                           <BitResponse response={response} loading={loading} hideComments={() => hideComments()} />
                                       </div>
+                                    
                                   ))}
+                                  <button onClick={() => setVisiable(false)} className="border-gray-300 text-gray-500 font-medium text-xs border rounded-lg px-4 py-2 hover:bg-gray-500 hover:text-white transition-all duration-300">
+                                  Hide COMMENTS
+                              </button>
                               </div>
                           ) : (
                               <button onClick={() => setVisiable(true)} className="border-gray-300 text-gray-500 font-medium text-xs border rounded-lg px-4 py-2 hover:bg-gray-500 hover:text-white transition-all duration-300">
-                                  SHOW COMMENTS
+                                  Show COMMENTS
                               </button>
                           )}
                           <div>
