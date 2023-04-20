@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, {useContext, useEffect} from "react";
 import logo from "../logo.png";
 import {Outlet, Link} from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
 import useUserIdCookie from '../hooks/cookies.js';
+import {GlobalContext} from "../contexts/GlobalContext.jsx";
 
 function Layout() {
 
@@ -13,6 +14,9 @@ function Layout() {
         window.localStorage.removeItem("userId");
         window.location.reload();
     }
+
+    const globalContext = useContext(GlobalContext);
+    const loggedInUserId = globalContext.value.user.userId;
 
     return (
         <>
@@ -34,7 +38,7 @@ function Layout() {
                         textDecoration: "none"
                     }}
                     className="button ml-10 flex text-gray-900"
-                    to="/my-profile"
+                    to={`/user/${loggedInUserId}`}
                 >
                     <Box>  { useUserIdCookie(localStorage) ? null :
                         <Button
