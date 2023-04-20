@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import BitResponse from "./BitResponses";
 import BitResponseForm from "./BitResponseForm";
 import { json } from "react-router-dom";
+import { Button } from "@mui/material";
 
 const fetchResponses = async (id, token) => {
   return await (
@@ -24,6 +25,7 @@ const postResponse = async (response, token) =>  {
     })).json();
 }
 
+
 function BitCard({ bit }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -35,6 +37,7 @@ function BitCard({ bit }) {
   const hideComments = () => {
     setVisiable(false);
   };
+
 
   const submitResponse = async (content) => {
     const bitResponse = {
@@ -97,8 +100,8 @@ function BitCard({ bit }) {
                     <BitResponse
                       response={response}
                       loading={loading}
-                      hideComments={() => hideComments()}
                     />
+                    <Button onClick={() => setVisiable()}>Hide COMMENTS</Button>
                     </div>
                 ))}
               </div>
