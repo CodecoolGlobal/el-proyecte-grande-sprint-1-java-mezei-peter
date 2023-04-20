@@ -17,7 +17,6 @@ function Layout() {
     }
 
     const globalContext = useContext(GlobalContext);
-    //const loggedInUserId = globalContext.user.userId;
     const loggedInUserId = useUserIdCookie(localStorage);
 
     return (
@@ -35,7 +34,7 @@ function Layout() {
                         Bitter
                     </h1>
                 </Link>
-                <div className="justify-between items-center flex text-gray-900 pt-5">
+                <div className="flex text-gray-900 pt-5">
                     <SearchBar />
                 </div>
 

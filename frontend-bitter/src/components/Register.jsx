@@ -46,7 +46,7 @@ const Login = () => {
 
     return (
 
-        <div className="sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]" style={{display: 'flex', justifyContent: 'center'}}>
+        <div className="flex justify-center sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]" >
             <Box
                 sx={{
                     margin: '4rem 1rem 4rem 4rem',
