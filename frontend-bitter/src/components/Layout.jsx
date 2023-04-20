@@ -3,6 +3,7 @@ import logo from "../logo.png";
 import {Outlet, Link, useNavigate} from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
+import SearchBar from "./SearchBar.jsx";
 
 import {useUserIdCookie} from '../hooks/cookies.js';
 import {GlobalContext} from "../contexts/GlobalContext.jsx";
@@ -34,7 +35,8 @@ function Layout() {
                         Bitter
                     </h1>
                 </Link>
-                <Link
+                <SearchBar/>
+               <Link
                     style={{
                         textDecoration: "none"
                     }}

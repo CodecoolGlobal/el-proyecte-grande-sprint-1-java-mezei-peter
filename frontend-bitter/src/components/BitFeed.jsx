@@ -1,6 +1,8 @@
 import {useState, useEffect, useContext} from "react";
 import BitCard from "./BitCard.jsx";
 import { GlobalContext } from "../contexts/GlobalContext.jsx";
+import { UserContext } from "../contexts/UserContext";
+import PostBit from "./PostBit.jsx";
 
 function BitFeed() {
     const [feedBits, setFeedBits] = useState(null);
@@ -10,9 +12,7 @@ function BitFeed() {
     const userId = window.localStorage.getItem("userId")
     const token = window.localStorage.getItem("token");
 
-    useEffect(() => {
-        console.log(userId);
-        console.log(token);
+    const fetchBitFeed = async () => {
         fetch(`/api/bit/feed/${userId}`, {
             headers: {
                 Authorization: `Bearer ${token}`
@@ -20,12 +20,15 @@ function BitFeed() {
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data)
                 setFeedBits(data)
                 setLoading(false)
             });
+    }
 
-
+    useEffect(() => {
+        console.log(userId);
+        console.log(token);
+        fetchBitFeed()
     }, []);
 
     if (loading) {
@@ -33,9 +36,9 @@ function BitFeed() {
     }
     return (
         <>
+            <PostBit fetchBitFeed={fetchBitFeed} />
             <div className="className=sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]">
                 {feedBits.map(bit => <BitCard bit={bit} key={bit.bitId}/>)}
-
             </div>
         </>
     );

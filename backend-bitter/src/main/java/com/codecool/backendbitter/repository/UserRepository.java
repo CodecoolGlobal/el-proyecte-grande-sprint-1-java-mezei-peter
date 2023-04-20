@@ -21,4 +21,6 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     Collection<User> findFollowedByUserId(@Param("userId") UUID userId);
 
     Optional<User> findUserByUsername(String username);
+
+    Collection<User> findUsersByUsernameContainingIgnoreCase(@Param("username") String username);
 }

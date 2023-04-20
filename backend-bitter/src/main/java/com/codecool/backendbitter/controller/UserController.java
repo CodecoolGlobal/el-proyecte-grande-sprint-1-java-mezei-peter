@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Collection;
 import java.util.UUID;
 
 @RestController
@@ -54,8 +55,8 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestParam String username) {
-        String userId =  userService.findUserIdByUsername(username);
-        return new ResponseEntity<>(userId ,HttpStatus.OK);
+        String userId = userService.findUserIdByUsername(username);
+        return new ResponseEntity<>(userId, HttpStatus.OK);
     }
 
     @PutMapping("/{userId}/follow/{followedUserId}")
@@ -144,5 +145,17 @@ public class UserController {
             e.printStackTrace(System.err);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @GetMapping("/search")
+    private ResponseEntity<Collection<User>> getUsersByGivenString(@RequestParam String username) {
+        try {
+            Collection<User> usersByGivenString = userService.findUsersByUsernameContainingIgnoreCase(username);
+            return new ResponseEntity<>(usersByGivenString, HttpStatus.OK);
+        } catch (Throwable e) {
+            e.printStackTrace(System.err);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
     }
 }

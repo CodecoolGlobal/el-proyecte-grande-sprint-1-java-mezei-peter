@@ -16,7 +16,7 @@ const postRegistration = async(registrationData) => {
             "Content-Type" : "application/json"
         },
         body: JSON.stringify(registrationData)
-    })).json()
+    })).text();
 }
 
 const Login = () => {
@@ -36,10 +36,7 @@ const Login = () => {
 
     const handleRegistration = async () => {
         try {
-            const response = await postRegistration(values);
-
-            console.log(response);
-            
+            await postRegistration(values);
             window.location.pathname = '/';
         } catch(e) {
             console.error(e);

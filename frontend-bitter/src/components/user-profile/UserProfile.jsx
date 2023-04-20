@@ -6,6 +6,7 @@ import Modal from "../Modal/Modal.jsx";
 import useFetch from "../../hooks/UseFetch.js";
 import {GlobalContext} from "../../contexts/GlobalContext.jsx";
 import {useParams} from "react-router-dom";
+import FollowUser from "../FollowUser.jsx";
 
 function UserProfile(props) {
     const [followersIsOpen, setFollowersIsOpen] = useState(false);
