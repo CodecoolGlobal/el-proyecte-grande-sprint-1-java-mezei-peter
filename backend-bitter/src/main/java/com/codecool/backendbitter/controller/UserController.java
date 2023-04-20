@@ -78,15 +78,26 @@ public class UserController {
         }
     }
 
+    @GetMapping ("/{userId}")
+    private ResponseEntity<PublicUserProfileDTO> getUserById(@PathVariable String userId) {
+        try {
+            User user = userService.findById(UUID.fromString(userId));
+            PublicUserProfileDTO userDTO = PublicUserProfileDTO.of(user);
+            return new ResponseEntity<>(userDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch(Throwable e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping ("/followed/{userId}")
     private ResponseEntity<List<PublicUserProfileDTO>> getFollowed(@PathVariable String userId) {
-        List<PublicUserProfileDTO> profileDTOList =
-                userService
-                        .getFollowedForUser(UUID.fromString(userId))
-                        .stream()
-                        .map(user -> PublicUserProfileDTO.of(user)).toList();
-
         try {
+            List<PublicUserProfileDTO> profileDTOList =
+                    userService
+                            .getFollowedForUser(UUID.fromString(userId))
+                            .stream()
+                            .map(user -> PublicUserProfileDTO.of(user)).toList();
+
             return new ResponseEntity<>(
                     profileDTOList,
                     HttpStatus.OK
@@ -98,13 +109,13 @@ public class UserController {
 
     @GetMapping ("/followers/{userId}")
     private ResponseEntity<List<PublicUserProfileDTO>> getFollowers(@PathVariable String userId) {
-        List<PublicUserProfileDTO> profileDTOList =
-                userService
-                        .getFollowersForUser(UUID.fromString(userId))
-                        .stream()
-                        .map(user -> PublicUserProfileDTO.of(user)).toList();
-
         try {
+            List<PublicUserProfileDTO> profileDTOList =
+                    userService
+                            .getFollowersForUser(UUID.fromString(userId))
+                            .stream()
+                            .map(user -> PublicUserProfileDTO.of(user)).toList();
+
             return new ResponseEntity<>(
                     profileDTOList,
                     HttpStatus.OK
