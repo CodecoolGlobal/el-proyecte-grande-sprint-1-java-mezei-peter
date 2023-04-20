@@ -7,12 +7,14 @@ import useFetch from "../../hooks/UseFetch.js";
 import {GlobalContext} from "../../contexts/GlobalContext.jsx";
 import {useParams} from "react-router-dom";
 import FollowUser from "../FollowUser.jsx";
+import BitCard from "../BitCard.jsx";
 
 function UserProfile(props) {
     const [followersIsOpen, setFollowersIsOpen] = useState(false);
     const [followedIsOpen, setFollowedIsOpen] = useState(false);
     const { userId } = useParams();
     const fetch = useFetch(`/api/user/${userId}`);
+    const fetchUsersOwnBits = useFetch(`/api/bit/${userId}`);
     const user = fetch.data;
 
     if(userId === "error" || fetch.error || !user) return (<div className="className=sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]">Something went wrong!</div>);
@@ -35,6 +37,15 @@ function UserProfile(props) {
           </div>
           <Modal id="followersModal" open={followersIsOpen} onClose={() => setFollowersIsOpen(false)}></Modal>
           <Modal id="followedModal" open={followedIsOpen} onClose={() => setFollowedIsOpen(false)}></Modal>
+          <div id="bit-container"> {fetchUsersOwnBits.loading ? <div>Loading</div> :
+              fetchUsersOwnBits.error ? <div>Something went wrong...</div> :
+                  fetchUsersOwnBits.data.map(bit => {
+                  console.log("logging bit");
+                  console.log(bit);
+                  return <BitCard key={bit.bitId} bit={bit}/>;
+              })
+          }
+          </div>
       </div>
     );
 }

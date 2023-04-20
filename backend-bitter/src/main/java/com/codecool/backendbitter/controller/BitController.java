@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -129,6 +130,19 @@ public class BitController {
             return new ResponseEntity<>(HttpStatus.OK);
         } catch (Throwable e) {
             e.printStackTrace(System.err);
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<List<BitDTO>> getBitsOfUser(@PathVariable String userId) {
+        try {
+            UUID userUUID = UUID.fromString(userId);
+            List<Bit> bitsOfUser = new LinkedList<>(bitService.getBitsForUser(userUUID));
+            List<BitDTO> feedForUser = bitService.convertToBitDTO(bitsOfUser);
+            return new ResponseEntity<>(feedForUser, HttpStatus.OK);
+        } catch(Exception e) {
+            System.err.println(e);
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
