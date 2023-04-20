@@ -4,10 +4,12 @@ import Box from "@mui/material/Box";
 import Modal from "../Modal/Modal.jsx";
 import useFetch from "../../hooks/UseFetch.js";
 import {GlobalContext} from "../../contexts/GlobalContext.jsx";
+import {useParams} from "react-router-dom";
 
 function UserProfile(props) {
     const [followersIsOpen, setFollowersIsOpen] = useState(false);
     const [followedIsOpen, setFollowedIsOpen] = useState(false);
+    const { userId } = useParams();
 
     const dummy = useContext(GlobalContext);
 
