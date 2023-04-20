@@ -84,7 +84,7 @@ public class UserController {
         try {
             User user = userService.findById(UUID.fromString(userId));
             PublicUserProfileDTO userDTO = PublicUserProfileDTO.of(user);
-            return new ResponseEntity<>(userDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(userDTO, HttpStatus.OK);
         } catch(Throwable e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
