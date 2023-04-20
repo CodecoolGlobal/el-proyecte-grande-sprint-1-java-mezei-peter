@@ -2,6 +2,7 @@ import {useState, useEffect, useContext} from "react";
 import BitCard from "./BitCard.jsx";
 import { GlobalContext } from "../contexts/GlobalContext.jsx";
 import PostBit from "./PostBit.jsx";
+import MyProfileButton from "./MyProfileButton.jsx";
 
 function BitFeed() {
     const [feedBits, setFeedBits] = useState(null);
@@ -35,8 +36,11 @@ function BitFeed() {
     }
     return (
         <>
-            <PostBit fetchBitFeed={fetchBitFeed} />
             <div className="className=sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]">
+            <MyProfileButton className=""/>
+            <PostBit fetchBitFeed={fetchBitFeed} />
+
+
                 {feedBits.map(bit => <BitCard bit={bit} key={bit.bitId}/>)}
             </div>
         </>

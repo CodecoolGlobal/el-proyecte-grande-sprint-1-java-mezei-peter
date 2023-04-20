@@ -75,48 +75,45 @@ function BitCard({ bit }) {
   }, []);
 
   return (
-    <>
-      <div className="BitCard">
-        <div className="PictureContainer">
-          <img src={""} alt="profilePicture" />
-        </div>
-        <div className="ContentContainer">
-          <div className="CardPostData">
-            <div className="w-7 h-7 rounded-full object-cover bg-green-700 flex justify-center items-center text-white text-xs font-bold">
-              {bit.userDTO.userName[0]}
-            </div>
-            <p className="text-white text-sm">{bit.userDTO.userName}</p>
-            <span className="CardPostUserName">{bit.userDTO.userName}</span>
-            <span className="CardPostTime">{bit.dateOfCreation}</span>
-          </div>
-          <div className="CardContent">{bit.content}</div>
-          <div className="CardStats">
-            <button className="CardLikes">LIKE</button>
-
-            {visiable ? (
-              <div>
-                <div>
-                  {data.map((response) => (
-                    <div key={response.bitResponseId}>
-                      <BitResponse response={response} loading={loading} />
-                    </div>
-                  ))}
-                </div>
-                <Button onClick={() => setVisiable()}>Hide COMMENTS</Button>
+      <>
+          <div className="bg-white rounded-lg overflow-hidden max-w-3xl my-4 mx-auto border border-gray-300">
+              <div className="flex p-4">
+                  <div className="mr-4">
+                      <div className="w-16 h-16 rounded-full bg-green-700 flex justify-center items-center text-white text-2xl font-bold">
+                          {bit.userDTO.userName[0]}
+                      </div>
+                  </div>
+                  <div>
+                      <div className="flex items-center mb-2">
+                          <p className="text-gray-700 font-bold text-xm mr-2">{bit.userDTO.userName}</p>
+                          <span className="text-gray-500 text-xs">{bit.dateOfCreation}</span>
+                      </div>
+                      <div className="text-gray-800 font-normal text-xl mb-4">{bit.content}</div>
+                      <div className="inline-block justify-between">
+                          <button className="text-gray-500 font-medium text-xs border border-gray-300 rounded-lg px-4 py-2 hover:bg-gray-500 hover:text-white transition-all duration-300">
+                              LIKE
+                          </button>
+                          {visiable ? (
+                              <div>
+                                  {data.map((response) => (
+                                      <div key={response.bitResponseId}>
+                                          <BitResponse response={response} loading={loading} hideComments={() => hideComments()} />
+                                      </div>
+                                  ))}
+                              </div>
+                          ) : (
+                              <button onClick={() => setVisiable(true)} className="border-gray-300 text-gray-500 font-medium text-xs border rounded-lg px-4 py-2 hover:bg-gray-500 hover:text-white transition-all duration-300">
+                                  SHOW COMMENTS
+                              </button>
+                          )}
+                          <div>
+                              <BitResponseForm handleSubmit={submitResponse} />
+                          </div>
+                      </div>
+                  </div>
               </div>
-            ) : (
-              <button
-                onClick={() => setVisiable(true)}
-                className="CardComments"
-              >
-                Show COMMENTS
-              </button>
-            )}
-            <BitResponseForm handleSubmit={submitResponse} />
           </div>
-        </div>
-      </div>
-    </>
+      </>
   );
 }
 
