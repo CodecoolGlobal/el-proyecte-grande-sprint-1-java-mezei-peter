@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.NoSuchElementException;
 import java.util.UUID;
 
 @Service
@@ -44,9 +45,22 @@ public class UserServiceImpl implements UserService {
         return userRepository.existsById(userId);
     }
 
-    public GeneralUserDTO findById(UUID id) {
-        GeneralUserDTO generalUserDTO = new GeneralUserDTO()
+    public GeneralUserDTO findByIdAndConvertTOGeneralUserDTO(UUID id) {
         User user =  userRepository.findUserByUserId(id);
+
+        if(user == null) {
+            throw new NoSuchElementException("User with id: " + id + " not found!");
+        }
+
+        GeneralUserDTO generalUserDTO = new GeneralUserDTO(user.getUserId(), user.getUsername(),
+                user.isAdmin(), user.isBanned(), user.getProfilePicture());
+
+        return generalUserDTO;
+    }
+
+    @Override
+    public User findById(UUID id) {
+        return userRepository.findUserByUserId(id);
     }
 
     public boolean userIsAuthorizedForBitWithId(UUID userId, UUID bitId) {

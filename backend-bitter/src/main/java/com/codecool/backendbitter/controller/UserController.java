@@ -1,5 +1,6 @@
 package com.codecool.backendbitter.controller;
 
+import com.codecool.backendbitter.controller.dto.GeneralUserDTO;
 import com.codecool.backendbitter.controller.dto.UserIdDTO;
 import com.codecool.backendbitter.controller.dto.UserRegistrationDTO;
 import com.codecool.backendbitter.model.User;
@@ -22,9 +23,16 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("")
-    public ResponseEntity<?> getUserByUserId(@RequestBody UserIdDTO userIdDTO) {
-        User = userService.findById(UUID.fromString(userIdDTO.userId()));
+    @GetMapping("/{userId}")
+    public ResponseEntity<?> getUserByUserId(@PathVariable String userID) {
+
+        try {
+            GeneralUserDTO generalUserDTO = userService.findByIdAndConvertTOGeneralUserDTO(UUID.fromString(userID));
+
+            return ResponseEntity.status(HttpStatus.OK).body(generalUserDTO);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @PostMapping("/registration")

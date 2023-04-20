@@ -7,15 +7,12 @@ import com.codecool.backendbitter.controller.dto.bit.BitUpdateDTO;
 import com.codecool.backendbitter.model.Bit;
 import com.codecool.backendbitter.model.User;
 import com.codecool.backendbitter.service.BitService;
-import com.codecool.backendbitter.service.BitServiceImpl;
 import com.codecool.backendbitter.service.UserService;
-import com.codecool.backendbitter.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.PrintStream;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
