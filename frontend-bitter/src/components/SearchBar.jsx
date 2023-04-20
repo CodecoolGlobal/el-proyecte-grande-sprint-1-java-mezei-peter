@@ -80,7 +80,6 @@ const SearchBar = () => {
                 </div>
             </form>
         </>
-
     );
 };
 
