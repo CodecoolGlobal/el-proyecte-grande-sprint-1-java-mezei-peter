@@ -86,9 +86,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addFollowerToUser(UUID followerId, UUID userId) {
+    public void addFollowerToUser(UUID followerId, UUID userId) throws Exception {
         User user = userRepository.findById(userId).get();
         User follower = userRepository.findById(followerId).get();
+
+        if (user.hasFollower(follower)) {
+            throw new Exception("User already follows user");
+        }
 
         user.addFollower(follower);
         follower.followUser(user);
