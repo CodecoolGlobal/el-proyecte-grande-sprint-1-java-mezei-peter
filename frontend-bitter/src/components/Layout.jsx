@@ -31,7 +31,7 @@ function Layout() {
                     to="/"
                 >
                     <img src={logo} className="w-20 object-contain" alt="logo"/>
-                    <h1 className="mt-5 font-extrabold text-[#222328] text-[32px]">
+                    <h1 className="mt-5 font-extrabold text-[#222328] text-[32px] pr-5">
                         Bitter
                     </h1>
                 </Link>
