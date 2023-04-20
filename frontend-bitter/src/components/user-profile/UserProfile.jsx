@@ -27,6 +27,7 @@ function UserProfile(props) {
                   <Button onClick={() => setFollowedIsOpen(true)}>{`Followed [${user.followedUserCount ?? 0}]`}</Button>
               </ButtonGroup>
           </div>
+          {userId !== window.localStorage.getItem("userId") && <FollowUser userId={userId}/>}
           <div>
               <h1>User data</h1>
               <h2>{`Username: ${user.username}`}</h2>

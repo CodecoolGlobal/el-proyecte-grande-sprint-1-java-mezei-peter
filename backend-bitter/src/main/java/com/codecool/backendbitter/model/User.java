@@ -112,5 +112,18 @@ public class User {
     public void deleteBitFromLikes(Bit bit) {
         likedBits.remove(bit);
     }
+
+    public boolean hasFollower(User follower) {
+        return followers.contains(follower);
+    }
+
+    private boolean hasFollowerByUsername(String username) {
+        for (User follower : followers) {
+            if (follower.getUsername().equals(username)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
 
