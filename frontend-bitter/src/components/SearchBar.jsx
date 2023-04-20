@@ -45,7 +45,7 @@ const SearchBar = () => {
             <div className={"overflow-y-visible z-10 bg-white border-x-2"}>
                 {Array.isArray(searchResult) && searchResult.map((result, index) => {
                         const isEven = index % 2 == 0;
-                        const backgroundColor = isEven ? "bg-[#f1f5f9]" : "bg-white";
+                        const backgroundColor = isEven ? "bg-[#f9f9f9]" : "bg-white";
                         return (
                             <Link
                                 to="/my-profile"
