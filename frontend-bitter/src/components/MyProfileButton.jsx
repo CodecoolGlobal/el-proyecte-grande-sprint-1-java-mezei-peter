@@ -8,7 +8,8 @@ const MyProfileButton = () => {
         <>
             <Link
                 style={{
-                    textDecoration: "none"
+                    textDecoration: "none",
+                    width: "max-content"
                 }}
                 className="button ml-10 flex text-gray-900"
                 to={`/user/${window.localStorage.getItem("userId")}`}
@@ -26,6 +27,7 @@ const MyProfileButton = () => {
                             },
                         }}
                         variant="outlined"
+                        to={`/user/${window.localStorage.getItem("userId")}`}
                     >
                         My Profile
                     </Button>

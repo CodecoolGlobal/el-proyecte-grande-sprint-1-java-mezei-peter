@@ -41,7 +41,7 @@ function PostBit({fetchBitFeed}) {
 
     return (
         <div className="bg-[#FFFBE9] w-full pt-6">
-            <div className="w-4/5 m-auto flex flex-col justify-between p-10">
+            <div className="md:w-4/5 m-auto flex flex-col justify-between p-10">
                 <textarea className="resize-none h-32 p-2 bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-[#222328] focus:border-[#222328]"
                           placeholder="What's on your mind?"
                           value={newBit}

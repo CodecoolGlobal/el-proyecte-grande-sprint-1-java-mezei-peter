@@ -46,7 +46,7 @@ const Login = () => {
 
     return (
 
-        <div className="sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]">
+        <div className="flex justify-center sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]" >
             <Box
                 sx={{
                     margin: '4rem 1rem 4rem 4rem',
@@ -54,7 +54,7 @@ const Login = () => {
                     flexDirection: 'column',
                     gap: '1rem',
                     mx: {xs: "auto", md: 0},
-                    width: {xs: "100%", md: "80%"},
+                    width: {xs: "100%", md: "50%"},
 
                 }}
                 component="form"
@@ -85,7 +85,7 @@ const Login = () => {
 
                         name="username"
                         id="username"
-                        label="username"
+                        label="Username"
                         variant="outlined"
                         onChange={handleChange("username")}
                         sx={{
