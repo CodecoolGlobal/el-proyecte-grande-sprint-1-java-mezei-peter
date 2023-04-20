@@ -11,10 +11,12 @@ function UserProfile(props) {
     const [followersIsOpen, setFollowersIsOpen] = useState(false);
     const [followedIsOpen, setFollowedIsOpen] = useState(false);
     const { userId } = useParams();
+    const fetch = useFetch(`/api/user/${userId}`);
+    const user = fetch.data;
 
-    const dummy = useContext(GlobalContext);
+    if(userId === "error" || fetch.error) return (<h1>Something went wrong!</h1>);
 
-    return (
+    return ( fetch.loading ? <h1>Loading...</h1> :
       <div className="className=sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]">
           <div id="follower-data">
               <ButtonGroup variant="contained" aria-label="outlined primary button group">
