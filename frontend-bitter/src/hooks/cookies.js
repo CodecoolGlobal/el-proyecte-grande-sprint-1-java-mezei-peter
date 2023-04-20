@@ -1,5 +1,7 @@
-function useUserIdCookie(localStorage) {
+export function useUserIdCookie(localStorage) {
     return localStorage.getItem("userId");
 }
 
-export default useUserIdCookie;
+export function useJwtToken(localStorage) {
+    return localStorage.getItem("token");
+}

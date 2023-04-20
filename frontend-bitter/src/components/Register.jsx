@@ -10,7 +10,6 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 
 const postRegistration = async(registrationData) => {
-    console.log(registrationData)
     return await (await fetch('/api/user/registration', {
         method: "POST",
         headers : {

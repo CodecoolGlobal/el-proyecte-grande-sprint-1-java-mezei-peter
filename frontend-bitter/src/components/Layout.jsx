@@ -4,7 +4,7 @@ import {Outlet, Link} from "react-router-dom";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 
-import useUserIdCookie from '../hooks/cookies.js';
+import {useUserIdCookie} from '../hooks/cookies.js';
 import {GlobalContext} from "../contexts/GlobalContext.jsx";
 
 function Layout() {
@@ -16,7 +16,8 @@ function Layout() {
     }
 
     const globalContext = useContext(GlobalContext);
-    const loggedInUserId = globalContext.user.userId;
+    //const loggedInUserId = globalContext.user.userId;
+    const loggedInUserId = useUserIdCookie(localStorage);
 
     return (
         <>
@@ -40,7 +41,7 @@ function Layout() {
                     className="button ml-10 flex text-gray-900"
                     to={`/user/${loggedInUserId ?? "error"}`}
                 >
-                    <Box>  { useUserIdCookie(localStorage) ? null :
+                    <Box>  { !useUserIdCookie(localStorage) ? null :
                         <Button
                             sx={{
                                 backgroundColor: "#FFFBE9",

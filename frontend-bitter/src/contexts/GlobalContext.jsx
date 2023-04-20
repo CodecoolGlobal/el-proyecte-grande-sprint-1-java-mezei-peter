@@ -1,5 +1,5 @@
 import React, { createContext, useState } from 'react';
-import useUserIdCookie from "../hooks/cookies.js";
+import {useUserIdCookie} from "../hooks/cookies.js";
 
 export const GlobalContext = createContext(null);
 

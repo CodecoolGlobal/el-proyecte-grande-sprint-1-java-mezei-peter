@@ -14,7 +14,11 @@ function UserProfile(props) {
     const fetch = useFetch(`/api/user/${userId}`);
     const user = fetch.data;
 
-    if(userId === "error" || fetch.error) return (<div className="className=sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]">Something went wrong!</div>);
+    //setInterval(() => {
+    //    console.log(fetch);
+    //}, 2000);
+
+    if(userId === "error" || fetch.error || !user) return (<div className="className=sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]">Something went wrong!</div>);
 
     return ( fetch.loading ? <div className="className=sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]">Loading...</div> :
       <div className="className=sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]">
@@ -23,6 +27,13 @@ function UserProfile(props) {
                   <Button onClick={() => {setFollowersIsOpen(true);}}>Followers</Button>
                   <Button onClick={() => setFollowedIsOpen(true)}>Followed</Button>
               </ButtonGroup>
+          </div>
+          <div>
+              <h1>User data</h1>
+              <h2>{`Username: ${user.username}`}</h2>
+              <br/>
+              <h2>{`${user.userBio}`}</h2>
+              <h2>{`Member since: ${user.dateOfRegistration}`}</h2>
           </div>
           <Modal id="followersModal" open={followersIsOpen} onClose={() => setFollowersIsOpen(false)}></Modal>
           <Modal id="followedModal" open={followedIsOpen} onClose={() => setFollowedIsOpen(false)}></Modal>
