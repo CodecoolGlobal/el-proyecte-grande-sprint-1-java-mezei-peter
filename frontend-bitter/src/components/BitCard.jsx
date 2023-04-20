@@ -27,7 +27,7 @@ const postResponse = async (response, token) => {
   ).json();
 };
 
-function BitCard({ bit }) {
+function BitCard({ bit, isAdmin, handleDelete, index }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [visiable, setVisiable] = useState(false);
@@ -39,6 +39,7 @@ function BitCard({ bit }) {
     setVisiable(false);
   };
 
+
   const submitResponse = async (content) => {
     const bitResponse = {
       bitId: bit.bitId,
@@ -48,13 +49,13 @@ function BitCard({ bit }) {
 
     const res = await postResponse(bitResponse, token);
 
-    console.log(res);
+    console.log(res)
 
-    setData([...data, res]);
-  };
+    setData([...data, res])
+  } 
 
   useEffect(() => {
-    console.log("useeffect ran");
+    console.log("useeffect ran")
     const controller = new AbortController();
     const getResponses = async () => {
       try {
@@ -93,6 +94,7 @@ function BitCard({ bit }) {
                           <button className="text-gray-500 font-medium text-xs border border-gray-300 rounded-lg px-4 py-2 hover:bg-gray-500 hover:text-white transition-all duration-300">
                               LIKE
                           </button>
+                          {isAdmin ? <button className="text-gray-500 font-medium text-xs border border-gray-300 rounded-lg px-4 py-2 hover:bg-gray-500 hover:text-white transition-all duration-300" onClick={() => handleDelete(bit.bitId, index)}>Delete</button> : null}
                           {visiable ? (
                               <div>
                                   {data.map((response) => (

@@ -1,5 +1,6 @@
 package com.codecool.backendbitter.service;
 
+import com.codecool.backendbitter.controller.dto.GeneralUserDTO;
 import com.codecool.backendbitter.controller.dto.UserRegistrationDTO;
 import com.codecool.backendbitter.model.Bit;
 import com.codecool.backendbitter.model.User;
@@ -13,6 +14,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.Collection;
+import java.util.NoSuchElementException;
+import java.util.UUID;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -49,6 +53,20 @@ public class UserServiceImpl implements UserService {
         return userRepository.existsById(userId);
     }
 
+    public GeneralUserDTO findByIdAndConvertTOGeneralUserDTO(UUID id) {
+        User user =  userRepository.findUserByUserId(id);
+
+        if(user == null) {
+            throw new NoSuchElementException("User with id: " + id + " not found!");
+        }
+
+        GeneralUserDTO generalUserDTO = new GeneralUserDTO(user.getUserId(), user.getUsername(),
+                user.isAdmin(), user.isBanned(), user.getProfilePicture());
+
+        return generalUserDTO;
+    }
+
+    @Override
     public User findById(UUID id) {
         return userRepository.findUserByUserId(id);
     }
@@ -68,9 +86,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void addFollowerToUser(UUID followerId, UUID userId) {
+    public void addFollowerToUser(UUID followerId, UUID userId) throws Exception {
         User user = userRepository.findById(userId).get();
         User follower = userRepository.findById(followerId).get();
+
+        if (user.hasFollower(follower)) {
+            throw new Exception("User already follows user");
+        }
 
         user.addFollower(follower);
         follower.followUser(user);
