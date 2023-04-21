@@ -3,6 +3,7 @@ import BitCard from "./BitCard.jsx";
 import { GlobalContext } from "../contexts/GlobalContext.jsx";
 import PostBit from "./PostBit.jsx";
 import MyProfileButton from "./MyProfileButton.jsx";
+import Loader from "./Loader.jsx";
 
 const fetchCurrentUser = async (userId, token) => {
     return await (await fetch(`/api/user/${userId}`, {
@@ -82,18 +83,28 @@ function BitFeed() {
 
     }, []);
 
-    if (loading || user === null || feedBits === null) {
+/*    if (loading || user === null || feedBits === null) {
         return <div className="className=sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]">LOADING</div>
-    }
+    }*/
     return (
         <>
-            <div className="className=sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]">
-            <MyProfileButton className=""/>
-            <PostBit fetchBitFeed={fetchBitFeed} />
+            <>
+                <div className="className=sm:p-8 px-4 py-8 w-full bg-[#FFFBE9] min-h-[calc(100vh-73px)]">
 
+                    {loading ? (
+                        <div className="flex justify-center items-center">
+                            <Loader />
+                        </div>
+                    ) : (
+                        <>
+                            <MyProfileButton />
+                            <PostBit fetchBitFeed={fetchBitFeed} />
+                            {feedBits.map((bit, index) => <BitCard bit={bit} key={bit.bitId} isAdmin={user.isAdmin} handleDelete={handleDelete} index={index}/>)}
+                        </>
+                    )}
 
-                {feedBits.map((bit, index) => <BitCard bit={bit} key={bit.bitId} isAdmin={user.isAdmin} handleDelete={handleDelete} index={index}/>)}
-            </div>
+                </div>
+            </>
         </>
     );
 }
