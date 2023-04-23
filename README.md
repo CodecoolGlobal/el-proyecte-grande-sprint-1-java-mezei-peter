@@ -41,3 +41,11 @@ It is a fullstack teamwork project using Java Spring for the backend and React.j
 - Each user has a private feed page containing bits by their followed users and themselves.
 
 ## Usage
+#### Registration 
+![Screenshot of registration in Bitter](/screenshots/bitter-register.png)
+#### Login 
+![Screenshot of registration in Bitter](/screenshots/bitter-login.png)
+#### Personal feed 
+![Screenshot of registration in Bitter](/screenshots/bitter-feed.png)
+#### Public user details page 
+![Screenshot of registration in Bitter](/screenshots/bitter-details.png)
