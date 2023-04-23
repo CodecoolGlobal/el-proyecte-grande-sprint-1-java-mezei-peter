@@ -5,6 +5,18 @@ Bitter is a social media website where users can create their account, follow ea
 It is a fullstack teamwork project using Java Spring for the backend and React.js for the frontend.
 
 ## Used technologies
+- Java
+  - Spring Boot
+  - Spring Data
+  - Spring Security
+  - JUnit Jupiter
+  - Lombok
+- Javascript
+  - Node.js
+  - React.js
+- Tailwind
+- PostgreSQL
+- JWT
 
 ## Dependencies
 - JDK
@@ -19,5 +31,13 @@ It is a fullstack teamwork project using Java Spring for the backend and React.j
   ```
 
 ## Features
+- User can register.
+- User can log in. In this case, a JWT token is stored in the Local Storage and sent with each request where Spring Security validates it.
+- User can log out.
+- User can search for other users using a search bar.
+- User can follow other users.
+- User can post short text content called 'bits.'
+- Each user has a public details page containing bits that they posted + information about their followers and followed people.
+- Each user has a private feed page containing bits by their followed users and themselves.
 
 ## Usage
